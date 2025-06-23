@@ -1,0 +1,25 @@
+name: PR Lint & Test
+
+on:
+  pull_request: # 모든 브랜치 대상
+    branches: ["**"]
+
+jobs:
+  lint-and-test:
+    name: Lint & Test on PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
