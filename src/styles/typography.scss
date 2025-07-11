@@ -1,0 +1,57 @@
+@use "@/styles/functions" as *;
+@use "@/styles/colors" as *;
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.h7,
+.h8,
+.h9,
+.h10 {
+    font-weight: bold;
+    color: $gray100;
+}
+
+.h1 {
+    font-size: calc_vh(72vh);
+    line-height: calc_vh(72vh);
+}
+.h2 {
+    font-size: calc_vh(64vh);
+    line-height: calc_vh(64vh);
+}
+.h3 {
+    font-size: calc_vh(48vh);
+    line-height: calc_vh(48vh);
+}
+.h4 {
+    font-size: calc_vh(36vh);
+    line-height: calc_vh(36vh);
+}
+.h5 {
+    font-size: calc_vh(28vh);
+    line-height: calc_vh(28vh);
+}
+.h6 {
+    font-size: calc_vh(24vh);
+    line-height: calc_vh(24vh);
+}
+.h7 {
+    font-size: calc_vh(21vh);
+    line-height: calc_vh(21vh);
+}
+.h8 {
+    font-size: calc_vh(18vh);
+    line-height: calc_vh(18vh);
+}
+.h9 {
+    font-size: calc_vh(16vh);
+    line-height: calc_vh(16vh);
+}
+.h10 {
+    font-size: calc_vh(14vh);
+    line-height: calc_vh(14vh);
+}
