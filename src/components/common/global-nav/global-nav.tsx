@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Input from "@/components/ui/input/input";
+import styles from "./global-nav.module.scss";
 
 import classNames from "classnames/bind";
-import styles from "./global-nav.module.scss";
+import SearchInput from "./search-input/search-input";
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +23,7 @@ export default function GlobalNav() {
                 </nav>
             </section>
             <section className={cx("input-section")}>
-                <Input placeholder="팀이나 선수 이름을 입력해 주세요." />
+                <SearchInput />
             </section>
         </header>
     );
