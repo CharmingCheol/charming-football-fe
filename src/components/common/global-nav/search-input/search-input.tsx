@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
+
 import Input from "@/components/ui/input/input";
-import styles from "./search-input.module.scss";
 import useDebounce from "@/hooks/useDebounce";
 
-interface SearchSuggestion {
-    id: string;
-    name: string;
-    type: "team" | "player" | "league";
-}
+import SuggestionItem from "./suggestion-item/suggestion-item";
+import { SearchInputProvider, useSearchInputContext } from "./search-input-context";
+
+import classNames from "classnames/bind";
+import styles from "./search-input.module.scss";
+
+const cx = classNames.bind(styles);
 
 // 예시 데이터 (실제로는 API에서 가져올 수 있습니다)
 const mockSuggestions: SearchSuggestion[] = [
@@ -25,67 +27,17 @@ const mockSuggestions: SearchSuggestion[] = [
     { id: "10", name: "토트넘", type: "team" },
 ];
 
-// 하이라이트 텍스트 컴포넌트
-const HighlightedText = ({ text, highlight }: { text: string; highlight: string }) => {
-    if (!highlight.trim()) {
-        return <span>{text}</span>;
-    }
+const SearchInputContent = () => {
+    const { state, dispatch } = useSearchInputContext();
+    const { query, isOpen, selectedIndex } = state;
 
-    const regex = new RegExp(`(${highlight})`, "gi");
-    const parts = text.split(regex);
-
-    return (
-        <span>
-            {parts.map((part, index) =>
-                regex.test(part) ? (
-                    <mark key={index} className={styles.highlight}>
-                        {part}
-                    </mark>
-                ) : (
-                    part
-                )
-            )}
-        </span>
-    );
-};
-
-export default function SearchInput() {
-    const [query, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedIndex, setSelectedIndex] = useState(-1);
-    const [isLoading, setIsLoading] = useState(false);
+
     const inputRef = useRef<HTMLInputElement>(null);
     const suggestionsRef = useRef<HTMLDivElement>(null);
 
     const debouncedQuery = useDebounce(query, 300);
 
-    // 검색어에 따른 제안 필터링 (디바운싱 적용)
-    useEffect(() => {
-        if (debouncedQuery.trim() === "") {
-            setSuggestions([]);
-            setIsOpen(false);
-            setIsLoading(false);
-            return;
-        }
-
-        setIsLoading(true);
-
-        // 실제 API 호출을 시뮬레이션
-        const timer = setTimeout(() => {
-            const filtered = mockSuggestions.filter((item) =>
-                item.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-            );
-            setSuggestions(filtered);
-            setIsOpen(filtered.length > 0);
-            setSelectedIndex(-1);
-            setIsLoading(false);
-        }, 200);
-
-        return () => clearTimeout(timer);
-    }, [debouncedQuery]);
-
-    // 키보드 네비게이션
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent) => {
             if (!isOpen) return;
@@ -93,34 +45,60 @@ export default function SearchInput() {
             switch (e.key) {
                 case "ArrowDown":
                     e.preventDefault();
-                    setSelectedIndex((prev) => (prev < suggestions.length - 1 ? prev + 1 : prev));
+                    dispatch({
+                        type: "SET_SELECTED_INDEX",
+                        payload: selectedIndex < suggestions.length - 1 ? selectedIndex + 1 : selectedIndex,
+                    });
                     break;
                 case "ArrowUp":
                     e.preventDefault();
-                    setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+                    dispatch({
+                        type: "SET_SELECTED_INDEX",
+                        payload: selectedIndex > 0 ? selectedIndex - 1 : -1,
+                    });
                     break;
                 case "Enter":
                     e.preventDefault();
                     if (selectedIndex >= 0 && suggestions[selectedIndex]) {
-                        handleSuggestionClick(suggestions[selectedIndex]);
+                        dispatch({ type: "SELECT_SUGGESTION", payload: suggestions[selectedIndex] });
+                        console.log("선택된 항목:", suggestions[selectedIndex]);
                     }
                     break;
                 case "Escape":
-                    setIsOpen(false);
+                    dispatch({ type: "SET_IS_OPEN", payload: false });
                     inputRef.current?.blur();
                     break;
             }
         },
-        [isOpen, suggestions, selectedIndex]
+        [isOpen, suggestions, selectedIndex, dispatch]
     );
 
-    // 제안 클릭 처리
-    const handleSuggestionClick = useCallback((suggestion: SearchSuggestion) => {
-        setQuery(suggestion.name);
-        setIsOpen(false);
-        // 여기서 실제 검색 로직을 실행할 수 있습니다
-        console.log("선택된 항목:", suggestion);
-    }, []);
+    const handleFocus = useCallback(() => {
+        if (suggestions.length > 0) {
+            dispatch({ type: "SET_IS_OPEN", payload: true });
+        }
+    }, [suggestions.length, dispatch]);
+
+    // 검색어에 따른 제안 필터링 (디바운싱 적용)
+    useEffect(() => {
+        if (debouncedQuery.trim() === "") {
+            setSuggestions([]);
+            dispatch({ type: "SET_IS_OPEN", payload: false });
+            return;
+        }
+
+        // 실제 API 호출을 시뮬레이션
+        const timer = setTimeout(() => {
+            const filtered = mockSuggestions.filter((item) =>
+                item.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+            );
+            setSuggestions(filtered);
+            dispatch({ type: "SET_IS_OPEN", payload: filtered.length > 0 });
+            dispatch({ type: "SET_SELECTED_INDEX", payload: -1 });
+        }, 200);
+
+        return () => clearTimeout(timer);
+    }, [debouncedQuery, dispatch]);
 
     // 외부 클릭 시 제안 닫기
     useEffect(() => {
@@ -131,59 +109,41 @@ export default function SearchInput() {
                 inputRef.current &&
                 !inputRef.current.contains(event.target as Node)
             ) {
-                setIsOpen(false);
+                dispatch({ type: "SET_IS_OPEN", payload: false });
             }
         };
 
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    }, [dispatch]);
 
     return (
-        <div className={styles.searchContainer}>
+        <div className={cx("search-container")}>
             <Input
                 ref={inputRef}
                 placeholder="팀이나 선수 이름을 입력해 주세요."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => dispatch({ type: "SET_QUERY", payload: e.target.value })}
                 onKeyDown={handleKeyDown}
-                onFocus={() => suggestions.length > 0 && setIsOpen(true)}
+                onFocus={handleFocus}
             />
-
             {isOpen && (
-                <div ref={suggestionsRef} className={styles.suggestions}>
-                    {isLoading ? (
-                        <div className={styles.loadingItem}>
-                            <div className={styles.spinner}></div>
-                            <span>검색 중...</span>
-                        </div>
-                    ) : suggestions.length > 0 ? (
-                        suggestions.map((suggestion, index) => (
-                            <div
-                                key={suggestion.id}
-                                className={`${styles.suggestionItem} ${index === selectedIndex ? styles.selected : ""}`}
-                                onClick={() => handleSuggestionClick(suggestion)}
-                                onMouseEnter={() => setSelectedIndex(index)}
-                            >
-                                <div className={styles.suggestionContent}>
-                                    <span className={styles.suggestionName}>
-                                        <HighlightedText text={suggestion.name} highlight={query} />
-                                    </span>
-                                    <span className={styles.suggestionType}>
-                                        {suggestion.type === "team"
-                                            ? "팀"
-                                            : suggestion.type === "player"
-                                              ? "선수"
-                                              : "리그"}
-                                    </span>
-                                </div>
-                            </div>
-                        ))
-                    ) : (
-                        <div className={styles.noResults}>검색 결과가 없습니다.</div>
-                    )}
+                <div ref={suggestionsRef} className={cx("suggestions")}>
+                    {suggestions.map((suggestion, index) => (
+                        <SuggestionItem key={suggestion.id} suggestion={suggestion} index={index} query={query} />
+                    ))}
                 </div>
             )}
         </div>
     );
-}
+};
+
+const SearchInput = () => {
+    return (
+        <SearchInputProvider>
+            <SearchInputContent />
+        </SearchInputProvider>
+    );
+};
+
+export default SearchInput;
