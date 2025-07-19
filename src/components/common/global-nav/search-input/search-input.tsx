@@ -36,7 +36,7 @@ const SearchInputContent = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const suggestionsRef = useRef<HTMLDivElement>(null);
 
-    const debouncedQuery = useDebounce(query, 300);
+    const debouncedQuery = useDebounce(query, 500);
 
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent) => {
@@ -88,16 +88,12 @@ const SearchInputContent = () => {
         }
 
         // 실제 API 호출을 시뮬레이션
-        const timer = setTimeout(() => {
-            const filtered = mockSuggestions.filter((item) =>
-                item.name.toLowerCase().includes(debouncedQuery.toLowerCase())
-            );
-            setSuggestions(filtered);
-            dispatch({ type: "SET_IS_OPEN", payload: filtered.length > 0 });
-            dispatch({ type: "SET_SELECTED_INDEX", payload: -1 });
-        }, 200);
-
-        return () => clearTimeout(timer);
+        const suggestions = mockSuggestions.filter((item) =>
+            item.name.toLowerCase().includes(debouncedQuery.toLowerCase())
+        );
+        setSuggestions(suggestions);
+        dispatch({ type: "SET_IS_OPEN", payload: suggestions.length > 0 });
+        dispatch({ type: "SET_SELECTED_INDEX", payload: -1 });
     }, [debouncedQuery, dispatch]);
 
     // 외부 클릭 시 제안 닫기
@@ -118,10 +114,10 @@ const SearchInputContent = () => {
     }, [dispatch]);
 
     return (
-        <div className={cx("search-container")}>
+        <div className={cx("search-input-wrapper")}>
             <Input
                 ref={inputRef}
-                placeholder="팀이나 선수 이름을 입력해 주세요."
+                placeholder="팀, 선수, 리그 이름을 입력해 주세요."
                 value={query}
                 onChange={(e) => dispatch({ type: "SET_QUERY", payload: e.target.value })}
                 onKeyDown={handleKeyDown}
