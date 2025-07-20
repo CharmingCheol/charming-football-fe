@@ -13,8 +13,8 @@
         align-items: center;
 
         figure {
-            width: calc_vh(100vh);
-            height: calc_vh(100vh);
+            width: calc_vh(80vh);
+            height: calc_vh(80vh);
         }
 
         nav {
@@ -22,6 +22,7 @@
 
             a {
                 @include text-h4;
+                text-decoration: none;
             }
 
             a:not(:last-child) {

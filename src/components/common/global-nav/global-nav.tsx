@@ -12,11 +12,11 @@ export default function GlobalNav() {
     return (
         <header className={cx("global-nav")}>
             <section className={cx("nav-section")}>
-                <Link href="/">
-                    <figure>
+                <figure>
+                    <Link href="/">
                         <Image src="/images/logo.png" alt="로고" width={80} height={80} layout="responsive" />
-                    </figure>
-                </Link>
+                    </Link>
+                </figure>
                 <nav>
                     <Link href="/matches">일정</Link>
                     <Link href="/tables">순위</Link>
