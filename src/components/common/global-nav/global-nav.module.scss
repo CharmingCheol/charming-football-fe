@@ -1,0 +1,39 @@
+@use "@/styles/colors" as *;
+@use "@/styles/functions" as *;
+@use "@/styles/typography" as *;
+
+.global-nav {
+    display: flex;
+    justify-content: space-between;
+    padding: calc_vh(12vh) calc_vh(20vh);
+    border-bottom: 1px solid $gray900;
+
+    .nav-section {
+        display: flex;
+        align-items: center;
+
+        figure {
+            width: calc_vh(80vh);
+            height: calc_vh(80vh);
+        }
+
+        nav {
+            margin-left: calc_vh(16vh);
+
+            a {
+                @include text-h4;
+                text-decoration: none;
+            }
+
+            a:not(:last-child) {
+                margin-right: calc_vh(20vh);
+            }
+        }
+    }
+
+    .input-section {
+        display: flex;
+        align-items: center;
+        width: calc_vh(480vh);
+    }
+}

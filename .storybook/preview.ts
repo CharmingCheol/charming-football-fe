@@ -1,5 +1,7 @@
 import type { Preview } from "@storybook/nextjs";
 
+import viewports from "./viewports";
+
 const preview: Preview = {
     parameters: {
         controls: {
@@ -8,6 +10,19 @@ const preview: Preview = {
                 date: /Date$/i,
             },
         },
+        backgrounds: {
+            options: {
+                dark: { name: "Dark", value: "#080b0b" },
+                light: { name: "Light", value: "#fafbfc" },
+            },
+        },
+        viewport: {
+            options: viewports,
+        },
+    },
+    initialGlobals: {
+        backgrounds: { value: "dark" },
+        viewport: { value: "full", isRotated: false },
     },
 };
 

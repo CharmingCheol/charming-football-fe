@@ -1,0 +1,18 @@
+@use "@/styles/colors" as *;
+@use "@/styles/functions" as *;
+@use "@/styles/typography" as *;
+
+.input {
+    width: 100%;
+    height: calc_vh(44vh);
+    padding: 0 calc_vh(12vh);
+    border: 1px solid $gray500;
+    border-radius: calc_vh(8vh);
+    background: $black900;
+    outline: none;
+    @include text-p3;
+
+    &:focus {
+        border: 1px solid $gray300;
+    }
+}
