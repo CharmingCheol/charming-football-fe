@@ -25,6 +25,10 @@ const preview: Preview = {
             test: "todo",
         },
     },
+    initialGlobals: {
+        backgrounds: { value: "dark" },
+        viewport: { value: "full", isRotated: false },
+    },
 };
 
 export default preview;
