@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import logo from "@/assets/images/logo.png";
 import styles from "./global-nav.module.scss";
 
 import classNames from "classnames/bind";
@@ -13,7 +13,7 @@ export default function GlobalNav() {
             <section className={cx("nav-section")}>
                 <figure>
                     <Link to="/">
-                        <img src="/images/logo.png" alt="로고" />
+                        <img src={logo} alt="로고" />
                     </Link>
                 </figure>
                 <nav>
