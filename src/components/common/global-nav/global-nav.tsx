@@ -1,6 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
-
+import { Link } from "react-router-dom";
+import logo from "@/assets/images/logo.png";
 import styles from "./global-nav.module.scss";
 
 import classNames from "classnames/bind";
@@ -13,13 +12,13 @@ export default function GlobalNav() {
         <header className={cx("global-nav")}>
             <section className={cx("nav-section")}>
                 <figure>
-                    <Link href="/">
-                        <Image src="/images/logo.png" alt="로고" width={80} height={80} layout="responsive" />
+                    <Link to="/">
+                        <img src={logo} alt="로고" />
                     </Link>
                 </figure>
                 <nav>
-                    <Link href="/matches">일정</Link>
-                    <Link href="/tables">순위</Link>
+                    <Link to="/matches">일정</Link>
+                    <Link to="/tables">순위</Link>
                 </nav>
             </section>
             <section className={cx("input-section")}>
