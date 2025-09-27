@@ -12,21 +12,20 @@ interface Props {
 }
 
 const SuggestionItem = ({ suggestion, index, query }: Props) => {
-    const { selectedIndex, changeSelectedIndex } = useSearchInputStore();
-
-    const isSelected = index === selectedIndex;
+    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
+    const actions = useSearchInputStore((state) => state.actions);
 
     const handleClick = () => {
         //
     };
 
     const handleMouseEnter = () => {
-        changeSelectedIndex(index);
+        actions.selectKeywordByIndex(index);
     };
 
     return (
         <li
-            className={cx("suggestion-item", { selected: isSelected })}
+            className={cx("suggestion-item", { selected: index === selectedKeywordIndex })}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
         >

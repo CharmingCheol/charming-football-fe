@@ -2,17 +2,19 @@ import { create } from "zustand";
 import { combine } from "zustand/middleware";
 
 interface State {
-    suggestionList: SearchSuggestion[];
-    selectedIndex: number;
+    suggestionKeywords: SearchSuggestion[];
+    selectedKeywordIndex: number;
+    focusedInput: boolean;
 }
 
 const initialState: State = {
-    suggestionList: [],
-    selectedIndex: -1,
+    suggestionKeywords: [],
+    selectedKeywordIndex: -1,
+    focusedInput: false,
 };
 
 // 예시 데이터 (실제로는 API에서 가져올 수 있습니다)
-const mockSuggestions: SearchSuggestion[] = [
+const mockSuggestionKeywords: SearchSuggestion[] = [
     { id: "1", name: "맨체스터 유나이티드", type: "team" },
     { id: "2", name: "리버풀", type: "team" },
     { id: "3", name: "손흥민", type: "player" },
@@ -28,17 +30,17 @@ const mockSuggestions: SearchSuggestion[] = [
 const useSearchInputStore = create(
     combine(initialState, (set) => ({
         actions: {
-            fetchSuggestionList: async (query: string) => {
+            querySuggestionKeywords: (query: string) => {
                 set({
-                    suggestionList: mockSuggestions.filter((suggestion) => suggestion.name.includes(query)),
-                    selectedIndex: -1,
+                    suggestionKeywords: mockSuggestionKeywords.filter((keyword) => keyword.name.includes(query)),
+                    selectedKeywordIndex: -1,
                 });
             },
-            resetSuggestionList: () => {
-                set({ suggestionList: [], selectedIndex: -1 });
+            selectKeywordByIndex: (selectedKeywordIndex: number) => {
+                set({ selectedKeywordIndex });
             },
-            changeSelectedIndex: (selectedIndex: number) => {
-                set({ selectedIndex });
+            clear: () => {
+                set({ suggestionKeywords: [], selectedKeywordIndex: -1 });
             },
         },
     }))

@@ -14,8 +14,8 @@ import styles from "./search-input.module.scss";
 const cx = classNames.bind(styles);
 
 const SearchInput = () => {
-    const suggestionList = useSearchInputStore((state) => state.suggestionList);
-    const selectedIndex = useSearchInputStore((state) => state.selectedIndex);
+    const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
+    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
     const actions = useSearchInputStore((state) => state.actions);
 
     const [query, setQuery] = useState<string>("");
@@ -31,19 +31,21 @@ const SearchInput = () => {
             switch (e.key) {
                 case "ArrowDown": {
                     e.preventDefault();
-                    actions.changeSelectedIndex(
-                        selectedIndex < suggestionList.length - 1 ? selectedIndex + 1 : selectedIndex
+                    actions.selectKeywordByIndex(
+                        selectedKeywordIndex < suggestionKeywords.length - 1
+                            ? selectedKeywordIndex + 1
+                            : selectedKeywordIndex
                     );
                     break;
                 }
                 case "ArrowUp": {
                     e.preventDefault();
-                    actions.changeSelectedIndex(selectedIndex > 0 ? selectedIndex - 1 : -1);
+                    actions.selectKeywordByIndex(selectedKeywordIndex > 0 ? selectedKeywordIndex - 1 : -1);
                     break;
                 }
                 case "Enter": {
                     e.preventDefault();
-                    if (selectedIndex >= 0) {
+                    if (selectedKeywordIndex >= 0) {
                         //
                     }
                     break;
@@ -55,15 +57,15 @@ const SearchInput = () => {
                 }
             }
         },
-        [actions, selectedIndex, suggestionList.length]
+        [actions, selectedKeywordIndex, suggestionKeywords.length]
     );
 
     useEffect(() => {
         if (debouncedQuery.trim() === "") {
-            actions.resetSuggestionList();
+            actions.clear();
             return;
         }
-        actions.fetchSuggestionList(debouncedQuery);
+        actions.querySuggestionKeywords(debouncedQuery);
     }, [actions, debouncedQuery]);
 
     // 외부 클릭 시 제안 닫기
@@ -92,9 +94,9 @@ const SearchInput = () => {
                 onKeyDown={handleKeyDown}
                 onFocus={() => setFocusInput(true)}
             />
-            {suggestionList.length > 0 && focusInput && (
+            {suggestionKeywords.length > 0 && focusInput && (
                 <ul ref={suggestionsRef} className={cx("suggestions")}>
-                    {suggestionList.map((suggestion, index) => (
+                    {suggestionKeywords.map((suggestion, index) => (
                         <SuggestionItem key={suggestion.id} suggestion={suggestion} index={index} query={query} />
                     ))}
                 </ul>
