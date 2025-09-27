@@ -1,4 +1,4 @@
-import { useSearchInputContext } from "../search-input-context";
+import useSearchInputStore from "../search-input.store";
 
 import classNames from "classnames/bind";
 import styles from "./suggestion-item.module.scss";
@@ -12,20 +12,20 @@ interface Props {
 }
 
 const SuggestionItem = ({ suggestion, index, query }: Props) => {
-    const { state, dispatch } = useSearchInputContext();
+    const { selectedIndex, changeSelectedIndex } = useSearchInputStore();
 
-    const isSelected = index === state.selectedIndex;
+    const isSelected = index === selectedIndex;
 
     const handleClick = () => {
-        dispatch({ type: "SELECT_SUGGESTION", payload: suggestion });
+        //
     };
 
     const handleMouseEnter = () => {
-        dispatch({ type: "SET_SELECTED_INDEX", payload: index });
+        changeSelectedIndex(index);
     };
 
     return (
-        <div
+        <li
             className={cx("suggestion-item", { selected: isSelected })}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
@@ -38,7 +38,7 @@ const SuggestionItem = ({ suggestion, index, query }: Props) => {
                     <TypeLabel type={suggestion.type} />
                 </span>
             </div>
-        </div>
+        </li>
     );
 };
 
