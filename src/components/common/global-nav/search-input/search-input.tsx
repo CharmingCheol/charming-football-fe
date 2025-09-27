@@ -14,8 +14,9 @@ import styles from "./search-input.module.scss";
 const cx = classNames.bind(styles);
 
 const SearchInput = () => {
-    const { suggestionList, selectedIndex, fetchSuggestionList, resetSuggestionList, changeSelectedIndex } =
-        useSearchInputStore();
+    const suggestionList = useSearchInputStore((state) => state.suggestionList);
+    const selectedIndex = useSearchInputStore((state) => state.selectedIndex);
+    const actions = useSearchInputStore((state) => state.actions);
 
     const [query, setQuery] = useState<string>("");
     const [focusInput, setFocusInput] = useState<boolean>(false);
@@ -30,12 +31,14 @@ const SearchInput = () => {
             switch (e.key) {
                 case "ArrowDown": {
                     e.preventDefault();
-                    changeSelectedIndex(selectedIndex < suggestionList.length - 1 ? selectedIndex + 1 : selectedIndex);
+                    actions.changeSelectedIndex(
+                        selectedIndex < suggestionList.length - 1 ? selectedIndex + 1 : selectedIndex
+                    );
                     break;
                 }
                 case "ArrowUp": {
                     e.preventDefault();
-                    changeSelectedIndex(selectedIndex > 0 ? selectedIndex - 1 : -1);
+                    actions.changeSelectedIndex(selectedIndex > 0 ? selectedIndex - 1 : -1);
                     break;
                 }
                 case "Enter": {
@@ -52,16 +55,16 @@ const SearchInput = () => {
                 }
             }
         },
-        [selectedIndex, suggestionList, changeSelectedIndex]
+        [actions, selectedIndex, suggestionList.length]
     );
 
     useEffect(() => {
         if (debouncedQuery.trim() === "") {
-            resetSuggestionList();
+            actions.resetSuggestionList();
             return;
         }
-        fetchSuggestionList(debouncedQuery);
-    }, [debouncedQuery, resetSuggestionList, fetchSuggestionList]);
+        actions.fetchSuggestionList(debouncedQuery);
+    }, [actions, debouncedQuery]);
 
     // 외부 클릭 시 제안 닫기
     useEffect(() => {

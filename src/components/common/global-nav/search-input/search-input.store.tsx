@@ -27,17 +27,19 @@ const mockSuggestions: SearchSuggestion[] = [
 
 const useSearchInputStore = create(
     combine(initialState, (set) => ({
-        fetchSuggestionList: async (query: string) => {
-            set({
-                suggestionList: mockSuggestions.filter((suggestion) => suggestion.name.includes(query)),
-                selectedIndex: -1,
-            });
-        },
-        resetSuggestionList: () => {
-            set({ suggestionList: [], selectedIndex: -1 });
-        },
-        changeSelectedIndex: (selectedIndex: number) => {
-            set({ selectedIndex });
+        actions: {
+            fetchSuggestionList: async (query: string) => {
+                set({
+                    suggestionList: mockSuggestions.filter((suggestion) => suggestion.name.includes(query)),
+                    selectedIndex: -1,
+                });
+            },
+            resetSuggestionList: () => {
+                set({ suggestionList: [], selectedIndex: -1 });
+            },
+            changeSelectedIndex: (selectedIndex: number) => {
+                set({ selectedIndex });
+            },
         },
     }))
 );
