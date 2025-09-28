@@ -1,7 +1,7 @@
-import { useSearchInputContext } from "../search-input-context";
+import useSearchInputStore from "../../search-input.store";
 
 import classNames from "classnames/bind";
-import styles from "./suggestion-item.module.scss";
+import styles from "./suggestion-keyword.module.scss";
 
 const cx = classNames.bind(styles);
 
@@ -11,24 +11,19 @@ interface Props {
     query: string;
 }
 
-const SuggestionItem = ({ suggestion, index, query }: Props) => {
-    const { state, dispatch } = useSearchInputContext();
-
-    const isSelected = index === state.selectedIndex;
+const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
+    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
+    const actions = useSearchInputStore((state) => state.actions);
 
     const handleClick = () => {
-        dispatch({ type: "SELECT_SUGGESTION", payload: suggestion });
-    };
-
-    const handleMouseEnter = () => {
-        dispatch({ type: "SET_SELECTED_INDEX", payload: index });
+        //
     };
 
     return (
-        <div
-            className={cx("suggestion-item", { selected: isSelected })}
+        <li
+            className={cx("suggestion-keyword", { selected: index === selectedKeywordIndex })}
             onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
+            onMouseEnter={() => actions.selectKeywordByIndex(index)}
         >
             <div className={cx("suggestion-content")}>
                 <span className={cx("name")}>
@@ -38,7 +33,7 @@ const SuggestionItem = ({ suggestion, index, query }: Props) => {
                     <TypeLabel type={suggestion.type} />
                 </span>
             </div>
-        </div>
+        </li>
     );
 };
 
@@ -82,4 +77,4 @@ const TypeLabel = ({ type }: { type: string }) => {
     return <span>{getTypeLabel(type)}</span>;
 };
 
-export default SuggestionItem;
+export default SuggestionKeyword;
