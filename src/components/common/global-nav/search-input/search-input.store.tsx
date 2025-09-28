@@ -39,8 +39,14 @@ const useSearchInputStore = create(
             selectKeywordByIndex: (selectedKeywordIndex: number) => {
                 set({ selectedKeywordIndex });
             },
+            focusInInput: () => {
+                set({ focusedInput: true });
+            },
+            focusOutInput: () => {
+                set({ focusedInput: false });
+            },
             clear: () => {
-                set({ suggestionKeywords: [], selectedKeywordIndex: -1 });
+                set({ suggestionKeywords: [], selectedKeywordIndex: -1, focusedInput: false });
             },
         },
     }))

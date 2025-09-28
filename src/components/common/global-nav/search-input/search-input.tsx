@@ -16,10 +16,10 @@ const cx = classNames.bind(styles);
 const SearchInput = () => {
     const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
     const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
+    const focusedInput = useSearchInputStore((state) => state.focusedInput);
     const actions = useSearchInputStore((state) => state.actions);
 
     const [query, setQuery] = useState<string>("");
-    const [focusInput, setFocusInput] = useState<boolean>(false);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const suggestionsRef = useRef<HTMLUListElement>(null);
@@ -51,7 +51,7 @@ const SearchInput = () => {
                     break;
                 }
                 case "Escape": {
-                    setFocusInput(false);
+                    actions.focusOutInput();
                     inputRef.current?.blur();
                     break;
                 }
@@ -77,12 +77,12 @@ const SearchInput = () => {
                 inputRef.current &&
                 !inputRef.current.contains(event.target as Node)
             ) {
-                setFocusInput(false);
+                actions.focusOutInput();
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+    }, [actions]);
 
     return (
         <div className={cx("search-input-wrapper")}>
@@ -92,9 +92,9 @@ const SearchInput = () => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                onFocus={() => setFocusInput(true)}
+                onFocus={() => actions.focusInInput()}
             />
-            {suggestionKeywords.length > 0 && focusInput && (
+            {suggestionKeywords.length > 0 && focusedInput && (
                 <ul ref={suggestionsRef} className={cx("suggestions")}>
                     {suggestionKeywords.map((suggestion, index) => (
                         <SuggestionItem key={suggestion.id} suggestion={suggestion} index={index} query={query} />
