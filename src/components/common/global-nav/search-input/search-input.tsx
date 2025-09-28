@@ -5,11 +5,11 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
 
+import { SuggestionKeywordList } from "./suggestion-keyword-list/suggestion-keyword-list";
 import useSearchInputStore from "./search-input.store";
 
 import classNames from "classnames/bind";
 import styles from "./search-input.module.scss";
-import { SuggestionKeywordList } from "./suggestion-keyword-list/suggestion-keyword-list";
 
 const cx = classNames.bind(styles);
 
@@ -66,7 +66,6 @@ const SearchInput = () => {
         actions.querySuggestionKeywords(debouncedQuery);
     }, [actions, debouncedQuery]);
 
-    // 외부 클릭 시 제안 닫기
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (inputRef.current && !inputRef.current.contains(event.target as Node)) {

@@ -19,15 +19,11 @@ const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
         //
     };
 
-    const handleMouseEnter = () => {
-        actions.selectKeywordByIndex(index);
-    };
-
     return (
         <li
             className={cx("suggestion-keyword", { selected: index === selectedKeywordIndex })}
             onClick={handleClick}
-            onMouseEnter={handleMouseEnter}
+            onMouseEnter={() => actions.selectKeywordByIndex(index)}
         >
             <div className={cx("suggestion-content")}>
                 <span className={cx("name")}>
