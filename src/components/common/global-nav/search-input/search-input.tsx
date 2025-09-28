@@ -5,11 +5,11 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
 
-import SuggestionItem from "./suggestion-item/suggestion-item";
 import useSearchInputStore from "./search-input.store";
 
 import classNames from "classnames/bind";
 import styles from "./search-input.module.scss";
+import { SuggestionKeywordList } from "./suggestion-keyword-list/suggestion-keyword-list";
 
 const cx = classNames.bind(styles);
 
@@ -20,9 +20,7 @@ const SearchInput = () => {
     const actions = useSearchInputStore((state) => state.actions);
 
     const [query, setQuery] = useState<string>("");
-
     const inputRef = useRef<HTMLInputElement>(null);
-    const suggestionsRef = useRef<HTMLUListElement>(null);
 
     const debouncedQuery = useDebounce(query, 500);
 
@@ -71,12 +69,7 @@ const SearchInput = () => {
     // 외부 클릭 시 제안 닫기
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (
-                suggestionsRef.current &&
-                !suggestionsRef.current.contains(event.target as Node) &&
-                inputRef.current &&
-                !inputRef.current.contains(event.target as Node)
-            ) {
+            if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
                 actions.focusOutInput();
             }
         };
@@ -94,13 +87,7 @@ const SearchInput = () => {
                 onKeyDown={handleKeyDown}
                 onFocus={() => actions.focusInInput()}
             />
-            {suggestionKeywords.length > 0 && focusedInput && (
-                <ul ref={suggestionsRef} className={cx("suggestions")}>
-                    {suggestionKeywords.map((suggestion, index) => (
-                        <SuggestionItem key={suggestion.id} suggestion={suggestion} index={index} query={query} />
-                    ))}
-                </ul>
-            )}
+            {suggestionKeywords.length > 0 && focusedInput && <SuggestionKeywordList query={query} />}
         </div>
     );
 };

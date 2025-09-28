@@ -1,7 +1,7 @@
-import useSearchInputStore from "../search-input.store";
+import useSearchInputStore from "../../search-input.store";
 
 import classNames from "classnames/bind";
-import styles from "./suggestion-item.module.scss";
+import styles from "./suggestion-keyword.module.scss";
 
 const cx = classNames.bind(styles);
 
@@ -11,7 +11,7 @@ interface Props {
     query: string;
 }
 
-const SuggestionItem = ({ suggestion, index, query }: Props) => {
+const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
     const actions = useSearchInputStore((state) => state.actions);
 
@@ -25,7 +25,7 @@ const SuggestionItem = ({ suggestion, index, query }: Props) => {
 
     return (
         <li
-            className={cx("suggestion-item", { selected: index === selectedKeywordIndex })}
+            className={cx("suggestion-keyword", { selected: index === selectedKeywordIndex })}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
         >
@@ -81,4 +81,4 @@ const TypeLabel = ({ type }: { type: string }) => {
     return <span>{getTypeLabel(type)}</span>;
 };
 
-export default SuggestionItem;
+export default SuggestionKeyword;
