@@ -1,9 +1,7 @@
+import classNames from "classnames";
+
+import * as S from "./suggestion-keyword.styles";
 import useSearchInputStore from "../../search-input.store";
-
-import classNames from "classnames/bind";
-import styles from "./suggestion-keyword.module.scss";
-
-const cx = classNames.bind(styles);
 
 interface Props {
     suggestion: SearchSuggestion;
@@ -20,43 +18,39 @@ const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     };
 
     return (
-        <li
-            className={cx("suggestion-keyword", { selected: index === selectedKeywordIndex })}
+        <S.SuggestionKeyword
+            className={classNames({ selected: index === selectedKeywordIndex })}
             onClick={handleClick}
             onMouseEnter={() => actions.selectKeywordByIndex(index)}
         >
-            <div className={cx("suggestion-content")}>
-                <span className={cx("name")}>
-                    <HighlightedText text={suggestion.name} highlight={query} />
-                </span>
-                <span className={cx("type")}>
-                    <TypeLabel type={suggestion.type} />
-                </span>
+            <div className={"content"}>
+                <HighlightedText text={suggestion.name} highlight={query} />
+                <TypeLabel type={suggestion.type} />
             </div>
-        </li>
+        </S.SuggestionKeyword>
     );
 };
 
 const HighlightedText = ({ text, highlight }: { text: string; highlight: string }) => {
     if (!highlight.trim()) {
-        return <span>{text}</span>;
+        return <S.HighlightedText>{text}</S.HighlightedText>;
     }
 
     const regex = new RegExp(`(${highlight})`, "gi");
     const parts = text.split(regex);
 
     return (
-        <span>
+        <S.HighlightedText>
             {parts.map((part, index) =>
                 regex.test(part) ? (
-                    <mark key={index} className={cx("highlight")}>
+                    <mark key={index} className={"highlight"}>
                         {part}
                     </mark>
                 ) : (
                     part
                 )
             )}
-        </span>
+        </S.HighlightedText>
     );
 };
 
@@ -74,7 +68,7 @@ const TypeLabel = ({ type }: { type: string }) => {
         }
     };
 
-    return <span>{getTypeLabel(type)}</span>;
+    return <S.TypeLabel>{getTypeLabel(type)}</S.TypeLabel>;
 };
 
 export default SuggestionKeyword;

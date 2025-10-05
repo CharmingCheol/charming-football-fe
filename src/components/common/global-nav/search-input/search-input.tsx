@@ -1,17 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
+import { css } from "@emotion/react";
 
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
 
 import { SuggestionKeywordList } from "./suggestion-keyword-list/suggestion-keyword-list";
 import useSearchInputStore from "./search-input.store";
-
-import classNames from "classnames/bind";
-import styles from "./search-input.module.scss";
-
-const cx = classNames.bind(styles);
 
 const SearchInput = () => {
     const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
@@ -77,7 +73,13 @@ const SearchInput = () => {
     }, [actions]);
 
     return (
-        <div className={cx("search-input-wrapper")}>
+        <div
+            css={css`
+                display: flex;
+                position: relative;
+                width: 100%;
+            `}
+        >
             <Input
                 ref={inputRef}
                 placeholder="팀, 선수, 리그 이름을 입력해 주세요."
