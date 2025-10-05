@@ -1,9 +1,9 @@
 import { type InputHTMLAttributes, forwardRef } from "react";
-import * as S from "./input.styles";
+import * as Styles from "./input.styles";
 
 const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
     ({ className = "", ...props }, ref) => {
-        return <S.Input ref={ref} className={className} {...props} />;
+        return <Styles.Input ref={ref} className={className} {...props} />;
     }
 );
 

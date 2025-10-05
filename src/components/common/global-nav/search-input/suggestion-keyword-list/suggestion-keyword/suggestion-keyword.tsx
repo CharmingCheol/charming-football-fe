@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-import * as S from "./suggestion-keyword.styles";
+import * as Styles from "./suggestion-keyword.styles";
 import useSearchInputStore from "../../search-input.store";
 
 interface Props {
@@ -18,7 +18,7 @@ const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     };
 
     return (
-        <S.SuggestionKeyword
+        <Styles.SuggestionKeyword
             className={classNames({ selected: index === selectedKeywordIndex })}
             onClick={handleClick}
             onMouseEnter={() => actions.selectKeywordByIndex(index)}
@@ -27,20 +27,20 @@ const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
                 <HighlightedText text={suggestion.name} highlight={query} />
                 <TypeLabel type={suggestion.type} />
             </div>
-        </S.SuggestionKeyword>
+        </Styles.SuggestionKeyword>
     );
 };
 
 const HighlightedText = ({ text, highlight }: { text: string; highlight: string }) => {
     if (!highlight.trim()) {
-        return <S.HighlightedText>{text}</S.HighlightedText>;
+        return <Styles.HighlightedText>{text}</Styles.HighlightedText>;
     }
 
     const regex = new RegExp(`(${highlight})`, "gi");
     const parts = text.split(regex);
 
     return (
-        <S.HighlightedText>
+        <Styles.HighlightedText>
             {parts.map((part, index) =>
                 regex.test(part) ? (
                     <mark key={index} className={"highlight"}>
@@ -50,7 +50,7 @@ const HighlightedText = ({ text, highlight }: { text: string; highlight: string 
                     part
                 )
             )}
-        </S.HighlightedText>
+        </Styles.HighlightedText>
     );
 };
 
@@ -68,7 +68,7 @@ const TypeLabel = ({ type }: { type: string }) => {
         }
     };
 
-    return <S.TypeLabel>{getTypeLabel(type)}</S.TypeLabel>;
+    return <Styles.TypeLabel>{getTypeLabel(type)}</Styles.TypeLabel>;
 };
 
 export default SuggestionKeyword;

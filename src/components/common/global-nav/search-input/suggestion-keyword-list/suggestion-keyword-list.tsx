@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import * as S from "./suggestion-keyword-list.styles";
+import * as Styles from "./suggestion-keyword-list.styles";
 import SuggestionKeyword from "./suggestion-keyword/suggestion-keyword";
 import useSearchInputStore from "../search-input.store";
 
@@ -21,10 +21,10 @@ export const SuggestionKeywordList = ({ query }: { query: string }) => {
     }, [actions]);
 
     return (
-        <S.SuggestionKeywordList ref={suggestionsRef}>
+        <Styles.SuggestionKeywordList ref={suggestionsRef}>
             {suggestionKeywords.map((suggestion, index) => (
                 <SuggestionKeyword key={suggestion.id} suggestion={suggestion} index={index} query={query} />
             ))}
-        </S.SuggestionKeywordList>
+        </Styles.SuggestionKeywordList>
     );
 };
