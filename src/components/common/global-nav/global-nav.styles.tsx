@@ -5,7 +5,7 @@ export const GlobalNavContainer = styled.header({
     display: "flex",
     justifyContent: "space-between",
     padding: `${calcVh(12)} ${calcVh(20)}`,
-    borderBottom: `1px solid ${colors.gray[900]}`,
+    borderBottom: `1px solid ${colors.gray900}`,
 
     "& section": {
         display: "flex",

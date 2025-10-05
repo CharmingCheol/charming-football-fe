@@ -10,7 +10,7 @@ export const GlobalStyles = () => (
             },
 
             body: {
-                backgroundColor: colors.black[900],
+                backgroundColor: colors.black900,
             },
 
             a: {

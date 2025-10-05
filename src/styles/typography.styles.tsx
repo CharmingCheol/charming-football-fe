@@ -3,7 +3,7 @@ import { colors, calcVh } from "./index";
 const textStyle = (size: number, height: number) => ({
     fontSize: calcVh(size),
     lineHeight: calcVh(height),
-    color: colors.gray[100],
+    color: colors.gray100,
 });
 
 const titleStyle = (size: number, height: number) => ({
