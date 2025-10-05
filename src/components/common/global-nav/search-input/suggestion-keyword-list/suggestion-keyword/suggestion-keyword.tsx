@@ -1,5 +1,3 @@
-import classNames from "classnames";
-
 import * as Styles from "./suggestion-keyword.styles";
 import useSearchInputStore from "../../search-input.store";
 
@@ -10,7 +8,6 @@ interface Props {
 }
 
 const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
-    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
     const actions = useSearchInputStore((state) => state.actions);
 
     const handleClick = () => {
@@ -18,11 +15,7 @@ const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     };
 
     return (
-        <Styles.SuggestionKeyword
-            className={classNames({ selected: index === selectedKeywordIndex })}
-            onClick={handleClick}
-            onMouseEnter={() => actions.selectKeywordByIndex(index)}
-        >
+        <Styles.SuggestionKeyword onClick={handleClick} onMouseEnter={() => actions.selectKeywordByIndex(index)}>
             <div className={"content"}>
                 <HighlightedText text={suggestion.name} highlight={query} />
                 <TypeLabel type={suggestion.type} />

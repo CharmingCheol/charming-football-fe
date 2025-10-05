@@ -5,13 +5,14 @@ export const SuggestionKeyword = styled.li({
     padding: `${calcVh(12)} ${calcVh(16)}`,
     cursor: "pointer",
     borderBottom: `1px solid ${colors.gray200}`,
+    borderRadius: calcVh(8),
 
     "&:last-child": {
         borderBottom: "none",
     },
 
-    "&:hover, &.selected": {
-        backgroundColor: colors.gray100,
+    "&:hover": {
+        backgroundColor: colors.gray200,
     },
 
     "& .content": {
