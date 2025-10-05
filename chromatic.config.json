@@ -1,0 +1,8 @@
+{
+    "onlyChanged": false,
+    "projectId": "Project:685bf4dd7ed6e00dfb352cbe",
+    "zip": true,
+    "buildScriptName": "build-storybook",
+    "exitZeroOnChanges": true,
+    "ignoreLastBuildOnBranch": "main"
+}

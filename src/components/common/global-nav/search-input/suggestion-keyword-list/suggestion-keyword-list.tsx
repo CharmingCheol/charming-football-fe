@@ -1,12 +1,8 @@
 import { useEffect, useRef } from "react";
 
+import * as Styles from "./suggestion-keyword-list.styles";
 import SuggestionKeyword from "./suggestion-keyword/suggestion-keyword";
 import useSearchInputStore from "../search-input.store";
-
-import classNames from "classnames/bind";
-import styles from "./suggestion-keyword-list.module.scss";
-
-const cx = classNames.bind(styles);
 
 export const SuggestionKeywordList = ({ query }: { query: string }) => {
     const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
@@ -25,10 +21,10 @@ export const SuggestionKeywordList = ({ query }: { query: string }) => {
     }, [actions]);
 
     return (
-        <ul ref={suggestionsRef} className={cx("suggestions")}>
+        <Styles.SuggestionKeywordList ref={suggestionsRef}>
             {suggestionKeywords.map((suggestion, index) => (
                 <SuggestionKeyword key={suggestion.id} suggestion={suggestion} index={index} query={query} />
             ))}
-        </ul>
+        </Styles.SuggestionKeywordList>
     );
 };

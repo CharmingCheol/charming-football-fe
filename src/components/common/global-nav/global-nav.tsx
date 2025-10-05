@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/images/logo.png";
-import styles from "./global-nav.module.scss";
 
-import classNames from "classnames/bind";
 import SearchInput from "./search-input/search-input";
-
-const cx = classNames.bind(styles);
+import * as Styles from "./global-nav.styles";
 
 export default function GlobalNav() {
     return (
-        <header className={cx("global-nav")}>
-            <section className={cx("nav-section")}>
+        <Styles.GlobalNavContainer>
+            <section className="nav-section">
                 <figure>
                     <Link to="/">
                         <img src={logo} alt="로고" />
@@ -21,9 +18,9 @@ export default function GlobalNav() {
                     <Link to="/tables">순위</Link>
                 </nav>
             </section>
-            <section className={cx("input-section")}>
+            <section className="input-section">
                 <SearchInput />
             </section>
-        </header>
+        </Styles.GlobalNavContainer>
     );
 }

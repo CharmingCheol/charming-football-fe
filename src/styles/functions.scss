@@ -1,6 +1,0 @@
-@use "sass:math";
-
-$win_h: 1080; // (height / 1080) * 100
-@function calc_vh($val) {
-    @return math.div($val, $win_h) * 100;
-}
