@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./app/App";
 
 async function enableMocking() {
-    if (process.env.NODE_ENV !== "development") {
+    if (import.meta.env.MODE !== "development") {
         return;
     }
     const { worker } = await import("./mocks/browser");
