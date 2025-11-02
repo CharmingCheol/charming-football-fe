@@ -4,6 +4,11 @@ import { getSearchAllApi } from "@/apis/search";
 export const handlers = [
     http.get(`*/${getSearchAllApi.path}`, ({ request }) => {
         const query = new URL(request.url).searchParams.get("query") as string;
+
+        if (query === "error500") {
+            return HttpResponse.json({ message: "오류가 발생했습니다" }, { status: 500 });
+        }
+
         const response: Awaited<ReturnType<typeof getSearchAllApi.get>> = [
             { id: "1", name: "맨체스터 유나이티드", type: "team" },
             { id: "2", name: "리버풀", type: "team" },
