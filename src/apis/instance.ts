@@ -1,5 +1,6 @@
 import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig } from "axios";
+import { NetworkHttpError, ServerHttpError, UnknownHttpError } from "@/constants/errors";
 
 function createAxiosInstance(): AxiosInstance {
     const defaultConfig: AxiosRequestConfig = {
@@ -11,22 +12,26 @@ function createAxiosInstance(): AxiosInstance {
     };
 
     const instance = axios.create(defaultConfig);
-
-    instance.interceptors.request.use(
-        (config) => {
-            return config;
-        },
-        (error) => {
-            return Promise.reject(error);
-        }
-    );
-
     instance.interceptors.response.use(
         (response) => {
             return response;
         },
         (error) => {
-            return Promise.reject(error);
+            if (!axios.isAxiosError(error)) {
+                return Promise.reject(new UnknownHttpError(error));
+            }
+            if (!error.response) {
+                return Promise.reject(new NetworkHttpError(error));
+            }
+            const { status, data } = error.response;
+            switch (status) {
+                case 500: {
+                    return Promise.reject(new ServerHttpError(error));
+                }
+                default: {
+                    return Promise.reject(new UnknownHttpError(error, data?.message));
+                }
+            }
         }
     );
 
