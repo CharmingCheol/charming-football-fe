@@ -1,26 +1,27 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/images/logo.png";
-
 import SearchInput from "./search-input/search-input";
-import * as Styles from "./global-nav.styles";
+import * as S from "./global-nav.styles";
 
-export default function GlobalNav() {
+const GlobalNav = () => {
     return (
-        <Styles.GlobalNavContainer>
-            <section className="nav-section">
-                <figure>
+        <S.GlobalNavContainer>
+            <S.NavSection>
+                <S.LogoFigure>
                     <Link to="/">
                         <img src={logo} alt="로고" />
                     </Link>
-                </figure>
-                <nav>
+                </S.LogoFigure>
+                <S.NavList>
                     <Link to="/matches">일정</Link>
                     <Link to="/tables">순위</Link>
-                </nav>
-            </section>
-            <section className="input-section">
+                </S.NavList>
+            </S.NavSection>
+            <S.InputSection>
                 <SearchInput />
-            </section>
-        </Styles.GlobalNavContainer>
+            </S.InputSection>
+        </S.GlobalNavContainer>
     );
-}
+};
+
+export default GlobalNav;

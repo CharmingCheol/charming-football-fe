@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useCallback, useState } from "react";
-import { css } from "@emotion/react";
 
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
@@ -73,13 +72,24 @@ const SearchInput = () => {
     }, [actions]);
 
     return (
-        <div
-            css={css`
-                display: flex;
-                position: relative;
-                width: 100%;
-            `}
-        >
+        // <div
+        //     css={css`
+        //         display: flex;
+        //         position: relative;
+        //         width: 100%;
+        //     `}
+        // >
+        //     <Input
+        //         ref={inputRef}
+        //         placeholder="팀, 선수, 리그 이름을 입력해 주세요."
+        //         value={query}
+        //         onChange={(e) => setQuery(e.target.value)}
+        //         onKeyDown={handleKeyDown}
+        //         onFocus={() => actions.focusInInput()}
+        //     />
+        //     {suggestionKeywords.length > 0 && focusedInput && <SuggestionKeywordList query={query} />}
+        // </div>
+        <>
             <Input
                 ref={inputRef}
                 placeholder="팀, 선수, 리그 이름을 입력해 주세요."
@@ -89,7 +99,7 @@ const SearchInput = () => {
                 onFocus={() => actions.focusInInput()}
             />
             {suggestionKeywords.length > 0 && focusedInput && <SuggestionKeywordList query={query} />}
-        </div>
+        </>
     );
 };
 
