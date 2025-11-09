@@ -8,14 +8,14 @@ interface State {
     focusedInput: boolean;
 }
 
-const initialState: State = {
+export const searchInputState: State = {
     suggestionKeywords: [],
     selectedKeywordIndex: -1,
     focusedInput: false,
 };
 
 const useSearchInputStore = create(
-    combine(initialState, (set) => ({
+    combine(searchInputState, (set) => ({
         actions: {
             querySuggestionKeywords: async (query: string) => {
                 const suggestionKeywords = await getSearchAllApi.get(query);
