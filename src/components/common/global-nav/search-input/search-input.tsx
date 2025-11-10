@@ -21,23 +21,21 @@ const SearchInput = () => {
 
     const handleKeyDown = useCallback(
         (e: React.KeyboardEvent) => {
+            e.preventDefault();
             switch (e.key) {
                 case "ArrowDown": {
-                    e.preventDefault();
                     actions.selectKeywordByIndex(
-                        selectedKeywordIndex < suggestionKeywords.length - 1
-                            ? selectedKeywordIndex + 1
-                            : selectedKeywordIndex
+                        suggestionKeywords.length <= selectedKeywordIndex + 1 ? 0 : selectedKeywordIndex + 1
                     );
                     break;
                 }
                 case "ArrowUp": {
-                    e.preventDefault();
-                    actions.selectKeywordByIndex(selectedKeywordIndex > 0 ? selectedKeywordIndex - 1 : -1);
+                    actions.selectKeywordByIndex(
+                        selectedKeywordIndex - 1 < 0 ? suggestionKeywords.length - 1 : selectedKeywordIndex - 1
+                    );
                     break;
                 }
                 case "Enter": {
-                    e.preventDefault();
                     if (selectedKeywordIndex >= 0) {
                         //
                     }
@@ -72,23 +70,6 @@ const SearchInput = () => {
     }, [actions]);
 
     return (
-        // <div
-        //     css={css`
-        //         display: flex;
-        //         position: relative;
-        //         width: 100%;
-        //     `}
-        // >
-        //     <Input
-        //         ref={inputRef}
-        //         placeholder="팀, 선수, 리그 이름을 입력해 주세요."
-        //         value={query}
-        //         onChange={(e) => setQuery(e.target.value)}
-        //         onKeyDown={handleKeyDown}
-        //         onFocus={() => actions.focusInInput()}
-        //     />
-        //     {suggestionKeywords.length > 0 && focusedInput && <SuggestionKeywordList query={query} />}
-        // </div>
         <>
             <Input
                 ref={inputRef}
