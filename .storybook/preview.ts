@@ -1,7 +1,13 @@
 import type { Preview } from "@storybook/react-vite";
+import { initialize, mswLoader } from "msw-storybook-addon";
 import viewports from "./viewports";
+import { handlers } from "../src/mocks/handlers";
+
+// MSW 초기화
+initialize();
 
 const preview: Preview = {
+    loaders: [mswLoader],
     parameters: {
         controls: {
             matchers: {
@@ -23,6 +29,9 @@ const preview: Preview = {
             // 'error' - fail CI on a11y violations
             // 'off' - skip a11y checks entirely
             test: "todo",
+        },
+        msw: {
+            handlers,
         },
     },
     initialGlobals: {
