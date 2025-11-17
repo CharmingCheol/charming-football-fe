@@ -40,14 +40,22 @@ export const 기본: StoryObj<typeof GlobalNav> = {
 export const 검색_결과_있음: StoryObj<typeof GlobalNav> = {
     decorators: [
         withSearchInputStore({
+            query: "맨체",
             focusedInput: true,
             suggestionKeywords: [
-                { id: "1", name: "손흥민", type: "player" },
-                { id: "2", name: "토트넘", type: "team" },
-                { id: "3", name: "프리미어 리그", type: "league" },
-                { id: "4", name: "해리 케인", type: "player" },
+                { id: "1", name: "맨체스터 유나이티드드", type: "team" },
+                { id: "2", name: "맨체스터 시티", type: "team" },
             ],
-            selectedKeywordIndex: 0,
+        }),
+    ],
+    render: () => <GlobalNav />,
+};
+
+export const 검색_결과_없음: StoryObj<typeof GlobalNav> = {
+    decorators: [
+        withSearchInputStore({
+            query: "dfsdfdsafd",
+            focusedInput: true,
         }),
     ],
     render: () => <GlobalNav />,
