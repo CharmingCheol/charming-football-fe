@@ -1,5 +1,6 @@
 import * as Styles from "./suggestion-keyword.styles";
 import useSearchInputStore from "../../search-input.store";
+import { useMemo } from "react";
 
 interface Props {
     suggestion: SearchSuggestion;
@@ -9,14 +10,20 @@ interface Props {
 
 const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     const actions = useSearchInputStore((state) => state.actions);
+    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
+    const selected = useMemo(() => selectedKeywordIndex === index, [selectedKeywordIndex, index]);
 
     const handleClick = () => {
         //
     };
 
+    const handleMouseEnter = () => {
+        actions.selectKeywordByIndex(index);
+    };
+
     return (
-        <Styles.SuggestionKeyword onClick={handleClick} onMouseEnter={() => actions.selectKeywordByIndex(index)}>
-            <div className={"content"}>
+        <Styles.SuggestionKeyword selected={selected} onClick={handleClick} onMouseEnter={handleMouseEnter}>
+            <div className="content">
                 <HighlightedText text={suggestion.name} highlight={query} />
                 <TypeLabel type={suggestion.type} />
             </div>
@@ -36,7 +43,7 @@ const HighlightedText = ({ text, highlight }: { text: string; highlight: string 
         <Styles.HighlightedText>
             {parts.map((part, index) =>
                 regex.test(part) ? (
-                    <mark key={index} className={"highlight"}>
+                    <mark key={index} className="highlight">
                         {part}
                     </mark>
                 ) : (

@@ -18,6 +18,16 @@ const colors = {
     black700: "#1f1f1f",
     black800: "#121212",
     black900: "#080b0b",
+
+    red100: "#ff8585",
+    red200: "#ff7070",
+    red300: "#ff5a5a",
+    red400: "#ff4444",
+    red500: "#f63636",
+    red600: "#e62929",
+    red700: "#d91f1f",
+    red800: "#c41717",
+    red900: "#ef4444",
 } as const;
 
 export default colors;

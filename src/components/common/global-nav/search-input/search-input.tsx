@@ -1,21 +1,18 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
-import { css } from "@emotion/react";
-
+import { useEffect, useRef, useCallback } from "react";
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
-
 import { SuggestionKeywordList } from "./suggestion-keyword-list/suggestion-keyword-list";
 import useSearchInputStore from "./search-input.store";
 
 const SearchInput = () => {
+    const query = useSearchInputStore((state) => state.query);
     const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
     const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
     const focusedInput = useSearchInputStore((state) => state.focusedInput);
     const actions = useSearchInputStore((state) => state.actions);
 
-    const [query, setQuery] = useState<string>("");
     const inputRef = useRef<HTMLInputElement>(null);
 
     const debouncedQuery = useDebounce(query, 500);
@@ -25,40 +22,32 @@ const SearchInput = () => {
             switch (e.key) {
                 case "ArrowDown": {
                     e.preventDefault();
-                    actions.selectKeywordByIndex(
-                        selectedKeywordIndex < suggestionKeywords.length - 1
-                            ? selectedKeywordIndex + 1
-                            : selectedKeywordIndex
-                    );
+                    actions.goToNextKeywordIndex();
                     break;
                 }
                 case "ArrowUp": {
                     e.preventDefault();
-                    actions.selectKeywordByIndex(selectedKeywordIndex > 0 ? selectedKeywordIndex - 1 : -1);
+                    actions.goBackKeywordIndex();
                     break;
                 }
                 case "Enter": {
-                    e.preventDefault();
                     if (selectedKeywordIndex >= 0) {
                         //
                     }
                     break;
                 }
                 case "Escape": {
+                    e.preventDefault();
                     actions.focusOutInput();
                     inputRef.current?.blur();
                     break;
                 }
             }
         },
-        [actions, selectedKeywordIndex, suggestionKeywords.length]
+        [actions, selectedKeywordIndex]
     );
 
     useEffect(() => {
-        if (debouncedQuery.trim() === "") {
-            actions.clear();
-            return;
-        }
         actions.querySuggestionKeywords(debouncedQuery);
     }, [actions, debouncedQuery]);
 
@@ -73,23 +62,17 @@ const SearchInput = () => {
     }, [actions]);
 
     return (
-        <div
-            css={css`
-                display: flex;
-                position: relative;
-                width: 100%;
-            `}
-        >
+        <>
             <Input
                 ref={inputRef}
                 placeholder="팀, 선수, 리그 이름을 입력해 주세요."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => actions.setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 onFocus={() => actions.focusInInput()}
             />
             {suggestionKeywords.length > 0 && focusedInput && <SuggestionKeywordList query={query} />}
-        </div>
+        </>
     );
 };
 
