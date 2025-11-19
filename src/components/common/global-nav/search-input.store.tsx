@@ -4,7 +4,7 @@ import { combine } from "zustand/middleware";
 
 interface State {
     query: string;
-    suggestionKeywords: SearchSuggestion[];
+    suggestionKeywords: SearchResult[];
     focusedKeywordIndex: number;
     inputFocused: boolean;
 }

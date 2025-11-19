@@ -3,7 +3,7 @@ import useSearchInputStore from "../../search-input.store";
 import { useMemo } from "react";
 
 interface Props {
-    suggestion: SearchSuggestion;
+    suggestion: SearchResult;
     index: number;
     query: string;
 }
