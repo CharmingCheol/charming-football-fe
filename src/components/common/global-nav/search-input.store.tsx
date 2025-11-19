@@ -6,14 +6,14 @@ interface State {
     query: string;
     suggestionKeywords: SearchSuggestion[];
     selectedKeywordIndex: number;
-    focusedInput: boolean;
+    inputFocused: boolean;
 }
 
 export const searchInputState: State = {
     query: "",
     suggestionKeywords: [],
     selectedKeywordIndex: -1,
-    focusedInput: false,
+    inputFocused: false,
 };
 
 const useSearchInputStore = create(
@@ -44,13 +44,13 @@ const useSearchInputStore = create(
                 set({ selectedKeywordIndex });
             },
             focusInInput: () => {
-                set({ focusedInput: true });
+                set({ inputFocused: true });
             },
             focusOutInput: () => {
-                set({ focusedInput: false });
+                set({ inputFocused: false });
             },
             clear: () => {
-                set({ query: "", suggestionKeywords: [], selectedKeywordIndex: -1, focusedInput: false });
+                set({ query: "", suggestionKeywords: [], selectedKeywordIndex: -1, inputFocused: false });
             },
         },
     }))

@@ -40,7 +40,7 @@ export const 검색_결과_있음: StoryObj<typeof GlobalNav> = {
     decorators: [
         withSearchInputStore({
             query: "맨체",
-            focusedInput: true,
+            inputFocused: true,
             suggestionKeywords: [
                 { id: "1", name: "맨체스터 유나이티드드", type: "team" },
                 { id: "2", name: "맨체스터 시티", type: "team" },
@@ -54,7 +54,7 @@ export const 검색_결과_없음: StoryObj<typeof GlobalNav> = {
     decorators: [
         withSearchInputStore({
             query: "dfsdfdsafd",
-            focusedInput: true,
+            inputFocused: true,
         }),
     ],
     render: () => <GlobalNav />,
