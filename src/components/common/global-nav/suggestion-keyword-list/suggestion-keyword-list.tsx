@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 
 import * as Styles from "./suggestion-keyword-list.styles";
 import SuggestionKeyword from "./suggestion-keyword/suggestion-keyword";
-import useSearchInputStore from "../../search-input.store.ts";
+import useSearchInputStore from "../search-input.store.ts";
 
-export const SuggestionKeywordList = ({ query }: { query: string }) => {
+const SuggestionKeywordList = ({ query }: { query: string }) => {
     const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
     const actions = useSearchInputStore((state) => state.actions);
 
@@ -28,3 +28,5 @@ export const SuggestionKeywordList = ({ query }: { query: string }) => {
         </Styles.SuggestionKeywordList>
     );
 };
+
+export default SuggestionKeywordList;
