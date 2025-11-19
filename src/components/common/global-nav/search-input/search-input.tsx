@@ -3,14 +3,11 @@
 import { useEffect, useRef, useCallback } from "react";
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
-import SuggestionKeywordList from "../suggestion-keyword-list/suggestion-keyword-list";
-import useSearchInputStore from "../search-input.store.ts";
+import useSearchInputStore from "../search-input.store";
 
 const SearchInput = () => {
     const query = useSearchInputStore((state) => state.query);
-    const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
     const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
-    const focusedInput = useSearchInputStore((state) => state.focusedInput);
     const actions = useSearchInputStore((state) => state.actions);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -62,17 +59,14 @@ const SearchInput = () => {
     }, [actions]);
 
     return (
-        <>
-            <Input
-                ref={inputRef}
-                placeholder="팀, 선수, 리그 이름을 입력해 주세요."
-                value={query}
-                onChange={(e) => actions.setQuery(e.target.value)}
-                onKeyDown={handleKeyDown}
-                onFocus={() => actions.focusInInput()}
-            />
-            {suggestionKeywords.length > 0 && focusedInput && <SuggestionKeywordList query={query} />}
-        </>
+        <Input
+            ref={inputRef}
+            placeholder="팀, 선수, 리그 이름을 입력해 주세요."
+            value={query}
+            onChange={(e) => actions.setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onFocus={() => actions.focusInInput()}
+        />
     );
 };
 
