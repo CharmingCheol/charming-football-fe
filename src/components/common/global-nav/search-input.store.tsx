@@ -5,14 +5,14 @@ import { combine } from "zustand/middleware";
 interface State {
     query: string;
     suggestionKeywords: SearchSuggestion[];
-    selectedKeywordIndex: number;
+    focusedKeywordIndex: number;
     inputFocused: boolean;
 }
 
 export const searchInputState: State = {
     query: "",
     suggestionKeywords: [],
-    selectedKeywordIndex: -1,
+    focusedKeywordIndex: -1,
     inputFocused: false,
 };
 
@@ -27,21 +27,20 @@ const useSearchInputStore = create(
                     return;
                 }
                 const suggestionKeywords = await getSearchAllApi.get(query);
-                set({ suggestionKeywords, selectedKeywordIndex: 0 });
+                set({ suggestionKeywords, focusedKeywordIndex: 0 });
             },
             goToNextKeywordIndex: () => {
-                const { suggestionKeywords, selectedKeywordIndex } = get();
-                const nextIndex = suggestionKeywords.length <= selectedKeywordIndex + 1 ? 0 : selectedKeywordIndex + 1;
-                set({ selectedKeywordIndex: nextIndex });
+                const { suggestionKeywords, focusedKeywordIndex } = get();
+                const nextIndex = suggestionKeywords.length <= focusedKeywordIndex + 1 ? 0 : focusedKeywordIndex + 1;
+                set({ focusedKeywordIndex: nextIndex });
             },
             goBackKeywordIndex: () => {
-                const { suggestionKeywords, selectedKeywordIndex } = get();
-                const prevIndex =
-                    selectedKeywordIndex - 1 < 0 ? suggestionKeywords.length - 1 : selectedKeywordIndex - 1;
-                set({ selectedKeywordIndex: prevIndex });
+                const { suggestionKeywords, focusedKeywordIndex } = get();
+                const prevIndex = focusedKeywordIndex - 1 < 0 ? suggestionKeywords.length - 1 : focusedKeywordIndex - 1;
+                set({ focusedKeywordIndex: prevIndex });
             },
-            selectKeywordByIndex: (selectedKeywordIndex: number) => {
-                set({ selectedKeywordIndex });
+            selectKeywordByIndex: (focusedKeywordIndex: number) => {
+                set({ focusedKeywordIndex });
             },
             focusInInput: () => {
                 set({ inputFocused: true });
@@ -50,7 +49,7 @@ const useSearchInputStore = create(
                 set({ inputFocused: false });
             },
             clear: () => {
-                set({ query: "", suggestionKeywords: [], selectedKeywordIndex: -1, inputFocused: false });
+                set({ query: "", suggestionKeywords: [], focusedKeywordIndex: -1, inputFocused: false });
             },
         },
     }))

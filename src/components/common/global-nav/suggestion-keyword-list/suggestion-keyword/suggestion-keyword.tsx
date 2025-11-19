@@ -10,8 +10,8 @@ interface Props {
 
 const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     const actions = useSearchInputStore((state) => state.actions);
-    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
-    const selected = useMemo(() => selectedKeywordIndex === index, [selectedKeywordIndex, index]);
+    const focusedKeywordIndex = useSearchInputStore((state) => state.focusedKeywordIndex);
+    const focused = useMemo(() => focusedKeywordIndex === index, [focusedKeywordIndex, index]);
 
     const handleClick = () => {
         //
@@ -22,7 +22,7 @@ const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
     };
 
     return (
-        <Styles.SuggestionKeyword selected={selected} onClick={handleClick} onMouseEnter={handleMouseEnter}>
+        <Styles.SuggestionKeyword focused={focused} onClick={handleClick} onMouseEnter={handleMouseEnter}>
             <div className="content">
                 <HighlightedText text={suggestion.name} highlight={query} />
                 <TypeLabel type={suggestion.type} />
