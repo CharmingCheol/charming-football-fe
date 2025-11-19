@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback } from "react";
 import Input from "@/components/ui/input/input";
 import useDebounce from "@/hooks/useDebounce";
 import { SuggestionKeywordList } from "./suggestion-keyword-list/suggestion-keyword-list";
-import useSearchInputStore from "./search-input.store";
+import useSearchInputStore from "../search-input.store.ts";
 
 const SearchInput = () => {
     const query = useSearchInputStore((state) => state.query);

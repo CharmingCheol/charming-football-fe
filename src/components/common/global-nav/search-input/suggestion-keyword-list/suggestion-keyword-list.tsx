@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import * as Styles from "./suggestion-keyword-list.styles";
 import SuggestionKeyword from "./suggestion-keyword/suggestion-keyword";
-import useSearchInputStore from "../search-input.store";
+import useSearchInputStore from "../../search-input.store.ts";
 
 export const SuggestionKeywordList = ({ query }: { query: string }) => {
     const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);

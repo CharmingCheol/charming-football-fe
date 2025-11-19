@@ -1,5 +1,5 @@
 import * as Styles from "./suggestion-keyword.styles";
-import useSearchInputStore from "../../search-input.store";
+import useSearchInputStore from "../../../search-input.store.ts";
 import { useMemo } from "react";
 
 interface Props {

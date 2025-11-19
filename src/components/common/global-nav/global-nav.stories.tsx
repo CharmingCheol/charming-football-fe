@@ -1,9 +1,8 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
 import { MemoryRouter } from "react-router-dom";
 import { useEffect } from "react";
-
 import GlobalNav from "./global-nav";
-import useSearchInputStore, { searchInputState } from "./search-input/search-input.store";
+import useSearchInputStore, { searchInputState } from "./search-input.store.ts";
 
 const withSearchInputStore = (updatedState?: Partial<typeof searchInputState>): Decorator => {
     return (Story) => {
