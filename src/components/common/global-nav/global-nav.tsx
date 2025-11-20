@@ -6,7 +6,7 @@ import useSearchInputStore from "./search-input.store";
 import * as S from "./global-nav.styles";
 
 const GlobalNav = () => {
-    const suggestionKeywords = useSearchInputStore((state) => state.suggestionKeywords);
+    const searchResultList = useSearchInputStore((state) => state.searchResultList);
     const inputFocused = useSearchInputStore((state) => state.inputFocused);
     const query = useSearchInputStore((state) => state.query);
 
@@ -25,7 +25,7 @@ const GlobalNav = () => {
             </S.NavSection>
             <S.InputSection>
                 <SearchInput />
-                {suggestionKeywords.length > 0 && inputFocused && <SuggestionKeywordList query={query} />}
+                {searchResultList.length > 0 && inputFocused && <SuggestionKeywordList query={query} />}
             </S.InputSection>
         </S.GlobalNavContainer>
     );

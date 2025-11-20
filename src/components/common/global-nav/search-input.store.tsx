@@ -4,14 +4,14 @@ import { combine } from "zustand/middleware";
 
 interface State {
     query: string;
-    suggestionKeywords: SearchResult[];
+    searchResultList: SearchResult[];
     focusedKeywordIndex: number;
     inputFocused: boolean;
 }
 
 export const searchInputState: State = {
     query: "",
-    suggestionKeywords: [],
+    searchResultList: [],
     focusedKeywordIndex: -1,
     inputFocused: false,
 };
@@ -26,17 +26,17 @@ const useSearchInputStore = create(
                 if (query.trim() === "") {
                     return;
                 }
-                const suggestionKeywords = await getSearchAllApi.get(query);
-                set({ suggestionKeywords, focusedKeywordIndex: 0 });
+                const searchResultList = await getSearchAllApi.get(query);
+                set({ searchResultList, focusedKeywordIndex: 0 });
             },
             goToNextKeywordIndex: () => {
-                const { suggestionKeywords, focusedKeywordIndex } = get();
-                const nextIndex = suggestionKeywords.length <= focusedKeywordIndex + 1 ? 0 : focusedKeywordIndex + 1;
+                const { searchResultList, focusedKeywordIndex } = get();
+                const nextIndex = searchResultList.length <= focusedKeywordIndex + 1 ? 0 : focusedKeywordIndex + 1;
                 set({ focusedKeywordIndex: nextIndex });
             },
             goBackKeywordIndex: () => {
-                const { suggestionKeywords, focusedKeywordIndex } = get();
-                const prevIndex = focusedKeywordIndex - 1 < 0 ? suggestionKeywords.length - 1 : focusedKeywordIndex - 1;
+                const { searchResultList, focusedKeywordIndex } = get();
+                const prevIndex = focusedKeywordIndex - 1 < 0 ? searchResultList.length - 1 : focusedKeywordIndex - 1;
                 set({ focusedKeywordIndex: prevIndex });
             },
             selectKeywordByIndex: (focusedKeywordIndex: number) => {
@@ -49,7 +49,7 @@ const useSearchInputStore = create(
                 set({ inputFocused: false });
             },
             clear: () => {
-                set({ query: "", suggestionKeywords: [], focusedKeywordIndex: -1, inputFocused: false });
+                set({ query: "", searchResultList: [], focusedKeywordIndex: -1, inputFocused: false });
             },
         },
     }))
