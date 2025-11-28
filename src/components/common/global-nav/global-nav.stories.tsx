@@ -1,9 +1,8 @@
 import type { Decorator, Meta, StoryObj } from "@storybook/react-vite";
 import { MemoryRouter } from "react-router-dom";
 import { useEffect } from "react";
-
 import GlobalNav from "./global-nav";
-import useSearchInputStore, { searchInputState } from "./search-input/search-input.store";
+import useSearchInputStore, { searchInputState } from "./search-input.store";
 
 const withSearchInputStore = (updatedState?: Partial<typeof searchInputState>): Decorator => {
     return (Story) => {
@@ -41,8 +40,8 @@ export const 검색_결과_있음: StoryObj<typeof GlobalNav> = {
     decorators: [
         withSearchInputStore({
             query: "맨체",
-            focusedInput: true,
-            suggestionKeywords: [
+            inputFocused: true,
+            searchSuggestionList: [
                 { id: "1", name: "맨체스터 유나이티드드", type: "team" },
                 { id: "2", name: "맨체스터 시티", type: "team" },
             ],
@@ -55,7 +54,7 @@ export const 검색_결과_없음: StoryObj<typeof GlobalNav> = {
     decorators: [
         withSearchInputStore({
             query: "dfsdfdsafd",
-            focusedInput: true,
+            inputFocused: true,
         }),
     ],
     render: () => <GlobalNav />,

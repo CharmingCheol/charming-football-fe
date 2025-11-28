@@ -1,33 +1,33 @@
-import * as Styles from "./suggestion-keyword.styles";
+import * as Styles from "./search-suggestion.styles";
 import useSearchInputStore from "../../search-input.store";
 import { useMemo } from "react";
 
 interface Props {
-    suggestion: SearchSuggestion;
+    searchSuggestion: SearchSuggestion;
     index: number;
     query: string;
 }
 
-const SuggestionKeyword = ({ suggestion, index, query }: Props) => {
+const SearchSuggestion = ({ searchSuggestion, index, query }: Props) => {
     const actions = useSearchInputStore((state) => state.actions);
-    const selectedKeywordIndex = useSearchInputStore((state) => state.selectedKeywordIndex);
-    const selected = useMemo(() => selectedKeywordIndex === index, [selectedKeywordIndex, index]);
+    const focusedSearchIndex = useSearchInputStore((state) => state.focusedSearchIndex);
+    const focused = useMemo(() => focusedSearchIndex === index, [focusedSearchIndex, index]);
 
     const handleClick = () => {
         //
     };
 
     const handleMouseEnter = () => {
-        actions.selectKeywordByIndex(index);
+        actions.focusSearchIndex(index);
     };
 
     return (
-        <Styles.SuggestionKeyword selected={selected} onClick={handleClick} onMouseEnter={handleMouseEnter}>
+        <Styles.SearchSuggestion focused={focused} onClick={handleClick} onMouseEnter={handleMouseEnter}>
             <div className="content">
-                <HighlightedText text={suggestion.name} highlight={query} />
-                <TypeLabel type={suggestion.type} />
+                <HighlightedText text={searchSuggestion.name} highlight={query} />
+                <TypeLabel type={searchSuggestion.type} />
             </div>
-        </Styles.SuggestionKeyword>
+        </Styles.SearchSuggestion>
     );
 };
 
@@ -71,4 +71,4 @@ const TypeLabel = ({ type }: { type: string }) => {
     return <Styles.TypeLabel>{getTypeLabel(type)}</Styles.TypeLabel>;
 };
 
-export default SuggestionKeyword;
+export default SearchSuggestion;
