@@ -19,12 +19,12 @@ const SearchInput = () => {
             switch (e.key) {
                 case "ArrowDown": {
                     e.preventDefault();
-                    actions.goToNextKeywordIndex();
+                    actions.goToNextSearchIndex();
                     break;
                 }
                 case "ArrowUp": {
                     e.preventDefault();
-                    actions.goBackKeywordIndex();
+                    actions.goBackSearchIndex();
                     break;
                 }
                 case "Enter": {
@@ -45,7 +45,7 @@ const SearchInput = () => {
     );
 
     useEffect(() => {
-        actions.querySuggestionKeywords(debouncedQuery);
+        actions.querySearchSuggestion(debouncedQuery);
     }, [actions, debouncedQuery]);
 
     useEffect(() => {

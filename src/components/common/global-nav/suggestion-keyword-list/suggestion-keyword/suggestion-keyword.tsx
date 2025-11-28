@@ -3,12 +3,12 @@ import useSearchInputStore from "../../search-input.store";
 import { useMemo } from "react";
 
 interface Props {
-    searchResult: SearchResult;
+    searchSuggestion: SearchSuggestion;
     index: number;
     query: string;
 }
 
-const SuggestionKeyword = ({ searchResult, index, query }: Props) => {
+const SuggestionKeyword = ({ searchSuggestion, index, query }: Props) => {
     const actions = useSearchInputStore((state) => state.actions);
     const focusedSearchIndex = useSearchInputStore((state) => state.focusedSearchIndex);
     const focused = useMemo(() => focusedSearchIndex === index, [focusedSearchIndex, index]);
@@ -18,14 +18,14 @@ const SuggestionKeyword = ({ searchResult, index, query }: Props) => {
     };
 
     const handleMouseEnter = () => {
-        actions.selectKeywordByIndex(index);
+        actions.focusSearchIndex(index);
     };
 
     return (
         <Styles.SuggestionKeyword focused={focused} onClick={handleClick} onMouseEnter={handleMouseEnter}>
             <div className="content">
-                <HighlightedText text={searchResult.name} highlight={query} />
-                <TypeLabel type={searchResult.type} />
+                <HighlightedText text={searchSuggestion.name} highlight={query} />
+                <TypeLabel type={searchSuggestion.type} />
             </div>
         </Styles.SuggestionKeyword>
     );

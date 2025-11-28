@@ -41,7 +41,7 @@ export const 검색_결과_있음: StoryObj<typeof GlobalNav> = {
         withSearchInputStore({
             query: "맨체",
             inputFocused: true,
-            searchResultList: [
+            searchSuggestionList: [
                 { id: "1", name: "맨체스터 유나이티드드", type: "team" },
                 { id: "2", name: "맨체스터 시티", type: "team" },
             ],

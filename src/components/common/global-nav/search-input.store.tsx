@@ -4,14 +4,14 @@ import { combine } from "zustand/middleware";
 
 interface State {
     query: string;
-    searchResultList: SearchResult[];
+    searchSuggestionList: SearchSuggestion[];
     focusedSearchIndex: number;
     inputFocused: boolean;
 }
 
 export const searchInputState: State = {
     query: "",
-    searchResultList: [],
+    searchSuggestionList: [],
     focusedSearchIndex: -1,
     inputFocused: false,
 };
@@ -22,24 +22,24 @@ const useSearchInputStore = create(
             setQuery: (query: string) => {
                 set({ query });
             },
-            querySuggestionKeywords: async (query: string) => {
+            querySearchSuggestion: async (query: string) => {
                 if (query.trim() === "") {
                     return;
                 }
-                const searchResultList = await getSearchAllApi.get(query);
-                set({ searchResultList, focusedSearchIndex: 0 });
+                const searchSuggestionList = await getSearchAllApi.get(query);
+                set({ searchSuggestionList, focusedSearchIndex: 0 });
             },
-            goToNextKeywordIndex: () => {
-                const { searchResultList, focusedSearchIndex } = get();
-                const nextIndex = searchResultList.length <= focusedSearchIndex + 1 ? 0 : focusedSearchIndex + 1;
+            goToNextSearchIndex: () => {
+                const { searchSuggestionList, focusedSearchIndex } = get();
+                const nextIndex = searchSuggestionList.length <= focusedSearchIndex + 1 ? 0 : focusedSearchIndex + 1;
                 set({ focusedSearchIndex: nextIndex });
             },
-            goBackKeywordIndex: () => {
-                const { searchResultList, focusedSearchIndex } = get();
-                const prevIndex = focusedSearchIndex - 1 < 0 ? searchResultList.length - 1 : focusedSearchIndex - 1;
+            goBackSearchIndex: () => {
+                const { searchSuggestionList, focusedSearchIndex } = get();
+                const prevIndex = focusedSearchIndex - 1 < 0 ? searchSuggestionList.length - 1 : focusedSearchIndex - 1;
                 set({ focusedSearchIndex: prevIndex });
             },
-            selectKeywordByIndex: (focusedSearchIndex: number) => {
+            focusSearchIndex: (focusedSearchIndex: number) => {
                 set({ focusedSearchIndex });
             },
             focusInInput: () => {
@@ -49,7 +49,7 @@ const useSearchInputStore = create(
                 set({ inputFocused: false });
             },
             clear: () => {
-                set({ query: "", searchResultList: [], focusedSearchIndex: -1, inputFocused: false });
+                set({ query: "", searchSuggestionList: [], focusedSearchIndex: -1, inputFocused: false });
             },
         },
     }))

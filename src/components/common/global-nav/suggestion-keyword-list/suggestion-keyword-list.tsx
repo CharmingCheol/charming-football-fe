@@ -5,7 +5,7 @@ import SuggestionKeyword from "./suggestion-keyword/suggestion-keyword";
 import useSearchInputStore from "../search-input.store";
 
 const SuggestionKeywordList = ({ query }: { query: string }) => {
-    const searchResultList = useSearchInputStore((state) => state.searchResultList);
+    const searchSuggestionList = useSearchInputStore((state) => state.searchSuggestionList);
     const actions = useSearchInputStore((state) => state.actions);
 
     const suggestionsRef = useRef<HTMLUListElement>(null);
@@ -22,8 +22,13 @@ const SuggestionKeywordList = ({ query }: { query: string }) => {
 
     return (
         <Styles.SuggestionKeywordList ref={suggestionsRef}>
-            {searchResultList.map((searchResult, index) => (
-                <SuggestionKeyword key={searchResult.id} searchResult={searchResult} index={index} query={query} />
+            {searchSuggestionList.map((searchSuggestion, index) => (
+                <SuggestionKeyword
+                    key={searchSuggestion.id}
+                    searchSuggestion={searchSuggestion}
+                    index={index}
+                    query={query}
+                />
             ))}
         </Styles.SuggestionKeywordList>
     );
