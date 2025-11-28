@@ -1,4 +1,4 @@
-import * as Styles from "./suggestion-keyword.styles";
+import * as Styles from "./search-suggestion.styles";
 import useSearchInputStore from "../../search-input.store";
 import { useMemo } from "react";
 
@@ -8,7 +8,7 @@ interface Props {
     query: string;
 }
 
-const SuggestionKeyword = ({ searchSuggestion, index, query }: Props) => {
+const SearchSuggestion = ({ searchSuggestion, index, query }: Props) => {
     const actions = useSearchInputStore((state) => state.actions);
     const focusedSearchIndex = useSearchInputStore((state) => state.focusedSearchIndex);
     const focused = useMemo(() => focusedSearchIndex === index, [focusedSearchIndex, index]);
@@ -22,12 +22,12 @@ const SuggestionKeyword = ({ searchSuggestion, index, query }: Props) => {
     };
 
     return (
-        <Styles.SuggestionKeyword focused={focused} onClick={handleClick} onMouseEnter={handleMouseEnter}>
+        <Styles.SearchSuggestion focused={focused} onClick={handleClick} onMouseEnter={handleMouseEnter}>
             <div className="content">
                 <HighlightedText text={searchSuggestion.name} highlight={query} />
                 <TypeLabel type={searchSuggestion.type} />
             </div>
-        </Styles.SuggestionKeyword>
+        </Styles.SearchSuggestion>
     );
 };
 
@@ -71,4 +71,4 @@ const TypeLabel = ({ type }: { type: string }) => {
     return <Styles.TypeLabel>{getTypeLabel(type)}</Styles.TypeLabel>;
 };
 
-export default SuggestionKeyword;
+export default SearchSuggestion;

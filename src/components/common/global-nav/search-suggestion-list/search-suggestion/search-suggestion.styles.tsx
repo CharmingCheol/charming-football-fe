@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { calcVh, colors, typography } from "@/styles";
 
-export const SuggestionKeyword = styled.li<{ focused: boolean }>((props) => ({
+export const SearchSuggestion = styled.li<{ focused: boolean }>((props) => ({
     padding: `${calcVh(12)} ${calcVh(16)}`,
     cursor: "pointer",
     borderBottom: `1px solid ${colors.gray200}`,

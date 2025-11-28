@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/images/logo.png";
 import SearchInput from "./search-input/search-input";
-import SuggestionKeywordList from "./suggestion-keyword-list/suggestion-keyword-list";
+import SearchSuggestionList from "./search-suggestion-list/search-suggestion-list";
 import useSearchInputStore from "./search-input.store";
 import * as S from "./global-nav.styles";
 
@@ -25,7 +25,7 @@ const GlobalNav = () => {
             </S.NavSection>
             <S.InputSection>
                 <SearchInput />
-                {searchSuggestionList.length > 0 && inputFocused && <SuggestionKeywordList query={query} />}
+                {searchSuggestionList.length > 0 && inputFocused && <SearchSuggestionList query={query} />}
             </S.InputSection>
         </S.GlobalNavContainer>
     );
