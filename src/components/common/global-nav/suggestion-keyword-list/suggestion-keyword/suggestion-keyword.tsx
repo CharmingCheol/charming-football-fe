@@ -10,8 +10,8 @@ interface Props {
 
 const SuggestionKeyword = ({ searchResult, index, query }: Props) => {
     const actions = useSearchInputStore((state) => state.actions);
-    const focusedKeywordIndex = useSearchInputStore((state) => state.focusedKeywordIndex);
-    const focused = useMemo(() => focusedKeywordIndex === index, [focusedKeywordIndex, index]);
+    const focusedSearchIndex = useSearchInputStore((state) => state.focusedSearchIndex);
+    const focused = useMemo(() => focusedSearchIndex === index, [focusedSearchIndex, index]);
 
     const handleClick = () => {
         //

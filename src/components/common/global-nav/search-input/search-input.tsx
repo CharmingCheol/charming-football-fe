@@ -7,7 +7,7 @@ import useSearchInputStore from "../search-input.store";
 
 const SearchInput = () => {
     const query = useSearchInputStore((state) => state.query);
-    const focusedKeywordIndex = useSearchInputStore((state) => state.focusedKeywordIndex);
+    const focusedSearchIndex = useSearchInputStore((state) => state.focusedSearchIndex);
     const actions = useSearchInputStore((state) => state.actions);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +28,7 @@ const SearchInput = () => {
                     break;
                 }
                 case "Enter": {
-                    if (focusedKeywordIndex >= 0) {
+                    if (focusedSearchIndex >= 0) {
                         //
                     }
                     break;
@@ -41,7 +41,7 @@ const SearchInput = () => {
                 }
             }
         },
-        [actions, focusedKeywordIndex]
+        [actions, focusedSearchIndex]
     );
 
     useEffect(() => {
