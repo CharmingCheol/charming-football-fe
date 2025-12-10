@@ -72,3 +72,48 @@ export const 랜더링_1초_뒤: StoryObj<typeof NextMatchInfo> = {
     },
     render: () => <NextMatchInfo />,
 };
+
+export const API_에러: StoryObj<typeof NextMatchInfo> = {
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json({ error: "Server Error" }, { status: 500 });
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
+};
+
+export const 긴_이름: StoryObj<typeof NextMatchInfo> = {
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json({
+                        fixture: {
+                            date: new Date("2024-12-15T20:00:00"),
+                            stadium: "Tottenham Hotspur Stadium North London",
+                            city: "London, United Kingdom",
+                            status: { name: "Scheduled", elapsed: 0 },
+                        },
+                        home: {
+                            id: 165,
+                            name: "Borussia Mönchengladbach",
+                            logo: "https://media.api-sports.io/football/teams/165.png",
+                        },
+                        away: {
+                            id: 39,
+                            name: "Wolverhampton Wanderers",
+                            logo: "https://media.api-sports.io/football/teams/39.png",
+                        },
+                        goals: { home: 0, away: 0 },
+                        league: { name: "UEFA Champions League", round: "Round of 16 - 1st Leg" },
+                    });
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
+};
