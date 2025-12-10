@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import { calcVh, colors } from "@/styles";
+import { calcVh, colors, typography } from "@/styles";
 
 const shimmer = keyframes`
     0% {
@@ -38,12 +38,7 @@ export const TeamLogo = styled.img({
 });
 
 export const TeamName = styled.h2({
-    fontSize: calcVh(28),
-    fontWeight: 800,
-    color: colors.gray100,
-    textAlign: "center",
-    lineHeight: 1.2,
-    letterSpacing: "-0.02em",
+    ...typography.h5,
 });
 
 export const MatchInfoCard = styled.div({
@@ -59,20 +54,12 @@ export const MatchInfoCard = styled.div({
 });
 
 export const MatchTime = styled.span({
-    fontSize: calcVh(36),
-    fontWeight: 300,
-    color: colors.gray100,
-    letterSpacing: "0.02em",
+    ...typography.h5,
 });
 
 export const LeagueName = styled.span({
-    fontSize: calcVh(16),
-    fontWeight: 600,
+    ...typography.h9,
     color: colors.gray200,
-    textAlign: "center",
-    lineHeight: 1.4,
-    letterSpacing: "0.05em",
-    textTransform: "uppercase",
 });
 
 export const Divider = styled.div({
@@ -90,20 +77,13 @@ export const VenueInfo = styled.div({
 });
 
 export const City = styled.span({
-    fontSize: calcVh(14),
-    fontWeight: 500,
+    ...typography.h9,
     color: colors.gray200,
-    letterSpacing: "0.05em",
-    textTransform: "uppercase",
 });
 
 export const Stadium = styled.span({
-    fontSize: calcVh(14),
-    fontWeight: 400,
+    ...typography.p4,
     color: colors.gray400,
-    textAlign: "center",
-    letterSpacing: "0.03em",
-    textTransform: "uppercase",
 });
 
 // Empty State UI
@@ -121,20 +101,14 @@ export const EmptyStateContainer = styled.article({
 });
 
 export const EmptyStateTitle = styled.h3({
-    fontSize: calcVh(20),
-    fontWeight: 700,
-    color: colors.gray100,
-    textAlign: "center",
+    ...typography.h7,
     margin: 0,
 });
 
 export const EmptyStateDescription = styled.p({
-    fontSize: calcVh(14),
-    fontWeight: 400,
+    ...typography.p4,
     color: colors.gray400,
-    textAlign: "center",
     margin: 0,
-    lineHeight: 1.5,
 });
 
 // Skeleton UI
