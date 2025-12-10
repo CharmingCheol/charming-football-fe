@@ -30,7 +30,9 @@ const useNextMatchStore = create(
                 const month = date.getMonth() + 1;
                 const day = date.getDate();
                 const dayOfWeek = days[date.getDay()];
-                return `${year}년 ${month}월 ${day}일 ${dayOfWeek}`;
+                const hours = date.getHours().toString().padStart(2, "0");
+                const minutes = date.getMinutes().toString().padStart(2, "0");
+                return `${year}년 ${month}월 ${day}일 ${dayOfWeek} ${hours}:${minutes}`;
             },
             getFormattedLeagueName: () => {
                 const { nextMatch } = get();
