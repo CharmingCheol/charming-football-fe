@@ -106,6 +106,37 @@ export const Stadium = styled.span({
     textTransform: "uppercase",
 });
 
+// Empty State UI
+export const EmptyStateContainer = styled.article({
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: calcVh(16),
+    padding: `${calcVh(48)} ${calcVh(24)}`,
+    backgroundColor: colors.black900,
+    borderRadius: calcVh(16),
+    minHeight: calcVh(280),
+    border: `1px solid ${colors.black600}`,
+});
+
+export const EmptyStateTitle = styled.h3({
+    fontSize: calcVh(20),
+    fontWeight: 700,
+    color: colors.gray100,
+    textAlign: "center",
+    margin: 0,
+});
+
+export const EmptyStateDescription = styled.p({
+    fontSize: calcVh(14),
+    fontWeight: 400,
+    color: colors.gray400,
+    textAlign: "center",
+    margin: 0,
+    lineHeight: 1.5,
+});
+
 // Skeleton UI
 const skeletonBase = {
     background: `linear-gradient(90deg, ${colors.black600} 25%, ${colors.black500} 50%, ${colors.black600} 75%)`,

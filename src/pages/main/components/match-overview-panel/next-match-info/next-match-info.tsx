@@ -18,7 +18,12 @@ const NextMatchInfo = () => {
     }
 
     if (!nextMatch) {
-        return null;
+        return (
+            <S.EmptyStateContainer>
+                <S.EmptyStateTitle>예정된 경기가 없습니다</S.EmptyStateTitle>
+                <S.EmptyStateDescription>다음 경기 일정이 확정되면 이곳에 표시됩니다</S.EmptyStateDescription>
+            </S.EmptyStateContainer>
+        );
     }
 
     return (

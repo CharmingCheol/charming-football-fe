@@ -40,6 +40,19 @@ export const 로딩중: StoryObj<typeof NextMatchInfo> = {
     render: () => <NextMatchInfo />,
 };
 
+export const 데이터_없음: StoryObj<typeof NextMatchInfo> = {
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json(null);
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
+};
+
 export const 랜더링_1초_뒤: StoryObj<typeof NextMatchInfo> = {
     parameters: {
         msw: {
