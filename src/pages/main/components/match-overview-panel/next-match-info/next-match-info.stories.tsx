@@ -162,3 +162,35 @@ export const 경기중: StoryObj<typeof NextMatchInfo> = {
     },
     render: () => <NextMatchInfo />,
 };
+
+export const 이미지_로드_실패: StoryObj<typeof NextMatchInfo> = {
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json({
+                        fixture: {
+                            date: new Date("2024-12-20T15:00:00"),
+                            stadium: "Emirates Stadium",
+                            city: "London",
+                            status: { name: "Scheduled", elapsed: 0 },
+                        },
+                        home: {
+                            id: 42,
+                            name: "Arsenal",
+                            logo: "https://invalid-url.com/broken-image.png",
+                        },
+                        away: {
+                            id: 49,
+                            name: "Chelsea",
+                            logo: "https://invalid-url.com/another-broken.png",
+                        },
+                        goals: { home: 0, away: 0 },
+                        league: { name: "Premier League", round: "Regular Season - 18" },
+                    });
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
+};

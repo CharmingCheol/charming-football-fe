@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useNextMatchStore from "./next-match-info.store";
 import NextMatchInfoSkeleton from "./next-match-info.skeleton";
@@ -29,7 +30,11 @@ const NextMatchInfo = () => {
     return (
         <S.Container>
             <S.TeamCard>
-                <S.TeamLogo src={nextMatch.home.logo} alt={nextMatch.home.name} />
+                <S.TeamLogo
+                    src={nextMatch.home.logo}
+                    alt={nextMatch.home.name}
+                    onError={(e) => (e.currentTarget.src = fallbackLogo)}
+                />
                 <S.TeamName>{nextMatch.home.name.toUpperCase()}</S.TeamName>
             </S.TeamCard>
             <S.MatchInfoCard>
@@ -44,7 +49,11 @@ const NextMatchInfo = () => {
                 </S.VenueInfo>
             </S.MatchInfoCard>
             <S.TeamCard>
-                <S.TeamLogo src={nextMatch.away.logo} alt={nextMatch.away.name} />
+                <S.TeamLogo
+                    src={nextMatch.away.logo}
+                    alt={nextMatch.away.name}
+                    onError={(e) => (e.currentTarget.src = fallbackLogo)}
+                />
                 <S.TeamName>{nextMatch.away.name.toUpperCase()}</S.TeamName>
             </S.TeamCard>
         </S.Container>
