@@ -130,3 +130,35 @@ export const 긴_이름: StoryObj<typeof NextMatchInfo> = {
     },
     render: () => <NextMatchInfo />,
 };
+
+export const 경기중: StoryObj<typeof NextMatchInfo> = {
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json({
+                        fixture: {
+                            date: new Date(),
+                            stadium: "Anfield",
+                            city: "Liverpool",
+                            status: { name: "InPlay", elapsed: 67 },
+                        },
+                        home: {
+                            id: 40,
+                            name: "Liverpool",
+                            logo: "https://media.api-sports.io/football/teams/40.png",
+                        },
+                        away: {
+                            id: 33,
+                            name: "Manchester United",
+                            logo: "https://media.api-sports.io/football/teams/33.png",
+                        },
+                        goals: { home: 2, away: 1 },
+                        league: { name: "Premier League", round: "Regular Season - 17" },
+                    });
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
+};

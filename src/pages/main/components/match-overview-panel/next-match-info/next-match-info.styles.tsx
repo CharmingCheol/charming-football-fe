@@ -53,6 +53,13 @@ export const MatchInfoCard = styled.div({
     borderRadius: calcVh(12),
 });
 
+export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
+    ...typography.h9,
+    padding: `${calcVh(6)} ${calcVh(12)}`,
+    borderRadius: calcVh(4),
+    backgroundColor: isLive ? `${colors.red400}` : colors.black600,
+}));
+
 export const MatchTime = styled.span({
     ...typography.h5,
 });

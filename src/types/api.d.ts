@@ -10,7 +10,7 @@ interface NextMatchData {
         stadium: string;
         city: string;
         status: {
-            name: string;
+            name: "Scheduled" | "InPlay";
             elapsed: number;
         };
     };

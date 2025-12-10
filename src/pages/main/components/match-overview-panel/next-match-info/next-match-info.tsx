@@ -33,6 +33,9 @@ const NextMatchInfo = () => {
                 <S.TeamName>{nextMatch.home.name.toUpperCase()}</S.TeamName>
             </S.TeamCard>
             <S.MatchInfoCard>
+                <S.MatchStatus isLive={nextMatch.fixture.status.name === "InPlay"}>
+                    {nextMatch.fixture.status.name === "InPlay" ? "경기중" : "경기전"}
+                </S.MatchStatus>
                 <S.MatchTime>{getFormattedTime()}</S.MatchTime>
                 <S.LeagueName>{getFormattedLeagueName()}</S.LeagueName>
                 <S.VenueInfo>
