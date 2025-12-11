@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import { calcVh, colors, typography } from "@/styles";
+import { calcRem, colors, typography } from "@/styles";
 
 const shimmer = keyframes`
     0% {
@@ -15,10 +15,10 @@ export const Container = styled.article({
     width: "100%",
     boxSizing: "border-box",
     display: "flex",
-    gap: calcVh(4),
-    padding: calcVh(16),
+    gap: calcRem(4),
+    padding: calcRem(16),
     backgroundColor: colors.black900,
-    borderRadius: calcVh(16),
+    borderRadius: calcRem(16),
     "@media (max-width: 480px)": {
         flexWrap: "wrap",
     },
@@ -29,12 +29,12 @@ export const TeamCard = styled.div({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: calcVh(16),
+    gap: calcRem(16),
     flex: 1,
     minWidth: 0,
-    padding: `${calcVh(32)} ${calcVh(24)}`,
+    padding: `${calcRem(32)} ${calcRem(24)}`,
     backgroundColor: colors.black700,
-    borderRadius: calcVh(12),
+    borderRadius: calcRem(12),
     boxSizing: "border-box",
     "@media (max-width: 480px)": {
         flex: "0 0 calc(50% - 0.125rem)",
@@ -42,12 +42,12 @@ export const TeamCard = styled.div({
 });
 
 export const TeamLogo = styled.img({
-    width: calcVh(120),
-    height: calcVh(120),
+    width: calcRem(120),
+    height: calcRem(120),
     objectFit: "contain",
     "@media (max-width: 768px)": {
-        width: calcVh(60),
-        height: calcVh(60),
+        width: calcRem(60),
+        height: calcRem(60),
     },
 });
 
@@ -67,12 +67,12 @@ export const MatchInfoCard = styled.div({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: calcVh(12),
+    gap: calcRem(12),
     flex: 1,
     minWidth: 0,
-    padding: `${calcVh(32)} ${calcVh(24)}`,
+    padding: `${calcRem(32)} ${calcRem(24)}`,
     backgroundColor: colors.black700,
-    borderRadius: calcVh(12),
+    borderRadius: calcRem(12),
     "@media (max-width: 768px)": {
         flex: 2,
     },
@@ -84,8 +84,8 @@ export const MatchInfoCard = styled.div({
 
 export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
     ...typography.h9,
-    padding: `${calcVh(6)} ${calcVh(12)}`,
-    borderRadius: calcVh(4),
+    padding: `${calcRem(6)} ${calcRem(12)}`,
+    borderRadius: calcRem(4),
     backgroundColor: isLive ? `${colors.red400}` : colors.black600,
 }));
 
@@ -103,14 +103,14 @@ export const Divider = styled.div({
     width: "100%",
     height: 1,
     backgroundColor: colors.black500,
-    margin: `${calcVh(8)} 0`,
+    margin: `${calcRem(8)} 0`,
 });
 
 export const VenueInfo = styled.div({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: calcVh(4),
+    gap: calcRem(4),
 });
 
 export const City = styled.span({
@@ -129,11 +129,11 @@ export const EmptyStateContainer = styled.article({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: calcVh(16),
-    padding: `${calcVh(48)} ${calcVh(24)}`,
+    gap: calcRem(16),
+    padding: `${calcRem(48)} ${calcRem(24)}`,
     backgroundColor: colors.black900,
-    borderRadius: calcVh(16),
-    minHeight: calcVh(280),
+    borderRadius: calcRem(16),
+    minHeight: calcRem(280),
     border: `1px solid ${colors.black600}`,
 });
 
@@ -152,45 +152,45 @@ export const EmptyStateDescription = styled.p({
 const skeletonBase = {
     background: `linear-gradient(90deg, ${colors.black600} 25%, ${colors.black500} 50%, ${colors.black600} 75%)`,
     backgroundSize: "200% 100%",
-    borderRadius: calcVh(8),
+    borderRadius: calcRem(8),
 };
 
 export const SkeletonTeamLogo = styled.div({
     ...skeletonBase,
-    width: calcVh(160),
-    height: calcVh(160),
+    width: calcRem(160),
+    height: calcRem(160),
     borderRadius: "50%",
     animation: `${shimmer} 1.5s infinite ease-in-out`,
     "@media (max-width: 768px)": {
-        width: calcVh(60),
-        height: calcVh(60),
+        width: calcRem(60),
+        height: calcRem(60),
     },
 });
 
 export const SkeletonTeamName = styled.div({
     ...skeletonBase,
-    width: calcVh(140),
-    height: calcVh(34),
+    width: calcRem(140),
+    height: calcRem(34),
     animation: `${shimmer} 1.5s infinite ease-in-out`,
 });
 
 export const SkeletonMatchTime = styled.div({
     ...skeletonBase,
-    width: calcVh(180),
-    height: calcVh(48),
+    width: calcRem(180),
+    height: calcRem(48),
     animation: `${shimmer} 1.5s infinite ease-in-out`,
 });
 
 export const SkeletonLeagueName = styled.div({
     ...skeletonBase,
-    width: calcVh(120),
-    height: calcVh(44),
+    width: calcRem(120),
+    height: calcRem(44),
     animation: `${shimmer} 1.5s infinite ease-in-out`,
 });
 
 export const SkeletonVenue = styled.div({
     ...skeletonBase,
-    width: calcVh(100),
-    height: calcVh(18),
+    width: calcRem(100),
+    height: calcRem(18),
     animation: `${shimmer} 1.5s infinite ease-in-out`,
 });
