@@ -12,11 +12,16 @@ const shimmer = keyframes`
 `;
 
 export const Container = styled.article({
+    width: "100%",
+    boxSizing: "border-box",
     display: "flex",
     gap: calcVh(4),
     padding: calcVh(16),
     backgroundColor: colors.black900,
     borderRadius: calcVh(16),
+    "@media (max-width: 480px)": {
+        flexWrap: "wrap",
+    },
 });
 
 export const TeamCard = styled.div({
@@ -26,19 +31,35 @@ export const TeamCard = styled.div({
     justifyContent: "center",
     gap: calcVh(16),
     flex: 1,
+    minWidth: 0,
     padding: `${calcVh(32)} ${calcVh(24)}`,
     backgroundColor: colors.black700,
     borderRadius: calcVh(12),
+    boxSizing: "border-box",
+    "@media (max-width: 480px)": {
+        flex: "0 0 calc(50% - 0.125rem)",
+    },
 });
 
 export const TeamLogo = styled.img({
-    width: calcVh(160),
-    height: calcVh(160),
+    width: calcVh(120),
+    height: calcVh(120),
     objectFit: "contain",
+    "@media (max-width: 768px)": {
+        width: calcVh(60),
+        height: calcVh(60),
+    },
 });
 
 export const TeamName = styled.h2({
-    ...typography.h5,
+    ...typography.h6,
+    width: "100%",
+    textAlign: "center",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    "@media (max-width: 768px)": {
+        ...typography.h7,
+    },
 });
 
 export const MatchInfoCard = styled.div({
@@ -47,10 +68,18 @@ export const MatchInfoCard = styled.div({
     alignItems: "center",
     justifyContent: "center",
     gap: calcVh(12),
-    flex: 0.8,
+    flex: 1,
+    minWidth: 0,
     padding: `${calcVh(32)} ${calcVh(24)}`,
     backgroundColor: colors.black700,
     borderRadius: calcVh(12),
+    "@media (max-width: 768px)": {
+        flex: 2,
+    },
+    "@media (max-width: 480px)": {
+        order: -1,
+        flex: "1 1 100%",
+    },
 });
 
 export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
@@ -61,7 +90,8 @@ export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
 }));
 
 export const MatchTime = styled.span({
-    ...typography.h5,
+    ...typography.h7,
+    whiteSpace: "nowrap",
 });
 
 export const LeagueName = styled.span({
@@ -131,6 +161,10 @@ export const SkeletonTeamLogo = styled.div({
     height: calcVh(160),
     borderRadius: "50%",
     animation: `${shimmer} 1.5s infinite ease-in-out`,
+    "@media (max-width: 768px)": {
+        width: calcVh(60),
+        height: calcVh(60),
+    },
 });
 
 export const SkeletonTeamName = styled.div({
