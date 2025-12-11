@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useNextMatchStore from "./next-match-info.store";
@@ -7,12 +7,24 @@ import NextMatchInfoSkeleton from "./next-match-info.skeleton";
 const NextMatchInfo = () => {
     const nextMatch = useNextMatchStore((state) => state.nextMatch);
     const isLoading = useNextMatchStore((state) => state.isLoading);
-    const { fetchNextMatch } = useNextMatchStore((state) => state.actions);
-    const { getFormattedTime, getFormattedLeagueName } = useNextMatchStore((state) => state.computed);
+    const actions = useNextMatchStore((state) => state.actions);
+
+    const formattedTime = useMemo(() => {
+        if (!nextMatch) return "";
+        const date = new Date(nextMatch.fixture.date);
+        const days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const dayOfWeek = days[date.getDay()];
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+        return `${year}년 ${month}월 ${day}일 ${dayOfWeek} ${hours}:${minutes}`;
+    }, [nextMatch]);
 
     useEffect(() => {
-        fetchNextMatch();
-    }, [fetchNextMatch]);
+        actions.fetchNextMatch();
+    }, [actions]);
 
     if (isLoading) {
         return <NextMatchInfoSkeleton />;
@@ -41,8 +53,8 @@ const NextMatchInfo = () => {
                 <S.MatchStatus isLive={nextMatch.fixture.status.name === "InPlay"}>
                     {nextMatch.fixture.status.name === "InPlay" ? "경기중" : "경기전"}
                 </S.MatchStatus>
-                <S.MatchTime>{getFormattedTime()}</S.MatchTime>
-                <S.LeagueName>{getFormattedLeagueName()}</S.LeagueName>
+                <S.MatchTime>{formattedTime}</S.MatchTime>
+                <S.LeagueName>{nextMatch.league.name}</S.LeagueName>
                 <S.VenueInfo>
                     <S.City>{nextMatch.fixture.city}</S.City>
                     <S.Stadium>{nextMatch.fixture.stadium}</S.Stadium>
