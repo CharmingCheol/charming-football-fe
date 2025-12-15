@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useNextMatchStore from "./next-match-info.store";
-import NextMatchInfoSkeleton from "./next-match-info.skeleton";
+import Skeleton from "./skeleton/skeleton";
 import EmptyState from "./empty-state";
 
 const NextMatchInfo = () => {
@@ -28,7 +28,7 @@ const NextMatchInfo = () => {
     }, [actions]);
 
     if (isLoading) {
-        return <NextMatchInfoSkeleton />;
+        return <Skeleton />;
     }
 
     if (!nextMatch) {
