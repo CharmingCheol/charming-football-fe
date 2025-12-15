@@ -9,7 +9,7 @@ export const Container = styled.article({
     padding: calcRem(16),
     backgroundColor: colors.black900,
     borderRadius: calcRem(16),
-    "@media (max-width: 480px)": {
+    "@media (max-width: 768px)": {
         flexWrap: "wrap",
     },
 });
@@ -26,7 +26,7 @@ export const TeamCard = styled.div({
     backgroundColor: colors.black700,
     borderRadius: calcRem(12),
     boxSizing: "border-box",
-    "@media (max-width: 480px)": {
+    "@media (max-width: 768px)": {
         flex: "0 0 calc(50% - 0.125rem)",
     },
 });
@@ -58,15 +58,12 @@ export const MatchInfoCard = styled.div({
     alignItems: "center",
     justifyContent: "center",
     gap: calcRem(12),
-    flex: 1,
+    flex: 2,
     minWidth: 0,
     padding: `${calcRem(32)} ${calcRem(24)}`,
     backgroundColor: colors.black700,
     borderRadius: calcRem(12),
     "@media (max-width: 768px)": {
-        flex: 2,
-    },
-    "@media (max-width: 480px)": {
         order: -1,
         flex: "1 1 100%",
     },
@@ -85,7 +82,7 @@ export const MatchTime = styled.span({
 });
 
 export const LeagueName = styled.span({
-    ...typography.h9,
+    ...typography.p4,
     color: colors.gray200,
 });
 
