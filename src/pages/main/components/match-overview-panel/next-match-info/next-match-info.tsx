@@ -3,7 +3,7 @@ import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useNextMatchStore from "./next-match-info.store";
 import Skeleton from "./skeleton/skeleton";
-import EmptyState from "./empty-state";
+import EmptyState from "./empty-state/empty-state";
 
 const NextMatchInfo = () => {
     const nextMatch = useNextMatchStore((state) => state.nextMatch);
