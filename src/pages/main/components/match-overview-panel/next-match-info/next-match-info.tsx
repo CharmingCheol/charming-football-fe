@@ -23,6 +23,11 @@ const NextMatchInfo = () => {
         return `${year}년 ${month}월 ${day}일 ${dayOfWeek} ${hours}:${minutes}`;
     }, [nextMatch]);
 
+    const isLive = useMemo(() => {
+        if (!nextMatch) return false;
+        return nextMatch.fixture.status.name === "InPlay";
+    }, [nextMatch]);
+
     useEffect(() => {
         actions.fetchNextMatch();
     }, [actions]);
@@ -46,9 +51,7 @@ const NextMatchInfo = () => {
                 <S.TeamName>{nextMatch.home.name.toUpperCase()}</S.TeamName>
             </S.TeamCard>
             <S.MatchInfoCard>
-                <S.MatchStatus isLive={nextMatch.fixture.status.name === "InPlay"}>
-                    {nextMatch.fixture.status.name === "InPlay" ? "경기중" : "경기전"}
-                </S.MatchStatus>
+                <S.MatchStatus isLive={isLive}>{isLive ? "경기중" : "경기전"}</S.MatchStatus>
                 <S.MatchTime>{formattedTime}</S.MatchTime>
                 <S.LeagueName>{nextMatch.league.name}</S.LeagueName>
                 <S.VenueInfo>
