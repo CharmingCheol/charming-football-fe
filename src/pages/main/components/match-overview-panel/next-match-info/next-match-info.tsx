@@ -3,6 +3,7 @@ import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useNextMatchStore from "./next-match-info.store";
 import NextMatchInfoSkeleton from "./next-match-info.skeleton";
+import EmptyState from "./empty-state";
 
 const NextMatchInfo = () => {
     const nextMatch = useNextMatchStore((state) => state.nextMatch);
@@ -31,12 +32,7 @@ const NextMatchInfo = () => {
     }
 
     if (!nextMatch) {
-        return (
-            <S.EmptyStateContainer>
-                <S.EmptyStateTitle>예정된 경기가 없습니다</S.EmptyStateTitle>
-                <S.EmptyStateDescription>다음 경기 일정이 확정되면 이곳에 표시됩니다</S.EmptyStateDescription>
-            </S.EmptyStateContainer>
-        );
+        return <EmptyState />;
     }
 
     return (
