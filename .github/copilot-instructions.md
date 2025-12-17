@@ -39,7 +39,6 @@
 
 -   컴포넌트는 폴더로 분리 (component.tsx, component.styles.tsx)
 -   상태 관리가 필요한 경우 component.store.ts 파일 생성
--   스켈레톤 UI는 skeleton/ 폴더로 분리
 
 ## API 호출
 
