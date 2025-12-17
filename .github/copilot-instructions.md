@@ -23,7 +23,7 @@
 -   컴포넌트가 200줄을 초과하면 분리 제안
 -   조건부 렌더링 시 early return 패턴 권장
 
-## Zustand Store
+## Zustand
 
 -   상태(state)와 액션(actions)이 명확히 분리되어 있는지 확인
 -   초기 상태가 별도 상수로 정의되어 있는지 확인
