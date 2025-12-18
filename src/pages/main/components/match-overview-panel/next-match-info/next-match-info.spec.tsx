@@ -4,7 +4,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import NextMatchInfo from "./next-match-info";
 import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
 
-describe("pages/main/next-match-info", () => {
+describe("pages/main/match-overview-panel/next-match-info", () => {
     beforeEach(() => {
         useNextMatchStore.setState({
             nextMatch: {

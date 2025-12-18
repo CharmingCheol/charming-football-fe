@@ -7,7 +7,7 @@ import { getNextMatchApi } from "@/apis/teams";
 import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
 
 const meta: Meta<typeof NextMatchInfo> = {
-    title: "pages/main/next-match-info",
+    title: "pages/main/match-overview-panel/next-match-info",
     component: NextMatchInfo,
     decorators: [
         (Story) => {
