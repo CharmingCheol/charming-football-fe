@@ -7,9 +7,7 @@ const Layout = () => {
         <>
             <GlobalStyles />
             <GlobalNav />
-            <main>
-                <Outlet />
-            </main>
+            <Outlet />
         </>
     );
 };
