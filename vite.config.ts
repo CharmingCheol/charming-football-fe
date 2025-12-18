@@ -26,6 +26,17 @@ export default defineConfig({
     },
     test: {
         projects: [
+            // 일반 단위 테스트
+            {
+                extends: true,
+                test: {
+                    name: "unit",
+                    environment: "jsdom",
+                    include: ["src/**/*.test.{ts,tsx}"],
+                    setupFiles: ["./src/test/setup.ts"],
+                },
+            },
+            // Storybook 테스트
             {
                 extends: true,
                 plugins: [
