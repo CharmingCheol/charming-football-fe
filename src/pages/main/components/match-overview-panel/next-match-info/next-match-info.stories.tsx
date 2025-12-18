@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { http, HttpResponse, delay } from "msw";
 import { useEffect } from "react";
+import { MemoryRouter } from "react-router-dom";
 import NextMatchInfo from "./next-match-info";
 import { getNextMatchApi } from "@/apis/teams";
 import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
@@ -15,7 +16,11 @@ const meta: Meta<typeof NextMatchInfo> = {
                     useNextMatchStore.setState(nextMatchState);
                 };
             }, []);
-            return <Story />;
+            return (
+                <MemoryRouter>
+                    <Story />
+                </MemoryRouter>
+            );
         },
     ],
 };
