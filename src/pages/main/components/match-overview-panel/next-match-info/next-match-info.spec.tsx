@@ -4,13 +4,6 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import NextMatchInfo from "./next-match-info";
 import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
 
-vi.mock("@/apis/teams", () => ({
-    getNextMatchApi: {
-        get: vi.fn().mockResolvedValue(null),
-        path: "api/teams/:id/matches/next",
-    },
-}));
-
 describe("pages/main/next-match-info", () => {
     beforeEach(() => {
         useNextMatchStore.setState({
@@ -35,6 +28,9 @@ describe("pages/main/next-match-info", () => {
                 league: { name: "Premier League", round: "Regular Season - 15" },
             },
             isLoading: false,
+            actions: {
+                fetchNextMatch: vi.fn(),
+            },
         });
     });
 
