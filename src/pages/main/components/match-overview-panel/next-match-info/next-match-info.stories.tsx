@@ -2,8 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { http, HttpResponse, delay } from "msw";
 import { useEffect } from "react";
 import { MemoryRouter } from "react-router-dom";
-import NextMatchInfo from "./next-match-info";
+import { ErrorProvider } from "@/app/error-boundary";
 import { getNextMatchApi } from "@/apis/teams";
+import Toast from "@/components/common/toast/toast";
+import NextMatchInfo from "./next-match-info";
 import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
 
 const meta: Meta<typeof NextMatchInfo> = {
@@ -92,6 +94,14 @@ export const 랜더링_1초_뒤: StoryObj<typeof NextMatchInfo> = {
 };
 
 export const API_에러: StoryObj<typeof NextMatchInfo> = {
+    decorators: [
+        (Story) => (
+            <ErrorProvider>
+                <Story />
+                <Toast />
+            </ErrorProvider>
+        ),
+    ],
     parameters: {
         msw: {
             handlers: [
