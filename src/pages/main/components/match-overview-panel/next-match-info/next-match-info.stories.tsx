@@ -11,6 +11,9 @@ import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
 const meta: Meta<typeof NextMatchInfo> = {
     title: "pages/main/match-overview-panel/next-match-info",
     component: NextMatchInfo,
+    parameters: {
+        layout: "centered",
+    },
     decorators: [
         (Story) => {
             useEffect(() => {
@@ -20,7 +23,9 @@ const meta: Meta<typeof NextMatchInfo> = {
             }, []);
             return (
                 <MemoryRouter>
-                    <Story />
+                    <div style={{ width: "min(700px, 90vw)" }}>
+                        <Story />
+                    </div>
                 </MemoryRouter>
             );
         },
@@ -51,7 +56,8 @@ export const 데이터_없음: StoryObj<typeof NextMatchInfo> = {
     parameters: {
         msw: {
             handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
+                http.get(`*/${getNextMatchApi.path}`, async () => {
+                    await delay(1000);
                     return HttpResponse.json(null);
                 }),
             ],

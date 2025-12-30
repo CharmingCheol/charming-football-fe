@@ -31,7 +31,7 @@ export const TeamLogo = styled.div({
 
 export const TeamName = styled.div({
     ...skeletonBase,
-    width: calcRem(140),
+    width: calcRem(120),
     height: calcRem(34),
     animation: `${shimmer} 1.5s infinite ease-in-out`,
 });

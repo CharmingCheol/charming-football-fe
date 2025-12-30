@@ -7,10 +7,9 @@ export const Container = styled.article({
     alignItems: "center",
     justifyContent: "center",
     gap: calcRem(16),
-    padding: `${calcRem(48)} ${calcRem(24)}`,
     backgroundColor: colors.black900,
     borderRadius: calcRem(16),
-    minHeight: calcRem(280),
+    minHeight: calcRem(274),
     border: `1px solid ${colors.black600}`,
 });
 

@@ -51,9 +51,7 @@ const NextMatchInfo = () => {
                         onError={(e) => (e.currentTarget.src = fallbackLogo)}
                     />
                 </Link>
-                <Link to={`/team/${nextMatch.home.id}`}>
-                    <S.TeamName>{nextMatch.home.name.toUpperCase()}</S.TeamName>
-                </Link>
+                <S.TeamName2 to={`/team/${nextMatch.home.id}`}>{nextMatch.home.name.toUpperCase()}</S.TeamName2>
             </S.TeamCard>
             <S.MatchInfoCard>
                 <S.MatchStatus isLive={isLive}>{isLive ? "경기중" : "경기전"}</S.MatchStatus>
@@ -72,9 +70,7 @@ const NextMatchInfo = () => {
                         onError={(e) => (e.currentTarget.src = fallbackLogo)}
                     />
                 </Link>
-                <Link to={`/team/${nextMatch.away.id}`}>
-                    <S.TeamName>{nextMatch.away.name.toUpperCase()}</S.TeamName>
-                </Link>
+                <S.TeamName2 to={`/team/${nextMatch.away.id}`}>{nextMatch.away.name.toUpperCase()}</S.TeamName2>
             </S.TeamCard>
         </S.Container>
     );

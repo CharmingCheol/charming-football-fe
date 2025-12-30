@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 import { calcRem, colors, typography } from "@/styles";
 
 export const Container = styled.article({
@@ -6,7 +7,6 @@ export const Container = styled.article({
     boxSizing: "border-box",
     display: "flex",
     gap: calcRem(4),
-    padding: calcRem(16),
     backgroundColor: colors.black900,
     borderRadius: calcRem(16),
     "@media (max-width: 768px)": {
@@ -41,12 +41,13 @@ export const TeamLogo = styled.img({
     },
 });
 
-export const TeamName = styled.h2({
+export const TeamName2 = styled(Link)({
     ...typography.h6,
     width: "100%",
     textAlign: "center",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    margin: 0,
     "@media (max-width: 768px)": {
         ...typography.h7,
     },
