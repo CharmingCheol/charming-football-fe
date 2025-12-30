@@ -1,5 +1,5 @@
-const WIN_HEIGHT = 1080;
+const BASE_FONT_SIZE = 16;
 
-export const calcVh = (val: number): string => {
-    return `${(val / WIN_HEIGHT) * 100}vh`;
+export const calcRem = (val: number): string => {
+    return `${val / BASE_FONT_SIZE}rem`;
 };

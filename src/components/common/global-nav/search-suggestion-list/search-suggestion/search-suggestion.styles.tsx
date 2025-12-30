@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { calcVh, colors, typography } from "@/styles";
+import { calcRem, colors, typography } from "@/styles";
 
 export const SearchSuggestion = styled.li<{ focused: boolean }>((props) => ({
-    padding: `${calcVh(12)} ${calcVh(16)}`,
+    padding: `${calcRem(12)} ${calcRem(16)}`,
     cursor: "pointer",
     borderBottom: `1px solid ${colors.gray200}`,
-    borderRadius: calcVh(8),
+    borderRadius: calcRem(8),
     backgroundColor: props.focused ? colors.gray200 : "transparent",
 
     "&:last-child": {
@@ -27,6 +27,6 @@ export const HighlightedText = styled.span({
 export const TypeLabel = styled.span({
     ...typography.p4,
     backgroundColor: colors.gray400,
-    padding: `${calcVh(4)} ${calcVh(12)}`,
-    borderRadius: calcVh(12),
+    padding: `${calcRem(4)} ${calcRem(12)}`,
+    borderRadius: calcRem(12),
 });

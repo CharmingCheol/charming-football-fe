@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import { calcVh, colors } from "@/styles";
+import { calcRem, colors } from "@/styles";
 
 export const ToastContainer = styled.div`
     position: fixed;
-    top: ${calcVh(120)};
-    right: ${calcVh(20)};
+    top: ${calcRem(120)};
+    right: ${calcRem(20)};
     z-index: 9999;
     display: flex;
     flex-direction: column;
@@ -14,15 +14,15 @@ export const ToastContainer = styled.div`
 export const ToastItem = styled.div`
     background: ${colors.red500};
     color: ${colors.gray100};
-    padding: ${calcVh(8)} ${calcVh(12)};
-    border-radius: ${calcVh(8)};
-    min-width: ${calcVh(300)};
+    padding: ${calcRem(8)} ${calcRem(12)};
+    border-radius: ${calcRem(8)};
+    min-width: ${calcRem(300)};
     display: flex;
     align-items: center;
-    margin-bottom: ${calcVh(12)};
+    margin-bottom: ${calcRem(12)};
     animation: ${keyframes`
         from {
-            transform: translateX(${calcVh(400)});
+            transform: translateX(${calcRem(400)});
             opacity: 0;
         }
         to {

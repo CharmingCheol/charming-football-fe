@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { colors, calcVh, typography } from "@/styles";
+import { colors, calcRem, typography } from "@/styles";
 
 export const GlobalNavContainer = styled.header({
     display: "flex",
     justifyContent: "space-between",
-    padding: `${calcVh(12)} ${calcVh(20)}`,
+    padding: `${calcRem(12)} ${calcRem(20)}`,
     borderBottom: `1px solid ${colors.gray900}`,
 });
 
@@ -14,8 +14,8 @@ export const NavSection = styled.section({
 });
 
 export const LogoFigure = styled.figure({
-    width: calcVh(80),
-    height: calcVh(80),
+    width: calcRem(80),
+    height: calcRem(80),
 
     "& img": {
         width: "100%",
@@ -24,14 +24,14 @@ export const LogoFigure = styled.figure({
 });
 
 export const NavList = styled.nav({
-    marginLeft: calcVh(16),
+    marginLeft: calcRem(16),
 
     "& a": {
         ...typography.h4,
         textDecoration: "none",
 
         "&:not(:last-child)": {
-            marginRight: calcVh(20),
+            marginRight: calcRem(20),
         },
     },
 });
@@ -40,5 +40,5 @@ export const InputSection = styled.section({
     display: "flex",
     alignItems: "center",
     position: "relative",
-    width: calcVh(480),
+    width: calcRem(480),
 });
