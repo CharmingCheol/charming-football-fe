@@ -33,3 +33,26 @@ interface NextMatchData {
         round: string;
     };
 }
+
+interface RecentMatchData {
+    fixture: {
+        date: Date;
+    };
+    home: {
+        id: number;
+        name: string;
+        logo: string;
+    };
+    away: {
+        id: number;
+        name: string;
+        logo: string;
+    };
+    goals: {
+        home: number;
+        away: number;
+    };
+    league: {
+        name: string;
+    };
+}
