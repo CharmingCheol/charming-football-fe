@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useMatchOverviewPanelStore from "../match-overview-panel.store";
 import RecentMatchResultItem from "./recent-match-result-item/recent-match-result-item";
+import RecentMatchResultSkeleton from "./skeleton/skeleton";
 import * as S from "./recent-match-result.styles";
 
 const RecentMatchResult = () => {
@@ -12,7 +13,7 @@ const RecentMatchResult = () => {
     }, [actions]);
 
     if (recentMatches.isLoading) {
-        return null; // 또는 스켈레톤
+        return <RecentMatchResultSkeleton />;
     }
 
     return (
