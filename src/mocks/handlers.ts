@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw";
 import { getSearchAllApi } from "@/apis/search";
-import { getNextMatchApi } from "@/apis/teams";
+import { getNextMatchApi, getRecentMatchesApi } from "@/apis/teams";
 
 export const handlers = [
     http.get(`*/${getSearchAllApi.path}`, ({ request }) => {
@@ -55,6 +55,68 @@ export const handlers = [
                 round: "Group Stage - 6",
             },
         };
+
+        return HttpResponse.json(response);
+    }),
+
+    http.get(`*/${getRecentMatchesApi.path}`, () => {
+        const response: Awaited<ReturnType<typeof getRecentMatchesApi.get>> = [
+            {
+                fixture: { date: new Date("2025-05-06") },
+                home: { id: 40, name: "리버풀", logo: "https://media.api-sports.io/football/teams/40.png" },
+                away: {
+                    id: 30,
+                    name: "맨체스터 유나이티드",
+                    logo: "https://media.api-sports.io/football/teams/30.png",
+                },
+                goals: { home: 1, away: 2 },
+                league: { name: "UCL" },
+            },
+            {
+                fixture: { date: new Date("2025-05-11") },
+                home: { id: 548, name: "레알 소시에다드", logo: "https://media.api-sports.io/football/teams/548.png" },
+                away: {
+                    id: 30,
+                    name: "맨체스터 유나이티드",
+                    logo: "https://media.api-sports.io/football/teams/30.png",
+                },
+                goals: { home: 2, away: 5 },
+                league: { name: "La Liga" },
+            },
+            {
+                fixture: { date: new Date("2025-05-15") },
+                home: {
+                    id: 30,
+                    name: "맨체스터 유나이티드",
+                    logo: "https://media.api-sports.io/football/teams/30.png",
+                },
+                away: { id: 530, name: "A 마드리드", logo: "https://media.api-sports.io/football/teams/530.png" },
+                goals: { home: 3, away: 3 },
+                league: { name: "La Liga" },
+            },
+            {
+                fixture: { date: new Date("2025-05-24") },
+                home: { id: 532, name: "발렌시아", logo: "https://media.api-sports.io/football/teams/532.png" },
+                away: {
+                    id: 30,
+                    name: "맨체스터 유나이티드",
+                    logo: "https://media.api-sports.io/football/teams/30.png",
+                },
+                goals: { home: 0, away: 2 },
+                league: { name: "La Liga" },
+            },
+            {
+                fixture: { date: new Date("2025-05-30") },
+                home: {
+                    id: 30,
+                    name: "맨체스터 유나이티드",
+                    logo: "https://media.api-sports.io/football/teams/30.png",
+                },
+                away: { id: 50, name: "맨체스터 시티 FC", logo: "https://media.api-sports.io/football/teams/50.png" },
+                goals: { home: 0, away: 2 },
+                league: { name: "UCL" },
+            },
+        ];
 
         return HttpResponse.json(response);
     }),
