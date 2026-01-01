@@ -6,7 +6,7 @@ import { ErrorProvider } from "@/app/error-boundary";
 import { getNextMatchApi } from "@/apis/teams";
 import Toast from "@/components/common/toast/toast";
 import NextMatchInfo from "./next-match-info";
-import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
+import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
 
 const meta: Meta<typeof NextMatchInfo> = {
     title: "pages/main/match-overview-panel/next-match-info",
@@ -18,7 +18,7 @@ const meta: Meta<typeof NextMatchInfo> = {
         (Story) => {
             useEffect(() => {
                 return () => {
-                    useNextMatchStore.setState(nextMatchState);
+                    useMatchOverviewPanelStore.setState(initState);
                 };
             }, []);
             return (
