@@ -52,7 +52,4 @@ interface RecentMatchData {
         home: number;
         away: number;
     };
-    league: {
-        name: string;
-    };
 }
