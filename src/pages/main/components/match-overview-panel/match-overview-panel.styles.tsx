@@ -10,9 +10,9 @@ export const NextMatchInfoWrapper = styled.article`
 `;
 
 export const RecentMatchResultWrapper = styled.article`
-    flex: 2;
+    flex: 3;
 `;
 
 export const Div3 = styled.article`
-    flex: 3;
+    flex: 2;
 `;
