@@ -1,9 +1,11 @@
 import styled from "@emotion/styled";
+import { calcRem } from "@/styles";
 
-export const Container = styled.section`
-    display: flex;
-    gap: 16px;
-`;
+export const Container = styled.section({
+    display: "flex",
+    gap: calcRem(16),
+    padding: calcRem(24),
+});
 
 export const NextMatchInfoWrapper = styled.article`
     flex: 5;

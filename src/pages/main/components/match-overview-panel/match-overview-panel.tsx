@@ -11,7 +11,9 @@ const MatchOverviewPanel = () => {
             <S.RecentMatchResultWrapper>
                 <RecentMatchResult />
             </S.RecentMatchResultWrapper>
-            <S.Div3>3</S.Div3>
+            <S.Div3>
+                <div>temp</div>
+            </S.Div3>
         </S.Container>
     );
 };
