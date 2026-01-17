@@ -1,26 +1,26 @@
-import * as S from "../recent-match-result.styles";
-import * as Skeleton from "./skeleton.styles";
+import * as S from "./skeleton.styles";
+import { Container, Header, MatchList } from "../recent-match-result.styles";
 
-const RecentMatchResultSkeleton = () => {
+const Skeleton = () => {
     return (
-        <S.Container>
-            <S.Header>
-                <Skeleton.Header />
-            </S.Header>
-            <S.MatchList>
+        <Container>
+            <Header>
+                <S.Header />
+            </Header>
+            <MatchList>
                 {Array.from({ length: 5 }).map((_, index) => (
-                    <Skeleton.SkeletonItem key={index}>
-                        <Skeleton.MatchDate />
-                        <Skeleton.VenueType />
-                        <Skeleton.TeamLogo />
-                        <Skeleton.TeamName />
-                        <Skeleton.ResultIndicator />
-                        <Skeleton.Score />
-                    </Skeleton.SkeletonItem>
+                    <S.SkeletonItem key={index}>
+                        <S.MatchDate />
+                        <S.VenueType />
+                        <S.TeamLogo />
+                        <S.TeamName />
+                        <S.ResultIndicator />
+                        <S.Score />
+                    </S.SkeletonItem>
                 ))}
-            </S.MatchList>
-        </S.Container>
+            </MatchList>
+        </Container>
     );
 };
 
-export default RecentMatchResultSkeleton;
+export default Skeleton;

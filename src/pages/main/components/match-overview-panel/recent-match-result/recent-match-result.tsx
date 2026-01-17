@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useMatchOverviewPanelStore from "../match-overview-panel.store";
 import RecentMatchResultItem from "./recent-match-result-item/recent-match-result-item";
-import RecentMatchResultSkeleton from "./skeleton/skeleton";
+import Skeleton from "./skeleton/skeleton";
 import ErrorState from "./error-state/error-state";
 import * as S from "./recent-match-result.styles";
 
@@ -14,7 +14,7 @@ const RecentMatchResult = () => {
     }, [actions]);
 
     if (recentMatches.status === "request") {
-        return <RecentMatchResultSkeleton />;
+        return <Skeleton />;
     }
 
     if (recentMatches.status === "failure") {
