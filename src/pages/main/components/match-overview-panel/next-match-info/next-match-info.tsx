@@ -2,14 +2,14 @@ import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
-import useNextMatchStore from "./next-match-info.store";
+import useMatchOverviewPanelStore from "../match-overview-panel.store";
 import Skeleton from "./skeleton/skeleton";
 import EmptyState from "./empty-state/empty-state";
 
 const NextMatchInfo = () => {
-    const nextMatch = useNextMatchStore((state) => state.nextMatch);
-    const isLoading = useNextMatchStore((state) => state.isLoading);
-    const actions = useNextMatchStore((state) => state.actions);
+    const nextMatch = useMatchOverviewPanelStore((state) => state.nextMatch.data);
+    const status = useMatchOverviewPanelStore((state) => state.nextMatch.status);
+    const actions = useMatchOverviewPanelStore((state) => state.actions);
 
     const formattedTime = useMemo(() => {
         if (!nextMatch) return "";
@@ -33,7 +33,7 @@ const NextMatchInfo = () => {
         actions.fetchNextMatch();
     }, [actions]);
 
-    if (isLoading) {
+    if (status === "request") {
         return <Skeleton />;
     }
 

@@ -2,41 +2,44 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import NextMatchInfo from "./next-match-info";
-import useNextMatchStore, { nextMatchState } from "./next-match-info.store";
+import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
 
 describe("pages/main/match-overview-panel/next-match-info", () => {
     beforeEach(() => {
-        useNextMatchStore.setState({
+        useMatchOverviewPanelStore.setState({
             nextMatch: {
-                fixture: {
-                    date: new Date("2024-12-10T17:30:00"),
-                    stadium: "Old Trafford",
-                    city: "Manchester",
-                    status: { name: "Scheduled", elapsed: 0 },
+                data: {
+                    fixture: {
+                        date: new Date("2024-12-10T17:30:00"),
+                        stadium: "Old Trafford",
+                        city: "Manchester",
+                        status: { name: "Scheduled", elapsed: 0 },
+                    },
+                    home: {
+                        id: 33,
+                        name: "Manchester United",
+                        logo: "https://media.api-sports.io/football/teams/33.png",
+                    },
+                    away: {
+                        id: 40,
+                        name: "Liverpool",
+                        logo: "https://media.api-sports.io/football/teams/40.png",
+                    },
+                    goals: { home: 0, away: 0 },
+                    league: { name: "Premier League", round: "Regular Season - 15" },
                 },
-                home: {
-                    id: 33,
-                    name: "Manchester United",
-                    logo: "https://media.api-sports.io/football/teams/33.png",
-                },
-                away: {
-                    id: 40,
-                    name: "Liverpool",
-                    logo: "https://media.api-sports.io/football/teams/40.png",
-                },
-                goals: { home: 0, away: 0 },
-                league: { name: "Premier League", round: "Regular Season - 15" },
+                status: "success",
             },
-            isLoading: false,
             actions: {
                 fetchNextMatch: vi.fn(),
+                fetchRecentMatches: vi.fn(),
             },
         });
     });
 
     afterEach(() => {
         cleanup();
-        useNextMatchStore.setState(nextMatchState);
+        useMatchOverviewPanelStore.setState(initState);
     });
 
     it("홈팀 로고는 올바른 팀 페이지 링크를 가진다", () => {

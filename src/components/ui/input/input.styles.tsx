@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import { colors, calcRem, typography } from "@/styles";
+import { colors, clampVh, typography } from "@/styles";
 
 export const Input = styled.input({
     width: "100%",
-    height: calcRem(44),
-    padding: `0 ${calcRem(12)}`,
+    height: clampVh(44),
+    padding: `0 ${clampVh(12)}`,
     border: `1px solid ${colors.gray500}`,
-    borderRadius: calcRem(8),
+    borderRadius: clampVh(8),
     background: colors.black900,
     outline: "none",
     ...typography.p3,
