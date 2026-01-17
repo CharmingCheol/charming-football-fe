@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { calcRem } from "@/styles";
+import { clampVh } from "@/styles";
 
 export const Container = styled.section({
     display: "flex",
-    gap: calcRem(16),
-    padding: calcRem(24),
+    gap: clampVh(16),
+    padding: clampVh(24),
 });
 
 export const NextMatchInfoWrapper = styled.article`

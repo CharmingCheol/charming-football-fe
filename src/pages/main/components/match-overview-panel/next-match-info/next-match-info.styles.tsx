@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-import { calcRem, colors, typography } from "@/styles";
+import { clampVh, colors, typography } from "@/styles";
 
 export const Container = styled.article({
     width: "100%",
     boxSizing: "border-box",
     display: "flex",
-    gap: calcRem(4),
+    gap: clampVh(4),
     backgroundColor: colors.black900,
-    borderRadius: calcRem(16),
+    borderRadius: clampVh(16),
     "@media (max-width: 768px)": {
         flexWrap: "wrap",
     },
@@ -19,12 +19,12 @@ export const TeamCard = styled.div({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: calcRem(16),
+    gap: clampVh(16),
     flex: 1,
     minWidth: 0,
-    padding: `${calcRem(32)} ${calcRem(24)}`,
+    padding: `${clampVh(32)} ${clampVh(24)}`,
     backgroundColor: colors.black700,
-    borderRadius: calcRem(12),
+    borderRadius: clampVh(12),
     boxSizing: "border-box",
     "@media (max-width: 768px)": {
         flex: "0 0 calc(50% - 0.125rem)",
@@ -32,12 +32,12 @@ export const TeamCard = styled.div({
 });
 
 export const TeamLogo = styled.img({
-    width: calcRem(120),
-    height: calcRem(120),
+    width: clampVh(120),
+    height: clampVh(120),
     objectFit: "contain",
     "@media (max-width: 768px)": {
-        width: calcRem(60),
-        height: calcRem(60),
+        width: clampVh(60),
+        height: clampVh(60),
     },
 });
 
@@ -58,12 +58,12 @@ export const MatchInfoCard = styled.div({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: calcRem(12),
+    gap: clampVh(12),
     flex: 2,
     minWidth: 0,
-    padding: `${calcRem(32)} ${calcRem(24)}`,
+    padding: `${clampVh(32)} ${clampVh(24)}`,
     backgroundColor: colors.black700,
-    borderRadius: calcRem(12),
+    borderRadius: clampVh(12),
     "@media (max-width: 768px)": {
         order: -1,
         flex: "1 1 100%",
@@ -72,8 +72,8 @@ export const MatchInfoCard = styled.div({
 
 export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
     ...typography.h9,
-    padding: `${calcRem(6)} ${calcRem(12)}`,
-    borderRadius: calcRem(4),
+    padding: `${clampVh(6)} ${clampVh(12)}`,
+    borderRadius: clampVh(4),
     backgroundColor: isLive ? `${colors.red400}` : colors.black600,
 }));
 
@@ -91,14 +91,14 @@ export const Divider = styled.div({
     width: "100%",
     height: 1,
     backgroundColor: colors.black500,
-    margin: `${calcRem(8)} 0`,
+    margin: `${clampVh(8)} 0`,
 });
 
 export const VenueInfo = styled.div({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: calcRem(4),
+    gap: clampVh(4),
 });
 
 export const City = styled.span({

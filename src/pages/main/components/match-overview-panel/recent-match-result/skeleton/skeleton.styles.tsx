@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { keyframes } from "@emotion/react";
-import { calcRem, colors } from "@/styles";
+import { clampVh, colors } from "@/styles";
 
 const shimmer = keyframes`
     0% {
@@ -14,73 +14,73 @@ const shimmer = keyframes`
 const skeletonBase = {
     background: `linear-gradient(90deg, ${colors.black600} 25%, ${colors.black500} 50%, ${colors.black600} 75%)`,
     backgroundSize: "200% 100%",
-    borderRadius: calcRem(4),
+    borderRadius: clampVh(4),
     animation: `${shimmer} 1.5s infinite ease-in-out`,
 };
 
 export const Header = styled.div({
     ...skeletonBase,
-    width: calcRem(180),
-    height: calcRem(16),
+    width: clampVh(180),
+    height: clampVh(16),
 });
 
 export const SkeletonItem = styled.li({
     display: "grid",
-    gridTemplateColumns: `${calcRem(48)} ${calcRem(32)} ${calcRem(28)} 1fr auto ${calcRem(60)}`,
+    gridTemplateColumns: `${clampVh(48)} ${clampVh(32)} ${clampVh(28)} 1fr auto ${clampVh(60)}`,
     alignItems: "center",
-    gap: calcRem(12),
-    padding: `${calcRem(12)} ${calcRem(20)}`,
+    gap: clampVh(12),
+    padding: `${clampVh(12)} ${clampVh(20)}`,
     borderBottom: `1px solid ${colors.black600}`,
     "&:last-child": {
         borderBottom: "none",
     },
     "@media (max-width: 768px)": {
-        gridTemplateColumns: `${calcRem(40)} ${calcRem(28)} ${calcRem(24)} 1fr auto ${calcRem(50)}`,
-        gap: calcRem(8),
-        padding: `${calcRem(10)} ${calcRem(12)}`,
+        gridTemplateColumns: `${clampVh(40)} ${clampVh(28)} ${clampVh(24)} 1fr auto ${clampVh(50)}`,
+        gap: clampVh(8),
+        padding: `${clampVh(10)} ${clampVh(12)}`,
     },
 });
 
 export const MatchDate = styled.div({
     ...skeletonBase,
-    width: calcRem(40),
-    height: calcRem(16),
+    width: clampVh(40),
+    height: clampVh(16),
 });
 
 export const VenueType = styled.div({
     ...skeletonBase,
-    width: calcRem(20),
-    height: calcRem(14),
+    width: clampVh(20),
+    height: clampVh(14),
     margin: "0 auto",
 });
 
 export const TeamLogo = styled.div({
     ...skeletonBase,
-    width: calcRem(24),
-    height: calcRem(24),
+    width: clampVh(24),
+    height: clampVh(24),
     borderRadius: "50%",
     "@media (max-width: 768px)": {
-        width: calcRem(20),
-        height: calcRem(20),
+        width: clampVh(20),
+        height: clampVh(20),
     },
 });
 
 export const TeamName = styled.div({
     ...skeletonBase,
     width: "60%",
-    height: calcRem(16),
+    height: clampVh(16),
 });
 
 export const ResultIndicator = styled.div({
     ...skeletonBase,
-    width: calcRem(10),
-    height: calcRem(10),
+    width: clampVh(10),
+    height: clampVh(10),
     borderRadius: "50%",
 });
 
 export const Score = styled.div({
     ...skeletonBase,
-    width: calcRem(50),
-    height: calcRem(16),
+    width: clampVh(50),
+    height: clampVh(16),
     marginLeft: "auto",
 });

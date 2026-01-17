@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { calcRem, colors } from "@/styles";
+import { clampVh, colors } from "@/styles";
 
 export const SearchSuggestionList = styled.ul({
     position: "absolute",
@@ -7,7 +7,7 @@ export const SearchSuggestionList = styled.ul({
     left: 0,
     right: 0,
     background: colors.gray100,
-    borderRadius: calcRem(8),
-    maxHeight: calcRem(300),
-    marginTop: calcRem(8),
+    borderRadius: clampVh(8),
+    maxHeight: clampVh(300),
+    marginTop: clampVh(8),
 });

@@ -1,8 +1,8 @@
-import { colors, calcRem } from "./index";
+import { colors, clampVh } from "./index";
 
 const textStyle = (size: number, height: number) => ({
-    fontSize: calcRem(size),
-    lineHeight: calcRem(height),
+    fontSize: clampVh(size),
+    lineHeight: clampVh(height),
     color: colors.gray100,
 });
 

@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
-import { calcRem, colors, typography } from "@/styles";
+import { clampVh, colors, typography } from "@/styles";
 
 export const MatchItem = styled.li({
     display: "grid",
-    gridTemplateColumns: `${calcRem(48)} ${calcRem(32)} ${calcRem(28)} 1fr auto ${calcRem(60)}`,
+    gridTemplateColumns: `${clampVh(48)} ${clampVh(32)} ${clampVh(28)} 1fr auto ${clampVh(60)}`,
     alignItems: "center",
-    gap: calcRem(12),
-    padding: `${calcRem(12)} ${calcRem(20)}`,
+    gap: clampVh(12),
+    padding: `${clampVh(12)} ${clampVh(20)}`,
     borderBottom: `1px solid ${colors.black600}`,
     "&:last-child": {
         borderBottom: "none",
@@ -16,9 +16,9 @@ export const MatchItem = styled.li({
         cursor: "pointer",
     },
     "@media (max-width: 768px)": {
-        gridTemplateColumns: `${calcRem(40)} ${calcRem(28)} ${calcRem(24)} 1fr auto ${calcRem(50)}`,
-        gap: calcRem(8),
-        padding: `${calcRem(10)} ${calcRem(12)}`,
+        gridTemplateColumns: `${clampVh(40)} ${clampVh(28)} ${clampVh(24)} 1fr auto ${clampVh(50)}`,
+        gap: clampVh(8),
+        padding: `${clampVh(10)} ${clampVh(12)}`,
     },
 });
 
@@ -34,12 +34,12 @@ export const VenueType = styled.span({
 });
 
 export const TeamLogo = styled.img({
-    width: calcRem(24),
-    height: calcRem(24),
+    width: clampVh(24),
+    height: clampVh(24),
     objectFit: "contain",
     "@media (max-width: 768px)": {
-        width: calcRem(20),
-        height: calcRem(20),
+        width: clampVh(20),
+        height: clampVh(20),
     },
 });
 
@@ -52,8 +52,8 @@ export const TeamName = styled.span({
 });
 
 export const ResultIndicator = styled.span<{ result?: "win" | "draw" | "loss" | null }>(({ result }) => ({
-    width: calcRem(10),
-    height: calcRem(10),
+    width: clampVh(10),
+    height: clampVh(10),
     borderRadius: "50%",
     backgroundColor:
         result === "win"

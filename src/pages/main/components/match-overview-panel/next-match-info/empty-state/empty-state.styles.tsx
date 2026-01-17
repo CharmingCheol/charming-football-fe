@@ -1,15 +1,15 @@
 import styled from "@emotion/styled";
-import { calcRem, colors, typography } from "@/styles";
+import { clampVh, colors, typography } from "@/styles";
 
 export const Container = styled.article({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    gap: calcRem(16),
+    gap: clampVh(16),
     backgroundColor: colors.black900,
-    borderRadius: calcRem(16),
-    minHeight: calcRem(274),
+    borderRadius: clampVh(16),
+    minHeight: clampVh(274),
     border: `1px solid ${colors.black600}`,
 });
 
