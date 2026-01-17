@@ -8,7 +8,7 @@ import EmptyState from "./empty-state/empty-state";
 
 const NextMatchInfo = () => {
     const nextMatch = useMatchOverviewPanelStore((state) => state.nextMatch.data);
-    const isLoading = useMatchOverviewPanelStore((state) => state.nextMatch.isLoading);
+    const status = useMatchOverviewPanelStore((state) => state.nextMatch.status);
     const actions = useMatchOverviewPanelStore((state) => state.actions);
 
     const formattedTime = useMemo(() => {
@@ -33,7 +33,7 @@ const NextMatchInfo = () => {
         actions.fetchNextMatch();
     }, [actions]);
 
-    if (isLoading) {
+    if (status === "request") {
         return <Skeleton />;
     }
 
