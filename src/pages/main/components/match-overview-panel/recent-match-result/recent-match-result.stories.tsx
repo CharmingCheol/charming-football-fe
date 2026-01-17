@@ -51,12 +51,12 @@ export const 로딩중: Story = {
     render: () => <RecentMatchResult />,
 };
 
-export const 경기_정보_없음: Story = {
+export const API_에러: Story = {
     parameters: {
         msw: {
             handlers: [
                 http.get(`*/${getRecentMatchesApi.path}`, () => {
-                    return HttpResponse.json([]);
+                    return HttpResponse.json({ message: "Internal Server Error" }, { status: 500 });
                 }),
             ],
         },
