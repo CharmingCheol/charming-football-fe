@@ -1,21 +1,25 @@
-import { apiClient } from "./instance";
+import { apiFootballClient } from "./instance";
+
+interface ApiFootballResponse<T> {
+    response: T[];
+}
 
 export const getNextMatchApi = {
-    path: "api/teams/:teamId/matches/next",
+    path: "fixtures",
     get: async (teamId: number): Promise<NextMatchData | null> => {
-        const path = getNextMatchApi.path.replace(":teamId", teamId.toString());
-        const response = await apiClient.get(path);
-        return response.data;
+        const response = await apiFootballClient.get<ApiFootballResponse<NextMatchData>>(getNextMatchApi.path, {
+            params: { team: teamId, next: 1 },
+        });
+        return response.data.response[0] ?? null;
     },
 };
 
 export const getRecentMatchesApi = {
-    path: "api/teams/:teamId/matches/recent",
+    path: "fixtures",
     get: async (teamId: number): Promise<RecentMatchData[]> => {
-        const path = getRecentMatchesApi.path.replace(":teamId", teamId.toString());
-        const response = await apiClient.get(path, {
-            params: { last: 5 },
+        const response = await apiFootballClient.get<ApiFootballResponse<RecentMatchData>>(getRecentMatchesApi.path, {
+            params: { team: teamId, last: 5 },
         });
-        return response.data;
+        return response.data.response;
     },
 };
