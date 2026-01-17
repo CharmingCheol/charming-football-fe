@@ -28,7 +28,7 @@ describe("pages/main/match-overview-panel/next-match-info", () => {
                     goals: { home: 0, away: 0 },
                     league: { name: "Premier League", round: "Regular Season - 15" },
                 },
-                isLoading: false,
+                status: "success",
             },
             actions: {
                 fetchNextMatch: vi.fn(),
