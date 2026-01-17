@@ -4,6 +4,7 @@ import { clampVh, colors, typography } from "@/styles";
 export const MatchItem = styled.li({
     display: "grid",
     gridTemplateColumns: `${clampVh(48)} ${clampVh(32)} ${clampVh(28)} 1fr auto ${clampVh(60)}`,
+    flex: 1,
     alignItems: "center",
     gap: clampVh(12),
     padding: `${clampVh(12)} ${clampVh(20)}`,

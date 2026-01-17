@@ -4,6 +4,7 @@ import { clampVh, colors, typography } from "@/styles";
 
 export const Container = styled.article({
     width: "100%",
+    height: "100%",
     boxSizing: "border-box",
     display: "flex",
     gap: clampVh(4),

@@ -5,6 +5,7 @@ export const Container = styled.article({
     display: "flex",
     flexDirection: "column",
     width: "100%",
+    height: "100%",
     backgroundColor: colors.black700,
     borderRadius: clampVh(12),
     overflow: "hidden",
@@ -27,4 +28,5 @@ export const MatchList = styled.ul({
     listStyle: "none",
     margin: 0,
     padding: 0,
+    height: "100%",
 });

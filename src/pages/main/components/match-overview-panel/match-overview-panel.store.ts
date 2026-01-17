@@ -19,6 +19,7 @@ const useMatchOverviewPanelStore = create(
     combine(initState, (set) => ({
         actions: {
             fetchNextMatch: async () => {
+                set({ nextMatch: { data: null, status: "request" } });
                 try {
                     const nextMatch = await getNextMatchApi.get(MANCHESTER_UNITED);
                     set({ nextMatch: { data: nextMatch, status: "success" } });
@@ -28,6 +29,7 @@ const useMatchOverviewPanelStore = create(
                 }
             },
             fetchRecentMatches: async () => {
+                set({ recentMatches: { data: [], status: "request" } });
                 try {
                     const recentMatches = await getRecentMatchesApi.get(MANCHESTER_UNITED);
                     set({ recentMatches: { data: recentMatches, status: "success" } });

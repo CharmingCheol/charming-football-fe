@@ -15,9 +15,7 @@ const meta: Meta<typeof RecentMatchResult> = {
     decorators: [
         (Story) => {
             useEffect(() => {
-                return () => {
-                    useMatchOverviewPanelStore.setState(initState);
-                };
+                useMatchOverviewPanelStore.setState(initState);
             }, []);
             return (
                 <BrowserRouter>
