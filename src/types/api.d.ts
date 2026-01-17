@@ -1,55 +1,68 @@
-interface SearchSuggestion {
-    id: string;
-    name: string;
-    type: "team" | "player" | "league";
-}
-
-interface NextMatchData {
+interface ApiFootballFixture {
     fixture: {
-        date: Date;
-        stadium: string;
-        city: string;
+        id: number;
+        referee: string | null;
+        timezone: string;
+        date: string;
+        timestamp: number;
+        periods: {
+            first: number | null;
+            second: number | null;
+        };
+        venue: {
+            id: number | null;
+            name: string | null;
+            city: string | null;
+        };
         status: {
-            name: "Scheduled" | "InPlay";
-            elapsed: number;
+            long: string;
+            short: string;
+            elapsed: number | null;
         };
     };
-    home: {
-        id: number;
-        name: string;
-        logo: string;
-    };
-    away: {
-        id: number;
-        name: string;
-        logo: string;
-    };
-    goals: {
-        home: number;
-        away: number;
-    };
     league: {
+        id: number;
         name: string;
+        country: string;
+        logo: string;
+        flag: string | null;
+        season: number;
         round: string;
     };
-}
-
-interface RecentMatchData {
-    fixture: {
-        date: Date;
-    };
-    home: {
-        id: number;
-        name: string;
-        logo: string;
-    };
-    away: {
-        id: number;
-        name: string;
-        logo: string;
+    teams: {
+        home: {
+            id: number;
+            name: string;
+            logo: string;
+            winner: boolean | null;
+        };
+        away: {
+            id: number;
+            name: string;
+            logo: string;
+            winner: boolean | null;
+        };
     };
     goals: {
-        home: number;
-        away: number;
+        home: number | null;
+        away: number | null;
+    };
+    score: {
+        halftime: {
+            home: number | null;
+            away: number | null;
+        };
+        fulltime: {
+            home: number | null;
+            away: number | null;
+        };
+        extratime: {
+            home: number | null;
+            away: number | null;
+        };
+        penalty: {
+            home: number | null;
+            away: number | null;
+        };
     };
 }
