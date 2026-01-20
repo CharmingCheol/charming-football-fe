@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
 import { clampVh, colors, typography } from "@/styles";
 
 export const Container = styled.article({
@@ -42,7 +41,7 @@ export const TeamLogo = styled.img({
     },
 });
 
-export const TeamName2 = styled(Link)({
+export const TeamName = styled.span({
     ...typography.h6,
     width: "100%",
     textAlign: "center",

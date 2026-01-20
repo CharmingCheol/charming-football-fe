@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
 import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useMatchOverviewPanelStore from "../match-overview-panel.store";
@@ -44,16 +43,12 @@ const NextMatchInfo = () => {
     return (
         <S.Container>
             <S.TeamCard>
-                <Link to={`/team/${nextMatch.data.teams.home.id}`}>
-                    <S.TeamLogo
-                        src={nextMatch.data.teams.home.logo}
-                        alt={nextMatch.data.teams.home.name}
-                        onError={(e) => (e.currentTarget.src = fallbackLogo)}
-                    />
-                </Link>
-                <S.TeamName2 to={`/team/${nextMatch.data.teams.home.id}`}>
-                    {nextMatch.data.teams.home.name.toUpperCase()}
-                </S.TeamName2>
+                <S.TeamLogo
+                    src={nextMatch.data.teams.home.logo}
+                    alt={nextMatch.data.teams.home.name}
+                    onError={(e) => (e.currentTarget.src = fallbackLogo)}
+                />
+                <S.TeamName>{nextMatch.data.teams.home.name.toUpperCase()}</S.TeamName>
             </S.TeamCard>
             <S.MatchInfoCard>
                 <S.MatchStatus isLive={isLive}>{isLive ? "경기중" : "경기전"}</S.MatchStatus>
@@ -65,16 +60,12 @@ const NextMatchInfo = () => {
                 </S.VenueInfo>
             </S.MatchInfoCard>
             <S.TeamCard>
-                <Link to={`/team/${nextMatch.data.teams.away.id}`}>
-                    <S.TeamLogo
-                        src={nextMatch.data.teams.away.logo}
-                        alt={nextMatch.data.teams.away.name}
-                        onError={(e) => (e.currentTarget.src = fallbackLogo)}
-                    />
-                </Link>
-                <S.TeamName2 to={`/team/${nextMatch.data.teams.away.id}`}>
-                    {nextMatch.data.teams.away.name.toUpperCase()}
-                </S.TeamName2>
+                <S.TeamLogo
+                    src={nextMatch.data.teams.away.logo}
+                    alt={nextMatch.data.teams.away.name}
+                    onError={(e) => (e.currentTarget.src = fallbackLogo)}
+                />
+                <S.TeamName>{nextMatch.data.teams.away.name.toUpperCase()}</S.TeamName>
             </S.TeamCard>
         </S.Container>
     );
