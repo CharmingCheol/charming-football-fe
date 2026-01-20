@@ -1,9 +1,9 @@
 import { useEffect, useMemo } from "react";
-import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./next-match-info.styles";
 import useMatchOverviewPanelStore from "../match-overview-panel.store";
 import Skeleton from "./skeleton/skeleton";
 import EmptyState from "./empty-state/empty-state";
+import TeamCard from "./team-card/team-card";
 
 const NextMatchInfo = () => {
     const nextMatch = useMatchOverviewPanelStore((state) => state.nextMatch);
@@ -42,14 +42,7 @@ const NextMatchInfo = () => {
 
     return (
         <S.Container>
-            <S.TeamCard>
-                <S.TeamLogo
-                    src={nextMatch.data.teams.home.logo}
-                    alt={nextMatch.data.teams.home.name}
-                    onError={(e) => (e.currentTarget.src = fallbackLogo)}
-                />
-                <S.TeamName>{nextMatch.data.teams.home.name.toUpperCase()}</S.TeamName>
-            </S.TeamCard>
+            <TeamCard data={nextMatch.data.teams.home} />
             <S.MatchInfoCard>
                 <S.MatchStatus isLive={isLive}>{isLive ? "경기중" : "경기전"}</S.MatchStatus>
                 <S.MatchTime>{formattedTime}</S.MatchTime>
@@ -59,14 +52,7 @@ const NextMatchInfo = () => {
                     <S.Stadium>{nextMatch.data.fixture.venue.name}</S.Stadium>
                 </S.VenueInfo>
             </S.MatchInfoCard>
-            <S.TeamCard>
-                <S.TeamLogo
-                    src={nextMatch.data.teams.away.logo}
-                    alt={nextMatch.data.teams.away.name}
-                    onError={(e) => (e.currentTarget.src = fallbackLogo)}
-                />
-                <S.TeamName>{nextMatch.data.teams.away.name.toUpperCase()}</S.TeamName>
-            </S.TeamCard>
+            <TeamCard data={nextMatch.data.teams.away} />
         </S.Container>
     );
 };
