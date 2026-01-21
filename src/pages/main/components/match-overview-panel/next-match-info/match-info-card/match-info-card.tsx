@@ -25,7 +25,7 @@ const MatchInfoCard = () => {
     }, [nextMatch.data]);
 
     return (
-        <S.MatchInfoCard>
+        <S.Wrapper>
             <S.MatchStatus isLive={isLive}>{isLive ? "경기중" : "경기전"}</S.MatchStatus>
             <S.MatchTime>{formattedTime}</S.MatchTime>
             <S.LeagueName>{nextMatch.data!.league.name}</S.LeagueName>
@@ -33,7 +33,7 @@ const MatchInfoCard = () => {
                 <S.City>{nextMatch.data!.fixture.venue.city}</S.City>
                 <S.Stadium>{nextMatch.data!.fixture.venue.name}</S.Stadium>
             </S.VenueInfo>
-        </S.MatchInfoCard>
+        </S.Wrapper>
     );
 };
 

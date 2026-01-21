@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { clampVh, colors, typography } from "@/styles";
 
-export const MatchInfoCard = styled.div({
+export const Wrapper = styled.div({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
