@@ -3,6 +3,7 @@ import * as S from "./next-match-info.styles";
 import useMatchOverviewPanelStore from "../match-overview-panel.store";
 import Skeleton from "./skeleton/skeleton";
 import EmptyState from "./empty-state/empty-state";
+import ErrorState from "./error-state/error-state";
 import TeamCard from "./team-card/team-card";
 import MatchInfoCard from "./match-info-card/match-info-card";
 
@@ -16,6 +17,10 @@ const NextMatchInfo = () => {
 
     if (nextMatch.status === "request") {
         return <Skeleton />;
+    }
+
+    if (nextMatch.status === "failure") {
+        return <ErrorState />;
     }
 
     if (!nextMatch.data) {

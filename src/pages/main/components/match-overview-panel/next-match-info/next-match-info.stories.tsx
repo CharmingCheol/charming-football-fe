@@ -3,9 +3,7 @@ import { http, HttpResponse, delay } from "msw";
 import { useEffect } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { MANCHESTER_UNITED } from "@/constants/team";
-import { ErrorProvider } from "@/app/error-boundary";
 import { getNextMatchApi } from "@/apis/teams";
-import Toast from "@/components/common/toast/toast";
 import Builder from "@/test/builder";
 import NextMatchInfo from "./next-match-info";
 import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
@@ -104,18 +102,11 @@ export const 랜더링_1초_뒤: StoryObj<typeof NextMatchInfo> = {
 };
 
 export const API_에러: StoryObj<typeof NextMatchInfo> = {
-    decorators: [
-        (Story) => (
-            <ErrorProvider>
-                <Story />
-                <Toast />
-            </ErrorProvider>
-        ),
-    ],
     parameters: {
         msw: {
             handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
+                http.get(`*/${getNextMatchApi.path}`, async () => {
+                    await delay(1000);
                     return HttpResponse.json({ error: "Server Error" }, { status: 500 });
                 }),
             ],
