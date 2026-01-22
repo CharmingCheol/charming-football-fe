@@ -31,14 +31,10 @@ export const TeamLogo = styled.img({
 });
 
 export const TeamName = styled.span({
-    ...typography.h6,
+    ...typography.h7,
     width: "100%",
     textAlign: "center",
     overflow: "hidden",
     textOverflow: "ellipsis",
     margin: 0,
-
-    "@media (max-width: 768px)": {
-        ...typography.h7,
-    },
 });

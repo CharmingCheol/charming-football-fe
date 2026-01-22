@@ -17,9 +17,7 @@ const meta: Meta<typeof NextMatchInfo> = {
     decorators: [
         (Story) => {
             useEffect(() => {
-                return () => {
-                    useMatchOverviewPanelStore.setState(initState);
-                };
+                useMatchOverviewPanelStore.setState(initState);
             }, []);
             return (
                 <MemoryRouter>

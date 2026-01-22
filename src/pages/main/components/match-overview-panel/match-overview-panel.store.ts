@@ -22,7 +22,7 @@ const useMatchOverviewPanelStore = create(
                 set({ nextMatch: { data: null, status: "request" } });
                 try {
                     const nextMatch = await getNextMatchApi.get(MANCHESTER_UNITED);
-                    set({ nextMatch: { data: nextMatch.response[0], status: "success" } });
+                    set({ nextMatch: { data: nextMatch.response[0] ?? null, status: "success" } });
                 } catch (error) {
                     set({ nextMatch: { data: null, status: "failure" } });
                     throw error;
