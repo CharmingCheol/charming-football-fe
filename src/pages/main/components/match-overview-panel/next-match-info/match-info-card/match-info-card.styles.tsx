@@ -31,6 +31,30 @@ export const MatchTime = styled.span({
     whiteSpace: "nowrap",
 });
 
+export const ElapsedTime = styled.span({
+    ...typography.h8,
+    color: colors.red400,
+    fontWeight: 700,
+});
+
+export const ScoreWrapper = styled.div({
+    display: "flex",
+    alignItems: "center",
+    gap: clampVh(16),
+});
+
+export const Score = styled.span({
+    ...typography.h1,
+    fontWeight: 700,
+    fontSize: clampVh(48),
+    lineHeight: 1,
+});
+
+export const ScoreDivider = styled.span({
+    ...typography.h3,
+    color: colors.gray400,
+});
+
 export const LeagueName = styled.span({
     ...typography.p4,
     color: colors.gray200,
