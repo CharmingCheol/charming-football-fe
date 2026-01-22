@@ -29,9 +29,11 @@ const NextMatchInfo = () => {
 
     return (
         <S.Container>
-            <TeamCard data={nextMatch.data.teams.home} />
             <MatchInfoCard />
-            <TeamCard data={nextMatch.data.teams.away} />
+            <S.TeamCardsWrapper>
+                <TeamCard data={nextMatch.data.teams.home} />
+                <TeamCard data={nextMatch.data.teams.away} />
+            </S.TeamCardsWrapper>
         </S.Container>
     );
 };

@@ -7,16 +7,10 @@ export const Wrapper = styled.div({
     alignItems: "center",
     justifyContent: "center",
     gap: clampVh(12),
-    flex: 2,
     minWidth: 0,
     padding: `${clampVh(32)} ${clampVh(24)}`,
     backgroundColor: colors.black700,
     borderRadius: clampVh(12),
-
-    "@media (max-width: 768px)": {
-        order: -1,
-        flex: "1 1 100%",
-    },
 });
 
 export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({

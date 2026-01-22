@@ -13,10 +13,6 @@ export const Wrapper = styled.div({
     backgroundColor: colors.black700,
     borderRadius: clampVh(12),
     boxSizing: "border-box",
-
-    "@media (max-width: 768px)": {
-        flex: "0 0 calc(50% - 0.125rem)",
-    },
 });
 
 export const TeamLogo = styled.img({
