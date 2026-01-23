@@ -6,10 +6,6 @@ import * as MatchInfoCard from "../match-info-card/match-info-card.styles";
 const SkeletonUI = () => {
     return (
         <NextMatchInfo.Container>
-            <TeamCard.Wrapper>
-                <Skeleton.TeamLogo />
-                <Skeleton.TeamName />
-            </TeamCard.Wrapper>
             <MatchInfoCard.Wrapper>
                 <Skeleton.MatchTime />
                 <Skeleton.LeagueName />
@@ -18,10 +14,16 @@ const SkeletonUI = () => {
                     <Skeleton.Venue />
                 </MatchInfoCard.VenueInfo>
             </MatchInfoCard.Wrapper>
-            <TeamCard.Wrapper>
-                <Skeleton.TeamLogo />
-                <Skeleton.TeamName />
-            </TeamCard.Wrapper>
+            <NextMatchInfo.TeamCardsWrapper>
+                <TeamCard.Wrapper>
+                    <Skeleton.TeamLogo />
+                    <Skeleton.TeamName />
+                </TeamCard.Wrapper>
+                <TeamCard.Wrapper>
+                    <Skeleton.TeamLogo />
+                    <Skeleton.TeamName />
+                </TeamCard.Wrapper>
+            </NextMatchInfo.TeamCardsWrapper>
         </NextMatchInfo.Container>
     );
 };

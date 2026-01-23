@@ -7,10 +7,12 @@ export const Container = styled.article({
     alignItems: "center",
     justifyContent: "center",
     gap: clampVh(16),
+    padding: clampVh(32),
     backgroundColor: colors.black900,
     borderRadius: clampVh(16),
-    minHeight: clampVh(274),
+    minHeight: clampVh(438),
     border: `1px solid ${colors.black600}`,
+    boxSizing: "border-box",
 });
 
 export const Title = styled.h3({

@@ -19,8 +19,8 @@ const skeletonBase = {
 
 export const TeamLogo = styled.div({
     ...skeletonBase,
-    width: clampVh(160),
-    height: clampVh(160),
+    width: clampVh(120),
+    height: clampVh(120),
     borderRadius: "50%",
     animation: `${shimmer} 1.5s infinite ease-in-out`,
     "@media (max-width: 768px)": {
