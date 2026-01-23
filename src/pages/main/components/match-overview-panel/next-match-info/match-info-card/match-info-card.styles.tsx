@@ -13,6 +13,12 @@ export const Wrapper = styled.div({
     borderRadius: clampVh(12),
 });
 
+export const StatusRow = styled.div({
+    display: "flex",
+    alignItems: "center",
+    gap: clampVh(8),
+});
+
 export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
     ...typography.h9,
     padding: `${clampVh(6)} ${clampVh(12)}`,
@@ -21,7 +27,7 @@ export const MatchStatus = styled.span<{ isLive?: boolean }>(({ isLive }) => ({
 }));
 
 export const MatchTime = styled.span({
-    ...typography.h7,
+    ...typography.h6,
     whiteSpace: "nowrap",
 });
 
@@ -38,14 +44,11 @@ export const ScoreWrapper = styled.div({
 });
 
 export const Score = styled.span({
-    ...typography.h1,
-    fontWeight: 700,
-    fontSize: clampVh(48),
-    lineHeight: 1,
+    ...typography.h6,
 });
 
 export const ScoreDivider = styled.span({
-    ...typography.h3,
+    ...typography.h6,
     color: colors.gray400,
 });
 
