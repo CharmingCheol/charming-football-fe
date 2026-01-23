@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { http, HttpResponse, delay } from "msw";
+import { http, HttpResponse } from "msw";
 import { useEffect } from "react";
 import { MemoryRouter } from "react-router-dom";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import { getNextMatchApi } from "@/apis/teams";
 import Builder from "@/test/builder";
 import NextMatchInfo from "./next-match-info";
+import SkeletonUI from "./skeleton/skeleton";
+import EmptyState from "./empty-state/empty-state";
 import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
+import ErrorState from "./error-state/error-state";
 
 const meta: Meta<typeof NextMatchInfo> = {
     title: "pages/main/match-overview-panel/next-match-info",
@@ -33,41 +36,10 @@ const meta: Meta<typeof NextMatchInfo> = {
 export default meta;
 
 export const 기본: StoryObj<typeof NextMatchInfo> = {
-    render: () => <NextMatchInfo />,
-};
-
-export const 로딩중: StoryObj<typeof NextMatchInfo> = {
     parameters: {
         msw: {
             handlers: [
                 http.get(`*/${getNextMatchApi.path}`, async () => {
-                    await delay("infinite");
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const 데이터_없음: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, async () => {
-                    return HttpResponse.json({ response: [] });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const 랜더링_1초_뒤: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, async () => {
-                    await delay(1000);
                     return HttpResponse.json({
                         response: [
                             Builder<ApiFootballFixture>()
@@ -99,18 +71,16 @@ export const 랜더링_1초_뒤: StoryObj<typeof NextMatchInfo> = {
     render: () => <NextMatchInfo />,
 };
 
+export const 로딩중: StoryObj<typeof NextMatchInfo> = {
+    render: () => <SkeletonUI />,
+};
+
+export const 데이터_없음: StoryObj<typeof NextMatchInfo> = {
+    render: () => <EmptyState />,
+};
+
 export const API_에러: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, async () => {
-                    await delay(1000);
-                    return HttpResponse.json({ error: "Server Error" }, { status: 500 });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
+    render: () => <ErrorState />,
 };
 
 export const 긴_이름: StoryObj<typeof NextMatchInfo> = {
