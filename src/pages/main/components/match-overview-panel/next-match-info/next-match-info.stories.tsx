@@ -1,10 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { http, HttpResponse } from "msw";
+import type { Meta } from "@storybook/react-vite";
 import { useEffect } from "react";
 import { MemoryRouter } from "react-router-dom";
-import { MANCHESTER_UNITED } from "@/constants/team";
-import { getNextMatchApi } from "@/apis/teams";
-import Builder from "@/test/builder";
 import NextMatchInfo from "./next-match-info";
 import SkeletonUI from "./skeleton/skeleton";
 import EmptyState from "./empty-state/empty-state";
@@ -35,159 +31,50 @@ const meta: Meta<typeof NextMatchInfo> = {
 
 export default meta;
 
-export const 기본: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, async () => {
-                    return HttpResponse.json({
-                        response: [
-                            Builder<ApiFootballFixture>()
-                                .fixture({
-                                    date: new Date().toString(),
-                                    venue: { name: "Old Trafford", city: "Manchester" },
-                                    status: { short: "NS" },
-                                })
-                                .league({ name: "Premier League" })
-                                .teams({
-                                    home: {
-                                        id: MANCHESTER_UNITED,
-                                        name: "Manchester United",
-                                        logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                                    },
-                                    away: {
-                                        id: 40,
-                                        name: "Liverpool",
-                                        logo: "https://media.api-sports.io/football/teams/40.png",
-                                    },
-                                })
-                                .build(),
-                        ],
-                    });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const 로딩중: StoryObj<typeof NextMatchInfo> = {
+export const 로딩중 = {
     render: () => <SkeletonUI />,
 };
 
-export const 데이터_없음: StoryObj<typeof NextMatchInfo> = {
+export const 데이터_없음 = {
     render: () => <EmptyState />,
 };
 
-export const API_에러: StoryObj<typeof NextMatchInfo> = {
+export const API_에러 = {
     render: () => <ErrorState />,
 };
 
-export const 긴_이름: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
-                    return HttpResponse.json({
-                        response: [
-                            Builder<ApiFootballFixture>()
-                                .fixture({
-                                    date: new Date().toString(),
-                                    venue: { name: "Tottenham Hotspur Stadium North London", city: "London" },
-                                    status: { short: "NS" },
-                                })
-                                .league({ name: "UEFA Champions League" })
-                                .teams({
-                                    home: {
-                                        id: 165,
-                                        name: "Borussia Mönchengladbach",
-                                        logo: "https://media.api-sports.io/football/teams/165.png",
-                                    },
-                                    away: {
-                                        id: MANCHESTER_UNITED,
-                                        name: "Manchester United",
-                                        logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                                    },
-                                })
-                                .build(),
-                        ],
-                    });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const 경기중: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
-                    return HttpResponse.json({
-                        response: [
-                            Builder<ApiFootballFixture>()
-                                .fixture({
-                                    date: new Date().toString(),
-                                    venue: { name: "Anfield", city: "Liverpool" },
-                                    status: { short: "LIVE", elapsed: 67 },
-                                })
-                                .league({ name: "Premier League" })
-                                .teams({
-                                    home: {
-                                        id: 40,
-                                        name: "Liverpool",
-                                        logo: "https://media.api-sports.io/football/teams/40.png",
-                                    },
-                                    away: {
-                                        id: MANCHESTER_UNITED,
-                                        name: "Manchester United",
-                                        logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                                    },
-                                })
-                                .goals({ home: 2, away: 1 })
-                                .build(),
-                        ],
-                    });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const 이미지_로드_실패: StoryObj<typeof NextMatchInfo> = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
-                    return HttpResponse.json({
-                        response: [
-                            Builder<ApiFootballFixture>()
-                                .fixture({
-                                    date: new Date().toString(),
-                                    venue: { name: "Emirates Stadium", city: "London" },
-                                    status: { short: "NS" },
-                                })
-                                .league({ name: "Premier League" })
-                                .teams({
-                                    home: {
-                                        id: 42,
-                                        name: "Arsenal",
-                                        logo: "https://invalid-url.com/broken-image.png",
-                                    },
-                                    away: {
-                                        id: MANCHESTER_UNITED,
-                                        name: "Manchester United",
-                                        logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                                    },
-                                })
-                                .build(),
-                        ],
-                    });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
+// export const 이미지_로드_실패 = {
+//     parameters: {
+//         msw: {
+//             handlers: [
+//                 http.get(`*/${getNextMatchApi.path}`, () => {
+//                     return HttpResponse.json({
+//                         response: [
+//                             Builder<ApiFootballFixture>()
+//                                 .fixture({
+//                                     date: new Date().toString(),
+//                                     venue: { name: "Emirates Stadium", city: "London" },
+//                                     status: { short: "NS" },
+//                                 })
+//                                 .league({ name: "Premier League" })
+//                                 .teams({
+//                                     home: {
+//                                         id: 42,
+//                                         name: "Arsenal",
+//                                         logo: "https://invalid-url.com/broken-image.png",
+//                                     },
+//                                     away: {
+//                                         id: MANCHESTER_UNITED,
+//                                         name: "Manchester United",
+//                                         logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
+//                                     },
+//                                 })
+//                                 .build(),
+//                         ],
+//                     });
+//                 }),
+//             ],
+//         },
+//     },
+//     render: () => <NextMatchInfo />,
+// };
