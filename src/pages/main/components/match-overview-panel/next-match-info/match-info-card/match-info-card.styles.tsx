@@ -55,6 +55,11 @@ export const ScoreDivider = styled.span({
 export const LeagueName = styled.span({
     ...typography.p4,
     color: colors.gray200,
+    width: "100%",
+    textAlign: "center",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
 });
 
 export const VenueInfo = styled.div({
@@ -62,14 +67,25 @@ export const VenueInfo = styled.div({
     flexDirection: "column",
     alignItems: "center",
     gap: clampVh(4),
+    width: "100%",
 });
 
 export const City = styled.span({
     ...typography.h9,
     color: colors.gray200,
+    width: "100%",
+    textAlign: "center",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
 });
 
 export const Stadium = styled.span({
     ...typography.p4,
     color: colors.gray400,
+    width: "100%",
+    textAlign: "center",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
 });

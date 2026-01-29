@@ -38,9 +38,9 @@ const MatchInfoCard = () => {
         <S.Wrapper>
             <S.StatusRow>
                 <S.MatchStatus isLive={isLive}>{isLive ? "경기중" : "경기전"}</S.MatchStatus>
-                {isLive && elapsedTime ? <S.ElapsedTime>{elapsedTime}분</S.ElapsedTime> : null}
+                {elapsedTime ? <S.ElapsedTime>{elapsedTime}분</S.ElapsedTime> : null}
             </S.StatusRow>
-            {isLive && score ? (
+            {score ? (
                 <S.ScoreWrapper>
                     <S.Score>{score.home}</S.Score>
                     <S.ScoreDivider>:</S.ScoreDivider>
