@@ -32,5 +32,6 @@ export const TeamName = styled.span({
     textAlign: "center",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
     margin: 0,
 });
