@@ -15,21 +15,24 @@ const MatchInfoCard = () => {
         const hours = date.getHours().toString().padStart(2, "0");
         const minutes = date.getMinutes().toString().padStart(2, "0");
         return `${year}년 ${month}월 ${day}일 ${dayOfWeek} ${hours}:${minutes}`;
-    }, [nextMatchData]);
+    }, [nextMatchData.fixture.date]);
 
     const isLive = useMemo(() => {
         const liveStatuses = ["1H", "2H", "HT", "ET", "P", "LIVE", "BT"];
         return liveStatuses.includes(nextMatchData.fixture.status.short);
-    }, [nextMatchData]);
+    }, [nextMatchData.fixture.status.short]);
 
     const elapsedTime = useMemo(() => {
         return nextMatchData.fixture.status.elapsed ?? 0;
-    }, [nextMatchData]);
+    }, [nextMatchData.fixture.status.elapsed]);
 
     const score = useMemo(() => {
         if (!isLive) return null;
-        return { home: nextMatchData.goals.home ?? 0, away: nextMatchData.goals.away ?? 0 };
-    }, [nextMatchData, isLive]);
+        return {
+            home: nextMatchData.goals.home ?? 0,
+            away: nextMatchData.goals.away ?? 0,
+        };
+    }, [nextMatchData.goals.home, nextMatchData.goals.away, isLive]);
 
     return (
         <S.Wrapper>
