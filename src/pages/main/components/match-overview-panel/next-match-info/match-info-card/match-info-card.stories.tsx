@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { useEffect } from "react";
 import Builder from "@/test/builder";
 import MatchInfoCard from "./match-info-card";
 import useMatchOverviewPanelStore, { initState } from "../../match-overview-panel.store";
@@ -6,6 +7,16 @@ import useMatchOverviewPanelStore, { initState } from "../../match-overview-pane
 const meta: Meta<typeof MatchInfoCard> = {
     title: "pages/main/match-overview-panel/next-match-info/match-info-card",
     component: MatchInfoCard,
+    decorators: [
+        (Story) => {
+            useEffect(() => {
+                return () => {
+                    useMatchOverviewPanelStore.setState(initState);
+                };
+            }, []);
+            return <Story />;
+        },
+    ],
     parameters: {
         layout: "centered",
     },

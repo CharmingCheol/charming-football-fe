@@ -1,5 +1,4 @@
 import type { Meta } from "@storybook/react-vite";
-import { useEffect } from "react";
 import { http, HttpResponse } from "msw";
 import { MemoryRouter } from "react-router-dom";
 import { MANCHESTER_UNITED } from "@/constants/team";
@@ -8,7 +7,6 @@ import Builder from "@/test/builder";
 import NextMatchInfo from "./next-match-info";
 import SkeletonUI from "./skeleton/skeleton";
 import EmptyState from "./empty-state/empty-state";
-import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
 import ErrorState from "./error-state/error-state";
 
 const meta: Meta<typeof NextMatchInfo> = {
@@ -19,9 +17,6 @@ const meta: Meta<typeof NextMatchInfo> = {
     },
     decorators: [
         (Story) => {
-            useEffect(() => {
-                useMatchOverviewPanelStore.setState(initState);
-            }, []);
             return (
                 <MemoryRouter>
                     <div style={{ width: "min(700px, 90vw)" }}>
