@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import * as S from "./next-match-info.styles";
 import useMatchOverviewPanelStore from "../match-overview-panel.store";
 import Skeleton from "./skeleton/skeleton";
@@ -9,11 +8,6 @@ import MatchInfoCard from "./match-info-card/match-info-card";
 
 const NextMatchInfo = () => {
     const nextMatch = useMatchOverviewPanelStore((state) => state.nextMatch);
-    const actions = useMatchOverviewPanelStore((state) => state.actions);
-
-    useEffect(() => {
-        actions.fetchNextMatch();
-    }, [actions]);
 
     if (nextMatch.status === "request") {
         return <Skeleton />;
