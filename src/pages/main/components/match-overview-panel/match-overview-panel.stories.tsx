@@ -41,7 +41,7 @@ export const Default: StoryObj<typeof MatchOverviewPanel> = {
                             response: [
                                 Builder<ApiFootballFixture>()
                                     .fixture({
-                                        date: new Date().toString(),
+                                        date: "2026-02-02T13:00:00+00:00",
                                         venue: { name: "Old Trafford", city: "Manchester" },
                                         status: { short: "NS" },
                                     })

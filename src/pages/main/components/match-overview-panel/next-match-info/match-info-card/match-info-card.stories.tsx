@@ -31,7 +31,7 @@ export const 경기_전: StoryObj<typeof MatchInfoCard> = {
                 .nextMatch({
                     data: {
                         fixture: {
-                            date: new Date().toString(),
+                            date: "2026-02-02T13:00:00+00:00",
                             venue: { name: "Old Trafford", city: "Manchester" },
                             status: { short: "NS" },
                         },
@@ -60,7 +60,7 @@ export const 경기_중: StoryObj<typeof MatchInfoCard> = {
                 .nextMatch({
                     data: {
                         fixture: {
-                            date: new Date().toString(),
+                            date: "2026-02-02T13:00:00+00:00",
                             venue: { name: "Old Trafford", city: "Manchester" },
                             status: { short: "LIVE", elapsed: 67 },
                         },
@@ -118,7 +118,7 @@ export const 대회_이름_긴_경우: StoryObj<typeof MatchInfoCard> = {
                 .nextMatch({
                     data: {
                         fixture: {
-                            date: new Date().toString(),
+                            date: "2026-02-02T13:00:00+00:00",
                             venue: { name: "Old Trafford", city: "Manchester" },
                             status: { short: "NS" },
                         },
@@ -147,7 +147,7 @@ export const 경기장_이름_긴_경우: StoryObj<typeof MatchInfoCard> = {
                 .nextMatch({
                     data: {
                         fixture: {
-                            date: new Date().toString(),
+                            date: "2026-02-02T13:00:00+00:00",
                             venue: {
                                 name: "AAAAAAAAAAAAA AAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                                 city: "Manchester",
@@ -179,7 +179,7 @@ export const 도시_이름_긴_경우: StoryObj<typeof MatchInfoCard> = {
                 .nextMatch({
                     data: {
                         fixture: {
-                            date: new Date().toString(),
+                            date: "2026-02-02T13:00:00+00:00",
                             venue: {
                                 name: "Old Trafford",
                                 city: "AAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",

@@ -46,7 +46,7 @@ export const 데이터_로딩_성공: StoryObj = {
                 .nextMatch({
                     data: {
                         fixture: {
-                            date: new Date().toString(),
+                            date: "2026-02-02T13:00:00+00:00",
                             venue: { name: "Old Trafford", city: "Manchester" },
                             status: { short: "NS" },
                         },
