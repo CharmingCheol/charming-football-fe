@@ -26,7 +26,7 @@ const RecentMatchResult = () => {
             <S.Header>맨체스터 유나이티드 최근 경기</S.Header>
             <S.MatchList>
                 {recentMatches.data.map((match) => (
-                    <RecentMatchResultItem key={match.fixture.date.toString()} data={match} />
+                    <RecentMatchResultItem key={match.fixture.id} data={match} />
                 ))}
             </S.MatchList>
         </S.Container>

@@ -7,10 +7,10 @@ export const ErrorContent = styled.div({
     alignItems: "center",
     justifyContent: "center",
     gap: clampVh(16),
-    // 기본 상태 아이템 5개 높이와 동일하게 맞춤 (48px * 5 + border 4px)
     minHeight: clampVh(244),
     padding: `${clampVh(20)}`,
     textAlign: "center",
+    boxSizing: "border-box",
 });
 
 export const ErrorMessage = styled.p({
@@ -41,4 +41,3 @@ export const RetryButton = styled.button({
         transform: "scale(0.98)",
     },
 });
-

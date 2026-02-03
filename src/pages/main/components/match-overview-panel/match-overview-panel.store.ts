@@ -6,8 +6,8 @@ import { MANCHESTER_UNITED } from "@/constants/team";
 type Status = "request" | "success" | "failure";
 
 interface State {
-    nextMatch: { data: NextMatchData | null; status: Status };
-    recentMatches: { data: RecentMatchData[]; status: Status };
+    nextMatch: { data: NextMatchFixture | null; status: Status };
+    recentMatches: { data: RecentMatchFixture[]; status: Status };
 }
 
 export const initState: State = {
@@ -19,20 +19,18 @@ const useMatchOverviewPanelStore = create(
     combine(initState, (set) => ({
         actions: {
             fetchNextMatch: async () => {
-                set({ nextMatch: { data: null, status: "request" } });
                 try {
                     const nextMatch = await getNextMatchApi.get(MANCHESTER_UNITED);
-                    set({ nextMatch: { data: nextMatch, status: "success" } });
+                    set({ nextMatch: { data: nextMatch.response[0] ?? null, status: "success" } });
                 } catch (error) {
                     set({ nextMatch: { data: null, status: "failure" } });
                     throw error;
                 }
             },
             fetchRecentMatches: async () => {
-                set({ recentMatches: { data: [], status: "request" } });
                 try {
                     const recentMatches = await getRecentMatchesApi.get(MANCHESTER_UNITED);
-                    set({ recentMatches: { data: recentMatches, status: "success" } });
+                    set({ recentMatches: { data: recentMatches.response, status: "success" } });
                 } catch (error) {
                     set({ recentMatches: { data: [], status: "failure" } });
                     throw error;

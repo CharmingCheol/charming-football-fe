@@ -1,52 +1,58 @@
-interface SearchSuggestion {
-    id: string;
-    name: string;
-    type: "team" | "player" | "league";
-}
-
-interface NextMatchData {
+interface NextMatchFixture {
     fixture: {
-        date: Date;
-        stadium: string;
-        city: string;
+        id: number;
+        date: string;
+        venue: {
+            name: string;
+            city: string;
+        };
         status: {
-            name: "Scheduled" | "InPlay";
-            elapsed: number;
+            short: string;
+            elapsed: number | null;
         };
     };
-    home: {
+    league: {
         id: number;
         name: string;
-        logo: string;
     };
-    away: {
-        id: number;
-        name: string;
-        logo: string;
+    teams: {
+        home: {
+            id: number;
+            name: string;
+            logo: string;
+        };
+        away: {
+            id: number;
+            name: string;
+            logo: string;
+        };
     };
     goals: {
-        home: number;
-        away: number;
-    };
-    league: {
-        name: string;
-        round: string;
+        home: number | null;
+        away: number | null;
     };
 }
 
-interface RecentMatchData {
+interface RecentMatchFixture {
     fixture: {
-        date: Date;
-    };
-    home: {
         id: number;
-        name: string;
-        logo: string;
+        date: string;
+        venue: {
+            name: string;
+            city: string;
+        };
     };
-    away: {
-        id: number;
-        name: string;
-        logo: string;
+    teams: {
+        home: {
+            id: number;
+            name: string;
+            logo: string;
+        };
+        away: {
+            id: number;
+            name: string;
+            logo: string;
+        };
     };
     goals: {
         home: number;
