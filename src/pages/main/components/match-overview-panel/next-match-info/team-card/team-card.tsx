@@ -1,7 +1,7 @@
 import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./team-card.styles";
 
-export type TeamCardProps = ApiFootballFixture["teams"][keyof ApiFootballFixture["teams"]];
+export type TeamCardProps = NextMatchFixture["teams"][keyof NextMatchFixture["teams"]];
 
 const TeamCard = ({ data }: { data: TeamCardProps }) => {
     return (

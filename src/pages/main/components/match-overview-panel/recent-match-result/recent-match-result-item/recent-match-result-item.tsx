@@ -3,7 +3,7 @@ import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import * as S from "./recent-match-result-item.styles";
 
-const RecentMatchResultItem = ({ data }: { data: ApiFootballFixture }) => {
+const RecentMatchResultItem = ({ data }: { data: RecentMatchFixture }) => {
     const isHome = data.teams.home.id === MANCHESTER_UNITED;
     const opponent = isHome ? data.teams.away : data.teams.home;
     const myGoals = isHome ? data.goals.home : data.goals.away;

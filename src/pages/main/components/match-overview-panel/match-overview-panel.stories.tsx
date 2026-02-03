@@ -39,7 +39,7 @@ export const Default: StoryObj<typeof MatchOverviewPanel> = {
                     if (next) {
                         return HttpResponse.json({
                             response: [
-                                Builder<ApiFootballFixture>()
+                                Builder<NextMatchFixture>()
                                     .fixture({
                                         date: "2026-02-02T13:00:00+00:00",
                                         venue: { name: "Old Trafford", city: "Manchester" },

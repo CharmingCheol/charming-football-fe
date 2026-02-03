@@ -3,7 +3,7 @@ import * as S from "./match-info-card.styles";
 import useMatchOverviewPanelStore from "../../match-overview-panel.store";
 
 const MatchInfoCard = () => {
-    const nextMatchData = useMatchOverviewPanelStore((state) => state.nextMatch.data) as ApiFootballFixture;
+    const nextMatchData = useMatchOverviewPanelStore((state) => state.nextMatch.data) as NextMatchFixture;
 
     const formattedTime = useMemo(() => {
         const date = new Date(nextMatchData.fixture.date);

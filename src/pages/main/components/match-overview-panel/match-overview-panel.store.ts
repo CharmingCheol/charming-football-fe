@@ -6,8 +6,8 @@ import { MANCHESTER_UNITED } from "@/constants/team";
 type Status = "request" | "success" | "failure";
 
 interface State {
-    nextMatch: { data: ApiFootballFixture | null; status: Status };
-    recentMatches: { data: ApiFootballFixture[]; status: Status };
+    nextMatch: { data: NextMatchFixture | null; status: Status };
+    recentMatches: { data: RecentMatchFixture[]; status: Status };
 }
 
 export const initState: State = {

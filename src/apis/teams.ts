@@ -6,7 +6,7 @@ interface Response<T> {
 
 export const getNextMatchApi = {
     path: "fixtures",
-    get: async (teamId: number): Promise<Response<[ApiFootballFixture]>> => {
+    get: async (teamId: number): Promise<Response<[NextMatchFixture]>> => {
         const response = await apiFootballClient.get(getNextMatchApi.path, {
             params: { team: teamId, next: 1 },
         });
@@ -16,7 +16,7 @@ export const getNextMatchApi = {
 
 export const getRecentMatchesApi = {
     path: "fixtures",
-    get: async (teamId: number): Promise<Response<ApiFootballFixture[]>> => {
+    get: async (teamId: number): Promise<Response<RecentMatchFixture[]>> => {
         const response = await apiFootballClient.get(getRecentMatchesApi.path, {
             params: { team: teamId, last: 5 },
         });

@@ -12,7 +12,7 @@ export const handlers = [
         if (next) {
             return HttpResponse.json({
                 response: [
-                    Builder<ApiFootballFixture>()
+                    Builder<NextMatchFixture>()
                         .fixture({
                             date: "2025-01-20T15:00:00+00:00",
                             status: { short: "NS" },
@@ -39,7 +39,7 @@ export const handlers = [
         if (last) {
             return HttpResponse.json({
                 response: [
-                    Builder<ApiFootballFixture>()
+                    Builder<RecentMatchFixture>()
                         .fixture({ date: "2025-01-15T20:00:00+00:00" })
                         .teams({
                             home: {
@@ -55,7 +55,7 @@ export const handlers = [
                         })
                         .goals({ home: 1, away: 2 })
                         .build(),
-                    Builder<ApiFootballFixture>()
+                    Builder<RecentMatchFixture>()
                         .fixture({ date: "2025-01-20T15:00:00+00:00" })
                         .teams({
                             home: {
@@ -71,7 +71,7 @@ export const handlers = [
                         })
                         .goals({ home: 0, away: 2 })
                         .build(),
-                    Builder<ApiFootballFixture>()
+                    Builder<RecentMatchFixture>()
                         .fixture({ date: "2025-01-27T17:30:00+00:00" })
                         .teams({
                             home: {
@@ -87,7 +87,7 @@ export const handlers = [
                         })
                         .goals({ home: 0, away: 2 })
                         .build(),
-                    Builder<ApiFootballFixture>()
+                    Builder<RecentMatchFixture>()
                         .fixture({ date: "2025-02-01T15:00:00+00:00" })
                         .teams({
                             home: {
@@ -103,7 +103,7 @@ export const handlers = [
                         })
                         .goals({ home: 2, away: 5 })
                         .build(),
-                    Builder<ApiFootballFixture>()
+                    Builder<RecentMatchFixture>()
                         .fixture({ date: "2025-02-13T20:00:00+00:00" })
                         .teams({
                             home: {

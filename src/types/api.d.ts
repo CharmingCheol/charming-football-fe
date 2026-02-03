@@ -1,21 +1,12 @@
-interface ApiFootballFixture {
+interface NextMatchFixture {
     fixture: {
         id: number;
-        referee: string | null;
-        timezone: string;
         date: string;
-        timestamp: number;
-        periods: {
-            first: number | null;
-            second: number | null;
-        };
         venue: {
-            id: number | null;
-            name: string | null;
-            city: string | null;
+            name: string;
+            city: string;
         };
         status: {
-            long: string;
             short: string;
             elapsed: number | null;
         };
@@ -23,46 +14,48 @@ interface ApiFootballFixture {
     league: {
         id: number;
         name: string;
-        country: string;
-        logo: string;
-        flag: string | null;
-        season: number;
-        round: string;
     };
     teams: {
         home: {
             id: number;
             name: string;
             logo: string;
-            winner: boolean | null;
         };
         away: {
             id: number;
             name: string;
             logo: string;
-            winner: boolean | null;
         };
     };
     goals: {
         home: number | null;
         away: number | null;
     };
-    score: {
-        halftime: {
-            home: number | null;
-            away: number | null;
+}
+
+interface RecentMatchFixture {
+    fixture: {
+        id: number;
+        date: string;
+        venue: {
+            name: string;
+            city: string;
         };
-        fulltime: {
-            home: number | null;
-            away: number | null;
+    };
+    teams: {
+        home: {
+            id: number;
+            name: string;
+            logo: string;
         };
-        extratime: {
-            home: number | null;
-            away: number | null;
+        away: {
+            id: number;
+            name: string;
+            logo: string;
         };
-        penalty: {
-            home: number | null;
-            away: number | null;
-        };
+    };
+    goals: {
+        home: number;
+        away: number;
     };
 }
