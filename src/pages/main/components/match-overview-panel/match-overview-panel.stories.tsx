@@ -1,27 +1,28 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { useEffect } from "react";
-import { MemoryRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
 import { getNextMatchApi, getRecentMatchesApi } from "@/apis/teams";
 import Builder from "@/test/builder";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import MatchOverviewPanel from "./match-overview-panel";
-import useMatchOverviewPanelStore, { initState } from "./match-overview-panel.store";
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            retry: false,
+        },
+    },
+});
 
 const meta: Meta<typeof MatchOverviewPanel> = {
     title: "pages/main/match-overview-panel",
     component: MatchOverviewPanel,
     decorators: [
         (Story) => {
-            useEffect(() => {
-                return () => {
-                    useMatchOverviewPanelStore.setState(initState);
-                };
-            }, []);
             return (
-                <MemoryRouter>
+                <QueryClientProvider client={queryClient}>
                     <Story />
-                </MemoryRouter>
+                </QueryClientProvider>
             );
         },
     ],
