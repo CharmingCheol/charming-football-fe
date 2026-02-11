@@ -6,19 +6,18 @@ import Builder from "@/test/builder";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import MatchOverviewPanel from "./match-overview-panel";
 
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            retry: false,
-        },
-    },
-});
-
 const meta: Meta<typeof MatchOverviewPanel> = {
     title: "pages/main/match-overview-panel",
     component: MatchOverviewPanel,
     decorators: [
         (Story) => {
+            const queryClient = new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        retry: false,
+                    },
+                },
+            });
             return (
                 <QueryClientProvider client={queryClient}>
                     <Story />

@@ -1,5 +1,5 @@
 import * as S from "./next-match-info.styles";
-import useMatchOverviewPanelStore from "../match-overview-panel.store";
+import { useNextMatch } from "@/queries/fixtures.query";
 import Skeleton from "./skeleton/skeleton";
 import EmptyState from "./empty-state/empty-state";
 import ErrorState from "./error-state/error-state";
@@ -7,17 +7,17 @@ import TeamCard from "./team-card/team-card";
 import MatchInfoCard from "./match-info-card/match-info-card";
 
 const NextMatchInfo = () => {
-    const nextMatch = useMatchOverviewPanelStore((state) => state.nextMatch);
+    const { data, isLoading, isError, refetch } = useNextMatch();
 
-    if (nextMatch.status === "request") {
+    if (isLoading) {
         return <Skeleton />;
     }
 
-    if (nextMatch.status === "failure") {
-        return <ErrorState />;
+    if (isError) {
+        return <ErrorState onRetry={refetch} />;
     }
 
-    if (!nextMatch.data) {
+    if (!data) {
         return <EmptyState />;
     }
 
@@ -25,8 +25,8 @@ const NextMatchInfo = () => {
         <S.Container>
             <MatchInfoCard />
             <S.TeamCardsWrapper>
-                <TeamCard data={nextMatch.data.teams.home} />
-                <TeamCard data={nextMatch.data.teams.away} />
+                <TeamCard data={data.teams.home} />
+                <TeamCard data={data.teams.away} />
             </S.TeamCardsWrapper>
         </S.Container>
     );

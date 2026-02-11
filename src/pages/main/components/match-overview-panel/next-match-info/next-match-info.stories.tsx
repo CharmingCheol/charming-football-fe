@@ -1,13 +1,10 @@
-import { useEffect } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { MemoryRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { delay, http, HttpResponse } from "msw";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import Builder from "@/test/builder";
+import { getNextMatchApi } from "@/apis/teams";
 import NextMatchInfo from "./next-match-info";
-import SkeletonUI from "./skeleton/skeleton";
-import EmptyState from "./empty-state/empty-state";
-import ErrorState from "./error-state/error-state";
-import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
 
 const meta: Meta = {
     title: "pages/main/match-overview-panel/next-match-info",
@@ -17,17 +14,19 @@ const meta: Meta = {
     },
     decorators: [
         (Story) => {
-            useEffect(() => {
-                return () => {
-                    useMatchOverviewPanelStore.setState(initState);
-                };
-            }, []);
+            const queryClient = new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        retry: false,
+                    },
+                },
+            });
             return (
-                <MemoryRouter>
+                <QueryClientProvider client={queryClient}>
                     <div style={{ width: "min(700px, 90vw)" }}>
                         <Story />
                     </div>
-                </MemoryRouter>
+                </QueryClientProvider>
             );
         },
     ],
@@ -36,48 +35,80 @@ const meta: Meta = {
 export default meta;
 
 export const 로딩중: StoryObj = {
-    render: () => <SkeletonUI />,
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, async () => {
+                    await delay("infinite");
+                    return HttpResponse.json({ response: [] });
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
 };
 
 export const 데이터_로딩_성공: StoryObj = {
-    decorators: [
-        (Story) => {
-            const data = Builder<typeof initState>()
-                .nextMatch({
-                    data: {
-                        fixture: {
-                            date: "2026-02-02T13:00:00+00:00",
-                            venue: { name: "Old Trafford", city: "Manchester" },
-                            status: { short: "NS" },
-                        },
-                        league: { name: "Premier League" },
-                        goals: { home: null, away: null },
-                        teams: {
-                            home: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                            away: {
-                                id: 40,
-                                name: "Liverpool",
-                                logo: "https://media.api-sports.io/football/teams/40.png",
-                            },
-                        },
-                    },
-                })
-                .build();
-            useMatchOverviewPanelStore.setState(data);
-            return <Story />;
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json({
+                        response: [
+                            Builder<NextMatchFixture>()
+                                .fixture({
+                                    date: "2026-02-02T13:00:00+00:00",
+                                    venue: { name: "Old Trafford", city: "Manchester" },
+                                    status: { short: "NS" },
+                                })
+                                .league({ name: "Premier League" })
+                                .goals({ home: null, away: null })
+                                .teams({
+                                    home: {
+                                        id: MANCHESTER_UNITED,
+                                        name: "Manchester United",
+                                        logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
+                                    },
+                                    away: {
+                                        id: 40,
+                                        name: "Liverpool",
+                                        logo: "https://media.api-sports.io/football/teams/40.png",
+                                    },
+                                })
+                                .build(),
+                        ],
+                    });
+                }),
+            ],
         },
-    ],
+    },
     render: () => <NextMatchInfo />,
 };
 
 export const 데이터_없음: StoryObj = {
-    render: () => <EmptyState />,
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.json({
+                        response: [],
+                    });
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
 };
 
 export const API_에러: StoryObj = {
-    render: () => <ErrorState />,
+    parameters: {
+        msw: {
+            handlers: [
+                http.get(`*/${getNextMatchApi.path}`, () => {
+                    return HttpResponse.error();
+                }),
+            ],
+        },
+    },
+    render: () => <NextMatchInfo />,
 };
