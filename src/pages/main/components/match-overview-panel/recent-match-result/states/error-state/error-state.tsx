@@ -1,4 +1,4 @@
-import * as S from "../recent-match-result.styles";
+import * as S from "../../recent-match-result.styles";
 import * as ErrorStyles from "./error-state.styles";
 
 interface ErrorStateProps {

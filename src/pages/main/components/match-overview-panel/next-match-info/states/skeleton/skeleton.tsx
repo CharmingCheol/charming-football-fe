@@ -1,7 +1,7 @@
-import * as NextMatchInfo from "../next-match-info.styles";
+import * as NextMatchInfo from "../../next-match-info.styles";
 import * as Skeleton from "./skeleton.styles";
-import * as TeamCard from "../team-card/team-card.styles";
-import * as MatchInfoCard from "../match-info-card/match-info-card.styles";
+import * as TeamCard from "../../team-card/team-card.styles";
+import * as MatchInfoCard from "../../match-info-card/match-info-card.styles";
 
 const SkeletonUI = () => {
     return (

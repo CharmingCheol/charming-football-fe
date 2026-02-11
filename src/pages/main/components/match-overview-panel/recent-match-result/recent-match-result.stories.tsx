@@ -5,7 +5,6 @@ import { getRecentMatchesApi } from "@/apis/teams";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import Builder from "@/test/builder";
 import RecentMatchResult from "./recent-match-result";
-import Skeleton from "./skeleton/skeleton";
 
 const meta: Meta<typeof RecentMatchResult> = {
     title: "pages/main/match-overview-panel/recent-match-result",
@@ -125,23 +124,6 @@ export const 기본: Story = {
                                 .build(),
                         ],
                     });
-                }),
-            ],
-        },
-    },
-    render: () => <RecentMatchResult />,
-};
-
-export const 로딩중: Story = {
-    render: () => <Skeleton />,
-};
-
-export const API_에러 = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getRecentMatchesApi.path}`, () => {
-                    return HttpResponse.error();
                 }),
             ],
         },

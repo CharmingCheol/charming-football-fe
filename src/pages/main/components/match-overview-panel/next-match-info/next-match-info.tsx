@@ -1,8 +1,8 @@
 import * as S from "./next-match-info.styles";
 import { useNextMatch } from "@/queries/fixtures.query";
-import Skeleton from "./skeleton/skeleton";
-import EmptyState from "./empty-state/empty-state";
-import ErrorState from "./error-state/error-state";
+import Skeleton from "./states/skeleton/skeleton";
+import EmptyState from "./states/empty-state/empty-state";
+import ErrorState from "./states/error-state/error-state";
 import TeamCard from "./team-card/team-card";
 import MatchInfoCard from "./match-info-card/match-info-card";
 

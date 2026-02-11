@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { delay, http, HttpResponse } from "msw";
+import { http, HttpResponse } from "msw";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import Builder from "@/test/builder";
 import { getNextMatchApi } from "@/apis/teams";
@@ -34,20 +34,6 @@ const meta: Meta = {
 
 export default meta;
 
-export const 로딩중: StoryObj = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, async () => {
-                    await delay("infinite");
-                    return HttpResponse.json({ response: [] });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
 export const 데이터_로딩_성공: StoryObj = {
     parameters: {
         msw: {
@@ -78,34 +64,6 @@ export const 데이터_로딩_성공: StoryObj = {
                                 .build(),
                         ],
                     });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const 데이터_없음: StoryObj = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
-                    return HttpResponse.json({
-                        response: [],
-                    });
-                }),
-            ],
-        },
-    },
-    render: () => <NextMatchInfo />,
-};
-
-export const API_에러: StoryObj = {
-    parameters: {
-        msw: {
-            handlers: [
-                http.get(`*/${getNextMatchApi.path}`, () => {
-                    return HttpResponse.error();
                 }),
             ],
         },
