@@ -2,12 +2,12 @@ import axios from "axios";
 import type { AxiosInstance, AxiosRequestConfig } from "axios";
 import { NetworkHttpError, ServerHttpError, UnknownHttpError } from "@/constants/errors";
 
-function createApiFootballClient(): AxiosInstance {
+function createAxiosInstance(): AxiosInstance {
     const defaultConfig: AxiosRequestConfig = {
-        baseURL: "https://v3.football.api-sports.io",
+        baseURL: import.meta.env.VITE_API_BASE_URL || "",
         timeout: 10000,
         headers: {
-            "x-apisports-key": import.meta.env.VITE_API_FOOTBALL_KEY || "",
+            "Content-Type": "application/json",
         },
     };
 
@@ -38,4 +38,4 @@ function createApiFootballClient(): AxiosInstance {
     return instance;
 }
 
-export const apiFootballClient = createApiFootballClient();
+export const apiClient = createAxiosInstance();

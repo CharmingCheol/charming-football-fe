@@ -1,128 +1,26 @@
 import { http, HttpResponse } from "msw";
-import { getNextMatchApi } from "@/apis/teams";
-import { MANCHESTER_UNITED } from "@/constants/team";
-import Builder from "@/test/builder";
+import { getSearchAllApi } from "@/apis/search";
 
 export const handlers = [
-    http.get(`*/${getNextMatchApi.path}`, ({ request }) => {
-        const url = new URL(request.url);
-        const next = url.searchParams.get("next");
-        const last = url.searchParams.get("last");
+    http.get(`*/${getSearchAllApi.path}`, ({ request }) => {
+        const query = new URL(request.url).searchParams.get("query") as string;
 
-        if (next) {
-            return HttpResponse.json({
-                response: [
-                    Builder<NextMatchFixture>()
-                        .fixture({
-                            date: "2025-01-20T15:00:00+00:00",
-                            status: { short: "NS" },
-                            venue: { name: "Old Trafford", city: "Manchester" },
-                        })
-                        .league({ name: "Premier League" })
-                        .teams({
-                            home: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                            away: {
-                                id: 40,
-                                name: "Liverpool",
-                                logo: "https://media.api-sports.io/football/teams/40.png",
-                            },
-                        })
-                        .build(),
-                ],
-            });
+        if (query === "error500") {
+            return HttpResponse.json({ message: "오류가 발생했습니다" }, { status: 500 });
         }
 
-        if (last) {
-            return HttpResponse.json({
-                response: [
-                    Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-01-15T20:00:00+00:00", id: 1 })
-                        .teams({
-                            home: {
-                                id: 40,
-                                name: "Liverpool",
-                                logo: "https://media.api-sports.io/football/teams/40.png",
-                            },
-                            away: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                        })
-                        .goals({ home: 1, away: 2 })
-                        .build(),
-                    Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-01-20T15:00:00+00:00", id: 2 })
-                        .teams({
-                            home: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                            away: {
-                                id: 50,
-                                name: "Manchester City",
-                                logo: "https://media.api-sports.io/football/teams/50.png",
-                            },
-                        })
-                        .goals({ home: 0, away: 2 })
-                        .build(),
-                    Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-01-27T17:30:00+00:00", id: 3 })
-                        .teams({
-                            home: {
-                                id: 49,
-                                name: "Chelsea",
-                                logo: "https://media.api-sports.io/football/teams/49.png",
-                            },
-                            away: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                        })
-                        .goals({ home: 0, away: 2 })
-                        .build(),
-                    Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-02-01T15:00:00+00:00", id: 4 })
-                        .teams({
-                            home: {
-                                id: 39,
-                                name: "Wolves",
-                                logo: "https://media.api-sports.io/football/teams/39.png",
-                            },
-                            away: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                        })
-                        .goals({ home: 2, away: 5 })
-                        .build(),
-                    Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-02-13T20:00:00+00:00", id: 5 })
-                        .teams({
-                            home: {
-                                id: MANCHESTER_UNITED,
-                                name: "Manchester United",
-                                logo: `https://media.api-sports.io/football/teams/${MANCHESTER_UNITED}.png`,
-                            },
-                            away: {
-                                id: 42,
-                                name: "Arsenal",
-                                logo: "https://media.api-sports.io/football/teams/42.png",
-                            },
-                        })
-                        .goals({ home: 3, away: 3 })
-                        .build(),
-                ],
-            });
-        }
-
-        return HttpResponse.json({ response: [] });
+        const response: Awaited<ReturnType<typeof getSearchAllApi.get>> = [
+            { id: "1", name: "맨체스터 유나이티드", type: "team" },
+            { id: "2", name: "리버풀", type: "team" },
+            { id: "3", name: "손흥민", type: "player" },
+            { id: "4", name: "김민재", type: "player" },
+            { id: "5", name: "첼시", type: "team" },
+            { id: "6", name: "아스널", type: "team" },
+            { id: "7", name: "케인", type: "player" },
+            { id: "8", name: "살라", type: "player" },
+            { id: "9", name: "맨체스터 시티", type: "team" },
+            { id: "10", name: "토트넘", type: "team" },
+        ];
+        return HttpResponse.json(response.filter((keyword) => keyword.name.includes(query)));
     }),
 ];

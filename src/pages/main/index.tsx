@@ -1,11 +1,5 @@
-import MatchOverviewPanel from "./components/match-overview-panel/match-overview-panel";
-
 const MainPage = () => {
-    return (
-        <main>
-            <MatchOverviewPanel />
-        </main>
-    );
+    return <div></div>;
 };
 
 export default MainPage;
