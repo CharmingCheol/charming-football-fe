@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react-vite";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import viewports from "./viewports";
-// import { handlers } from "../src/mocks/handlers";
+import { handlers } from "../src/mocks/handlers";
 
 // MSW 초기화
 initialize();
@@ -30,9 +30,9 @@ const preview: Preview = {
             // 'off' - skip a11y checks entirely
             test: "todo",
         },
-        // msw: {
-        //     handlers,
-        // },
+        msw: {
+            handlers,
+        },
     },
     initialGlobals: {
         backgrounds: { value: "dark" },
