@@ -1,5 +1,9 @@
-const WIN_HEIGHT = 1080;
+const WINDOW_HEIGHT = 1080;
 
-export const calcVh = (val: number): string => {
-    return `${(val / WIN_HEIGHT) * 100}vh`;
+export const clampVh = (val: number): string => {
+    const vhValue = (val / WINDOW_HEIGHT) * 100;
+    const minValue = val * 0.6;
+    const maxValue = val * 1.2;
+
+    return `clamp(${minValue}px, ${vhValue}vh, ${maxValue}px)`;
 };
