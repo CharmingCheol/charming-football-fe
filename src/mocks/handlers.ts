@@ -40,7 +40,7 @@ export const handlers = [
             return HttpResponse.json({
                 response: [
                     Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-01-15T20:00:00+00:00" })
+                        .fixture({ date: "2025-01-15T20:00:00+00:00", id: 1 })
                         .teams({
                             home: {
                                 id: 40,
@@ -56,7 +56,7 @@ export const handlers = [
                         .goals({ home: 1, away: 2 })
                         .build(),
                     Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-01-20T15:00:00+00:00" })
+                        .fixture({ date: "2025-01-20T15:00:00+00:00", id: 2 })
                         .teams({
                             home: {
                                 id: MANCHESTER_UNITED,
@@ -72,7 +72,7 @@ export const handlers = [
                         .goals({ home: 0, away: 2 })
                         .build(),
                     Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-01-27T17:30:00+00:00" })
+                        .fixture({ date: "2025-01-27T17:30:00+00:00", id: 3 })
                         .teams({
                             home: {
                                 id: 49,
@@ -88,7 +88,7 @@ export const handlers = [
                         .goals({ home: 0, away: 2 })
                         .build(),
                     Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-02-01T15:00:00+00:00" })
+                        .fixture({ date: "2025-02-01T15:00:00+00:00", id: 4 })
                         .teams({
                             home: {
                                 id: 39,
@@ -104,7 +104,7 @@ export const handlers = [
                         .goals({ home: 2, away: 5 })
                         .build(),
                     Builder<RecentMatchFixture>()
-                        .fixture({ date: "2025-02-13T20:00:00+00:00" })
+                        .fixture({ date: "2025-02-13T20:00:00+00:00", id: 5 })
                         .teams({
                             home: {
                                 id: MANCHESTER_UNITED,

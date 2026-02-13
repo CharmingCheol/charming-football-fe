@@ -1,33 +1,25 @@
-import { useEffect } from "react";
-import useMatchOverviewPanelStore from "../match-overview-panel.store";
+import { useRecentMatches } from "@/queries/fixtures.query";
 import RecentMatchResultItem from "./recent-match-result-item/recent-match-result-item";
-import Skeleton from "./skeleton/skeleton";
-import ErrorState from "./error-state/error-state";
+import Skeleton from "./states/skeleton/skeleton";
+import ErrorState from "./states/error-state/error-state";
 import * as S from "./recent-match-result.styles";
 
 const RecentMatchResult = () => {
-    const recentMatches = useMatchOverviewPanelStore((state) => state.recentMatches);
-    const actions = useMatchOverviewPanelStore((state) => state.actions);
+    const { data, isLoading, isError, refetch } = useRecentMatches();
 
-    useEffect(() => {
-        actions.fetchRecentMatches();
-    }, [actions]);
-
-    if (recentMatches.status === "request") {
+    if (isLoading) {
         return <Skeleton />;
     }
 
-    if (recentMatches.status === "failure") {
-        return <ErrorState />;
+    if (isError) {
+        return <ErrorState onRetry={refetch} />;
     }
 
     return (
         <S.Container>
             <S.Header>맨체스터 유나이티드 최근 경기</S.Header>
             <S.MatchList>
-                {recentMatches.data.map((match) => (
-                    <RecentMatchResultItem key={match.fixture.id} data={match} />
-                ))}
+                {data?.map((match) => <RecentMatchResultItem key={match.fixture.id} data={match} />)}
             </S.MatchList>
         </S.Container>
     );

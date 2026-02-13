@@ -1,14 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
-import { useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
 import { getRecentMatchesApi } from "@/apis/teams";
-import Builder from "@/test/builder";
-import useMatchOverviewPanelStore, { initState } from "../match-overview-panel.store";
-import RecentMatchResult from "./recent-match-result";
-import Skeleton from "./skeleton/skeleton";
-import ErrorState from "./error-state/error-state";
 import { MANCHESTER_UNITED } from "@/constants/team";
+import Builder from "@/test/builder";
+import RecentMatchResult from "./recent-match-result";
 
 const meta: Meta<typeof RecentMatchResult> = {
     title: "pages/main/match-overview-panel/recent-match-result",
@@ -18,15 +14,19 @@ const meta: Meta<typeof RecentMatchResult> = {
     },
     decorators: [
         (Story) => {
-            useEffect(() => {
-                useMatchOverviewPanelStore.setState(initState);
-            }, []);
+            const queryClient = new QueryClient({
+                defaultOptions: {
+                    queries: {
+                        retry: false,
+                    },
+                },
+            });
             return (
-                <BrowserRouter>
+                <QueryClientProvider client={queryClient}>
                     <div style={{ width: "min(700px, 90vw)" }}>
                         <Story />
                     </div>
-                </BrowserRouter>
+                </QueryClientProvider>
             );
         },
     ],
@@ -129,12 +129,4 @@ export const 기본: Story = {
         },
     },
     render: () => <RecentMatchResult />,
-};
-
-export const 로딩중: Story = {
-    render: () => <Skeleton />,
-};
-
-export const API_에러 = {
-    render: () => <ErrorState />,
 };

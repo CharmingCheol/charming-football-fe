@@ -1,10 +1,11 @@
-import useMatchOverviewPanelStore from "../../match-overview-panel.store";
-import * as S from "../recent-match-result.styles";
+import * as S from "../../recent-match-result.styles";
 import * as ErrorStyles from "./error-state.styles";
 
-const ErrorState = () => {
-    const actions = useMatchOverviewPanelStore((state) => state.actions);
+interface ErrorStateProps {
+    onRetry: () => void;
+}
 
+const ErrorState = ({ onRetry }: ErrorStateProps) => {
     return (
         <S.Container>
             <S.Header>맨체스터 유나이티드 최근 경기</S.Header>
@@ -14,13 +15,10 @@ const ErrorState = () => {
                     <br />
                     잠시 후 다시 시도해주세요.
                 </ErrorStyles.ErrorMessage>
-                <ErrorStyles.RetryButton onClick={() => actions.fetchRecentMatches()}>
-                    다시 시도
-                </ErrorStyles.RetryButton>
+                <ErrorStyles.RetryButton onClick={onRetry}>다시 시도</ErrorStyles.RetryButton>
             </ErrorStyles.ErrorContent>
         </S.Container>
     );
 };
 
 export default ErrorState;
-

@@ -1,12 +1,13 @@
 import { useMemo } from "react";
+import { useNextMatch } from "@/queries/fixtures.query";
 import * as S from "./match-info-card.styles";
-import useMatchOverviewPanelStore from "../../match-overview-panel.store";
 
 const MatchInfoCard = () => {
-    const nextMatchData = useMatchOverviewPanelStore((state) => state.nextMatch.data) as NextMatchFixture;
+    const { data } = useNextMatch();
 
     const formattedTime = useMemo(() => {
-        const date = new Date(nextMatchData.fixture.date);
+        if (!data) return "";
+        const date = new Date(data.fixture.date);
         const days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
@@ -15,24 +16,28 @@ const MatchInfoCard = () => {
         const hours = date.getHours().toString().padStart(2, "0");
         const minutes = date.getMinutes().toString().padStart(2, "0");
         return `${year}년 ${month}월 ${day}일 ${dayOfWeek} ${hours}:${minutes}`;
-    }, [nextMatchData.fixture.date]);
+    }, [data]);
 
     const isLive = useMemo(() => {
+        if (!data) return false;
         const liveStatuses = ["1H", "2H", "HT", "ET", "P", "LIVE", "BT"];
-        return liveStatuses.includes(nextMatchData.fixture.status.short);
-    }, [nextMatchData.fixture.status.short]);
+        return liveStatuses.includes(data.fixture.status.short);
+    }, [data]);
 
     const elapsedTime = useMemo(() => {
-        return nextMatchData.fixture.status.elapsed ?? 0;
-    }, [nextMatchData.fixture.status.elapsed]);
+        if (!data) return 0;
+        return data.fixture.status.elapsed ?? 0;
+    }, [data]);
 
     const score = useMemo(() => {
-        if (!isLive) return null;
+        if (!data || !isLive) return null;
         return {
-            home: nextMatchData.goals.home ?? 0,
-            away: nextMatchData.goals.away ?? 0,
+            home: data.goals.home ?? 0,
+            away: data.goals.away ?? 0,
         };
-    }, [nextMatchData.goals.home, nextMatchData.goals.away, isLive]);
+    }, [data, isLive]);
+
+    if (!data) return null;
 
     return (
         <S.Wrapper>
@@ -49,10 +54,10 @@ const MatchInfoCard = () => {
             ) : (
                 <S.MatchTime>{formattedTime}</S.MatchTime>
             )}
-            <S.LeagueName>{nextMatchData.league.name}</S.LeagueName>
+            <S.LeagueName>{data.league.name}</S.LeagueName>
             <S.VenueInfo>
-                <S.City>{nextMatchData.fixture.venue.city}</S.City>
-                <S.Stadium>{nextMatchData.fixture.venue.name}</S.Stadium>
+                <S.City>{data.fixture.venue.city}</S.City>
+                <S.Stadium>{data.fixture.venue.name}</S.Stadium>
             </S.VenueInfo>
         </S.Wrapper>
     );

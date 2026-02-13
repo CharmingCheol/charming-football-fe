@@ -1,5 +1,5 @@
 import * as S from "./skeleton.styles";
-import { Container, Header, MatchList } from "../recent-match-result.styles";
+import { Container, Header, MatchList } from "../../recent-match-result.styles";
 
 const Skeleton = () => {
     return (
