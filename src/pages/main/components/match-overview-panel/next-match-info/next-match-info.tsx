@@ -23,7 +23,7 @@ const NextMatchInfo = () => {
 
     return (
         <S.Container>
-            <MatchInfoCard />
+            <MatchInfoCard data={data} />
             <S.TeamCardsWrapper>
                 <TeamCard data={data.teams.home} />
                 <TeamCard data={data.teams.away} />

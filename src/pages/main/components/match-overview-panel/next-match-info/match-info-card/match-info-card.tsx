@@ -1,12 +1,32 @@
 import { useMemo } from "react";
-import { useNextMatch } from "@/queries/fixtures.query";
 import * as S from "./match-info-card.styles";
 
-const MatchInfoCard = () => {
-    const { data } = useNextMatch();
+type MatchInfoCardProps = {
+    data: {
+        fixture: {
+            date: string;
+            status: {
+                short: string;
+                elapsed: number | null;
+            };
+            venue: {
+                city: string;
+                name: string;
+            };
+        };
+        league: {
+            name: string;
+        };
+        goals: {
+            home: number | null;
+            away: number | null;
+        };
+    };
+};
+
+const MatchInfoCard = ({ data }: MatchInfoCardProps) => {
 
     const formattedTime = useMemo(() => {
-        if (!data) return "";
         const date = new Date(data.fixture.date);
         const days = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
         const year = date.getFullYear();
@@ -19,25 +39,21 @@ const MatchInfoCard = () => {
     }, [data]);
 
     const isLive = useMemo(() => {
-        if (!data) return false;
         const liveStatuses = ["1H", "2H", "HT", "ET", "P", "LIVE", "BT"];
         return liveStatuses.includes(data.fixture.status.short);
     }, [data]);
 
     const elapsedTime = useMemo(() => {
-        if (!data) return 0;
         return data.fixture.status.elapsed ?? 0;
     }, [data]);
 
     const score = useMemo(() => {
-        if (!data || !isLive) return null;
+        if (!isLive) return null;
         return {
             home: data.goals.home ?? 0,
             away: data.goals.away ?? 0,
         };
     }, [data, isLive]);
-
-    if (!data) return null;
 
     return (
         <S.Wrapper>
