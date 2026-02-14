@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import SkeletonState from "./skeleton/skeleton";
+import SkeletonState from "./skeleton-state/skeleton-state";
 import EmptyState from "./empty-state/empty-state";
 import ErrorState from "./error-state/error-state";
 
@@ -21,14 +21,14 @@ const meta: Meta = {
 
 export default meta;
 
-export const Skeleton: StoryObj = {
+export const 스켈레톤: StoryObj = {
     render: () => <SkeletonState />,
 };
 
-export const Empty: StoryObj = {
+export const 빈상태: StoryObj = {
     render: () => <EmptyState />,
 };
 
-export const Error: StoryObj = {
+export const 에러: StoryObj = {
     render: () => <ErrorState onRetry={() => console.log("Retry clicked")} />,
 };

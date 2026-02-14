@@ -1,6 +1,6 @@
-import * as S from "./next-match-info.styles";
 import { useNextMatch } from "@/queries/fixtures.query";
-import Skeleton from "./states/skeleton/skeleton";
+import * as S from "./next-match-info.styles";
+import SkeletonState from "./states/skeleton-state/skeleton-state";
 import EmptyState from "./states/empty-state/empty-state";
 import ErrorState from "./states/error-state/error-state";
 import TeamCard from "./team-card/team-card";
@@ -10,7 +10,7 @@ const NextMatchInfo = () => {
     const { data, isLoading, isError, refetch } = useNextMatch();
 
     if (isLoading) {
-        return <Skeleton />;
+        return <SkeletonState />;
     }
 
     if (isError) {

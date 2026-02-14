@@ -1,7 +1,11 @@
 import fallbackLogo from "@/assets/images/fallback_team_logo.png";
 import * as S from "./team-card.styles";
 
-export type TeamCardProps = NextMatchFixture["teams"][keyof NextMatchFixture["teams"]];
+export interface TeamCardProps {
+    id: number;
+    name: string;
+    logo: string;
+}
 
 const TeamCard = ({ data }: { data: TeamCardProps }) => {
     return (

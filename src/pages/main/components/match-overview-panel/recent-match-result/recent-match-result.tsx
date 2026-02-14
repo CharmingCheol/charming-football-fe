@@ -1,6 +1,6 @@
 import { useRecentMatches } from "@/queries/fixtures.query";
 import RecentMatchResultItem from "./recent-match-result-item/recent-match-result-item";
-import Skeleton from "./states/skeleton/skeleton";
+import SkeletonState from "./states/skeleton-state/skeleton-state";
 import ErrorState from "./states/error-state/error-state";
 import * as S from "./recent-match-result.styles";
 
@@ -8,7 +8,7 @@ const RecentMatchResult = () => {
     const { data, isLoading, isError, refetch } = useRecentMatches();
 
     if (isLoading) {
-        return <Skeleton />;
+        return <SkeletonState />;
     }
 
     if (isError) {

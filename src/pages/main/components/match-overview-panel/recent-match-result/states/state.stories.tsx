@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import SkeletonState from "./skeleton/skeleton";
+import SkeletonState from "./skeleton-state/skeleton-state";
 import ErrorState from "./error-state/error-state";
 
 const meta: Meta = {

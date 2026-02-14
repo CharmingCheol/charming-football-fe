@@ -1,7 +1,7 @@
-import * as S from "./skeleton.styles";
+import * as S from "./skeleton-state.styles";
 import { Container, Header, MatchList } from "../../recent-match-result.styles";
 
-const Skeleton = () => {
+const SkeletonState = () => {
     return (
         <Container>
             <Header>
@@ -23,4 +23,4 @@ const Skeleton = () => {
     );
 };
 
-export default Skeleton;
+export default SkeletonState;
