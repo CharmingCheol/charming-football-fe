@@ -40,7 +40,7 @@ app/
 -   `App.tsx`에는 전역 Provider 설정 (QueryClient, Router, ErrorBoundary)
 -   `router.tsx`에서 모든 라우트 정의
 -   레이아웃은 `layouts/` 폴더에 분리
-    -   레이아웃이 여러 개 일 경우 폴더별로 분류류
+    -   레이아웃이 여러 개 일 경우 폴더별로 분류
 
 ---
 
@@ -90,9 +90,9 @@ pages/
             │   │   └── team-card.stories.tsx
             │   └── states/              # 상태별 UI 컴포넌트 그룹
             │       ├── states.stories.tsx
-            │       ├── skeleton/
-            │       │   ├── skeleton.tsx
-            │       │   └── skeleton.styles.tsx
+            │       ├── skeleton-state/
+            │       │   ├── skeleton-state.tsx
+            │       │   └── skeleton-state.styles.tsx
             │       ├── empty-state/
             │       │   ├── empty-state.tsx
             │       │   └── empty-state.styles.tsx

@@ -51,7 +51,7 @@ UserAvatar; // User + Avatar
 ### 5. 상태 컴포넌트 네이밍
 
 ```typescript
-Skeleton; // 로딩 스켈레톤
+SkeletonState; // 로딩 스켈레톤
 EmptyState; // 빈 상태
 ErrorState; // 에러 상태
 LoadingState; // 로딩 상태 (Skeleton 대신 사용 가능)
@@ -78,7 +78,6 @@ import { useUserData } from "@/queries/user.query";
 import { API_BASE_URL } from "@/constants/api";
 import logoImage from "@/assets/images/logo.png";
 import * as S from "./component-name.styles";
-import Skeleton from "./states/skeleton/skeleton";
 import SubComponent from "./sub-component/sub-component";
 ```
 
@@ -142,9 +141,9 @@ const SomeComponent = () => {
 ### 패턴 2: Props로 데이터를 받는 컴포넌트
 
 ```typescript
-import * as S from ".component-name.styles";
+import * as S from "./component-name.styles";
 
-export interface UserCardProps = {
+export interface UserCardProps {
     name: string;
     avatar: string;
     role: string;
