@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
+import { getNextMatchApi } from "@/apis/teams";
 import { MANCHESTER_UNITED } from "@/constants/team";
 import Builder from "@/test/builder";
-import { getNextMatchApi } from "@/apis/teams";
 import NextMatchInfo from "./next-match-info";
 
-const meta: Meta = {
+const meta: Meta<typeof NextMatchInfo> = {
     title: "pages/main/match-overview-panel/next-match-info",
     component: NextMatchInfo,
     parameters: {
@@ -34,7 +34,7 @@ const meta: Meta = {
 
 export default meta;
 
-export const 데이터_로딩_성공: StoryObj = {
+export const 데이터_로딩_성공: StoryObj<typeof NextMatchInfo> = {
     parameters: {
         msw: {
             handlers: [

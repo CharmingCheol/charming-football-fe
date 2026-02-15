@@ -20,10 +20,10 @@ const meta: Meta = {
 
 export default meta;
 
-export const Skeleton: StoryObj = {
+export const 스켈레톤: StoryObj = {
     render: () => <SkeletonState />,
 };
 
-export const Error: StoryObj = {
+export const 에러: StoryObj = {
     render: () => <ErrorState onRetry={() => console.log("Retry clicked")} />,
 };

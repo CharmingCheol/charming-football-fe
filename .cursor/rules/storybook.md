@@ -33,7 +33,7 @@ const meta: Meta<typeof ComponentName> = {
     title: "pages/main/component-name", // 계층 구조 반영
     component: ComponentName,
     parameters: {
-        layout: "centered", // centered로 권장
+        layout: "centered", // 또는 "fullscreen", "padded"
     },
 };
 

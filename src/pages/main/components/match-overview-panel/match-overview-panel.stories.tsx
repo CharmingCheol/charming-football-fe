@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
 import { getNextMatchApi, getRecentMatchesApi } from "@/apis/teams";
-import Builder from "@/test/builder";
 import { MANCHESTER_UNITED } from "@/constants/team";
+import Builder from "@/test/builder";
 import MatchOverviewPanel from "./match-overview-panel";
 
 const meta: Meta<typeof MatchOverviewPanel> = {
@@ -29,7 +29,7 @@ const meta: Meta<typeof MatchOverviewPanel> = {
 
 export default meta;
 
-export const Default: StoryObj<typeof MatchOverviewPanel> = {
+export const 기본: StoryObj<typeof MatchOverviewPanel> = {
     parameters: {
         msw: {
             handlers: [
