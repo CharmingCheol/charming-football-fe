@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http, HttpResponse } from "msw";
-import Builder from "@/test/builder";
 import { getNextMatchApi } from "@/apis/teams";
+import Builder from "@/test/builder";
 import MatchInfoCard from "./match-info-card";
 
 const meta: Meta<typeof MatchInfoCard> = {

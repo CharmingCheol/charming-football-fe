@@ -1,31 +1,31 @@
+import * as S from "./skeleton-state.styles";
 import * as NextMatchInfo from "../../next-match-info.styles";
-import * as Skeleton from "./skeleton.styles";
 import * as TeamCard from "../../team-card/team-card.styles";
 import * as MatchInfoCard from "../../match-info-card/match-info-card.styles";
 
-const SkeletonUI = () => {
+const SkeletonState = () => {
     return (
         <NextMatchInfo.Container>
             <MatchInfoCard.Wrapper>
-                <Skeleton.MatchTime />
-                <Skeleton.LeagueName />
+                <S.MatchTime />
+                <S.LeagueName />
                 <MatchInfoCard.VenueInfo>
-                    <Skeleton.Venue />
-                    <Skeleton.Venue />
+                    <S.Venue />
+                    <S.Venue />
                 </MatchInfoCard.VenueInfo>
             </MatchInfoCard.Wrapper>
             <NextMatchInfo.TeamCardsWrapper>
                 <TeamCard.Wrapper>
-                    <Skeleton.TeamLogo />
-                    <Skeleton.TeamName />
+                    <S.TeamLogo />
+                    <S.TeamName />
                 </TeamCard.Wrapper>
                 <TeamCard.Wrapper>
-                    <Skeleton.TeamLogo />
-                    <Skeleton.TeamName />
+                    <S.TeamLogo />
+                    <S.TeamName />
                 </TeamCard.Wrapper>
             </NextMatchInfo.TeamCardsWrapper>
         </NextMatchInfo.Container>
     );
 };
 
-export default SkeletonUI;
+export default SkeletonState;
